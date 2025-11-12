@@ -1,4 +1,3 @@
-using NUnit.Framework.Internal;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -6,51 +5,78 @@ using UnityEngine;
 public class PlayerController2D : MonoBehaviour
 {
     [Header("Vitesse")]
-    [SerializeField] private float maxSpeed = 6f;
-    [SerializeField] private float acceleration = 40f;
-    [SerializeField] private float deceleration = 60f;
-    public float dash = 50f;
-    public float direction = 1.0f;
+    [SerializeField] private float maxSpeed = 7f;
+    [SerializeField] private float acceleration = 55f;
+    [SerializeField] private float deceleration = 85f;
 
+    [Header("Saut - impulsion initiale")]
+    [SerializeField] private float jumpForce = 8.5f;
+
+    [Header("Saut - maintien (hauteur variable)")]
+    [SerializeField] private float maxJumpHoldTime = 0.13f;
+    [SerializeField] private float holdBoostAccel = 20f;
+
+    [Header("Détection du sol")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundProbeSkin = 0.02f;
+    [SerializeField] private float groundProbeHeight = 0.12f;
+    [SerializeField] private float groundProbeWidthScale = 0.9f;
+
+    [Header("Confort")]
+    [SerializeField] private float coyoteTime = 0.12f;
+    [SerializeField] private float jumpBuffer = 0.12f;
+
+    [Header("Gravité avancée")]
+    [SerializeField] private float fallMultiplier = 3.4f;      // Chute rapide
+    [SerializeField] private float lowJumpMultiplier = 2.6f;   // Petit saut si relâché tôt
+    [SerializeField] private float maxFallSpeed = -28f;        // Limite de chute
+    [SerializeField] private float apexBoostThreshold = 0.35f; // Zone proche du sommet
+    [SerializeField] private float apexBoostGravity = 1.2f;    // Gravité supplémentaire à l’apex
 
     [Header("Orientation")]
     [SerializeField] private bool flipSpriteOnDirection = true;
 
     private Rigidbody2D rb;
+    private Collider2D col;
     private float inputX;
+
+    // timers
+    private float coyoteTimer;
+    private float bufferTimer;
+
+    // état du bouton saut
+    private bool jumpHeld;
+    private bool isJumping;
+    private float jumpHoldTimer;
+
+    private bool isGrounded;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+
+        // Important : règle le Rigidbody2D directement depuis le code
+        rb.gravityScale = 1.4f;     // Gravité un peu plus forte pour éviter le “planage”
+        rb.linearDamping = 0f;
+        rb.freezeRotation = true;
     }
 
     private void Update()
     {
-        // Récupérer l'input horizontal (Q/D ou flèches gauche/droite)
+        // --- Input horizontal ---
         int x = 0;
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        { //Unity est sous qwerty donc A pour Q en azerty
-            x -= 1;
-            direction = -1f;
-        }
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-            x += 1;
-            direction = +1f;
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            if (direction > 0f)
-            {
-                rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);
-            }
-            else
-            {
-                rb.linearVelocity = new Vector2(-dash, rb.linearVelocity.y);
-            }
-        }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) x -= 1;
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) x += 1;
         inputX = Mathf.Clamp(x, -1, 1);
 
-        // Optionnel : retourner le sprite selon la direction
+        // --- Saut : buffer + état maintenu ---
+        if (Input.GetKeyDown(KeyCode.Space))
+            bufferTimer = jumpBuffer;
+
+        jumpHeld = Input.GetKey(KeyCode.Space);
+
+        // --- Flip du sprite ---
         if (flipSpriteOnDirection && inputX != 0f)
         {
             Vector3 s = transform.localScale;
@@ -58,13 +84,90 @@ public class PlayerController2D : MonoBehaviour
             transform.localScale = s;
         }
     }
-    // Gestion du mouvement dans FixedUpdate pour la physique
+
     private void FixedUpdate()
     {
+        // ----- Détection du sol (boîte large sous les pieds) -----
+        if (col != null)
+        {
+            Bounds b = col.bounds;
+            Vector2 boxCenter = new Vector2(b.center.x, b.min.y - groundProbeSkin);
+            Vector2 boxSize = new Vector2(b.size.x * groundProbeWidthScale, groundProbeHeight);
+            isGrounded = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null;
+        }
+
+        // ----- Coyote + buffer -----
+        if (isGrounded) coyoteTimer = coyoteTime;
+        else coyoteTimer -= Time.fixedDeltaTime;
+        bufferTimer -= Time.fixedDeltaTime;
+
+        // ----- Mouvement horizontal -----
         Vector2 vel = rb.linearVelocity;
         float targetVX = inputX * maxSpeed;
         float rate = (Mathf.Abs(inputX) > 0.01f) ? acceleration : deceleration;
         vel.x = Mathf.MoveTowards(vel.x, targetVX, rate * Time.fixedDeltaTime);
+
+        // ----- Déclenchement du saut (impulsion initiale) -----
+        if (bufferTimer > 0f && coyoteTimer > 0f)
+        {
+            if (vel.y < 0f) vel.y = 0f;
+            vel.y += jumpForce;
+
+            isJumping = true;
+            jumpHoldTimer = maxJumpHoldTime;
+
+            bufferTimer = 0f;
+            coyoteTimer = 0f;
+        }
+
+        // ----- Maintien du saut -----
+        if (isJumping)
+        {
+            if (jumpHeld && jumpHoldTimer > 0f)
+            {
+                vel.y += holdBoostAccel * Time.fixedDeltaTime;
+                jumpHoldTimer -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+
+        // ----- Gravité avancée -----
+        if (vel.y < 0f)
+        {
+            // Chute rapide
+            vel.y += Physics2D.gravity.y * (fallMultiplier - 1f) * Time.fixedDeltaTime;
+        }
+        else if (vel.y > 0f && !jumpHeld && !isJumping)
+        {
+            // Petit saut si relâché tôt
+            vel.y += Physics2D.gravity.y * (lowJumpMultiplier - 1f) * Time.fixedDeltaTime;
+        }
+
+        // ----- Anti-planement -----
+        if (!isGrounded && Mathf.Abs(vel.y) < apexBoostThreshold)
+        {
+            vel.y += Physics2D.gravity.y * apexBoostGravity * Time.fixedDeltaTime;
+        }
+
+        // Limite la vitesse de chute
+        if (vel.y < maxFallSpeed)
+            vel.y = maxFallSpeed;
+
         rb.linearVelocity = vel;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (col == null && !TryGetComponent(out col)) return;
+
+        Bounds b = col.bounds;
+        Vector2 boxCenter = new Vector2(b.center.x, b.min.y - groundProbeSkin);
+        Vector2 boxSize = new Vector2(b.size.x * groundProbeWidthScale, groundProbeHeight);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(boxCenter, boxSize);
     }
 }
