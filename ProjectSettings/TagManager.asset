@@ -10,6 +10,7 @@ TagManager:
   - left_Gravity
   - right_Gravity
   - no_Gravity_intermitant
+  - super_Gravity_intermitant
   layers:
   - Default
   - TransparentFX
