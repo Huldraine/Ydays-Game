@@ -586,7 +586,7 @@ GameObject:
   - component: {fileID: 200469740}
   - component: {fileID: 200469739}
   - component: {fileID: 200469738}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: plateforme (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -900,8 +900,22 @@ MonoBehaviour:
   maxSpeed: 6
   acceleration: 40
   deceleration: 60
-  dash: 50
-  direction: 1
+  jumpForce: 8.5
+  maxJumpHoldTime: 0.13
+  holdBoostAccel: 20
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  groundProbeSkin: 0.02
+  groundProbeHeight: 0.12
+  groundProbeWidthScale: 0.9
+  coyoteTime: 0.12
+  jumpBuffer: 0.12
+  fallMultiplier: 3.4
+  lowJumpMultiplier: 2.6
+  maxFallSpeed: -28
+  apexBoostThreshold: 0.35
+  apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
 --- !u!114 &240475087
 MonoBehaviour:
@@ -918,8 +932,22 @@ MonoBehaviour:
   maxSpeed: 6
   acceleration: 40
   deceleration: 60
-  dash: 50
-  direction: 1
+  jumpForce: 8.5
+  maxJumpHoldTime: 0.13
+  holdBoostAccel: 20
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundProbeSkin: 0.02
+  groundProbeHeight: 0.12
+  groundProbeWidthScale: 0.9
+  coyoteTime: 0.12
+  jumpBuffer: 0.12
+  fallMultiplier: 3.4
+  lowJumpMultiplier: 2.6
+  maxFallSpeed: -28
+  apexBoostThreshold: 0.35
+  apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
 --- !u!114 &240475088
 MonoBehaviour:
@@ -936,8 +964,22 @@ MonoBehaviour:
   maxSpeed: 6
   acceleration: 40
   deceleration: 60
-  dash: 50
-  direction: 1
+  jumpForce: 8.5
+  maxJumpHoldTime: 0.13
+  holdBoostAccel: 20
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundProbeSkin: 0.02
+  groundProbeHeight: 0.12
+  groundProbeWidthScale: 0.9
+  coyoteTime: 0.12
+  jumpBuffer: 0.12
+  fallMultiplier: 3.4
+  lowJumpMultiplier: 2.6
+  maxFallSpeed: -28
+  apexBoostThreshold: 0.35
+  apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
 --- !u!114 &240475089
 MonoBehaviour:
@@ -1013,14 +1055,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aa5387a02dc8c4aa13ebf75512ee6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::gravityIntermitant
-  zeroGravityForce: -5
-  normalGravityForce: 1
-  indextimer: 1
-  timer: 5
-  inZeroGravityZone: 0
-  targetRenderer: {fileID: 796643913}
-  colorA: {r: 1, g: 0, b: 0, a: 1}
-  colorB: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,7 +1158,7 @@ GameObject:
   - component: {fileID: 754696008}
   - component: {fileID: 754696007}
   - component: {fileID: 754696006}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: plateforme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1535,7 +1569,7 @@ GameObject:
   - component: {fileID: 1009998300}
   - component: {fileID: 1009998299}
   - component: {fileID: 1009998298}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: plateforme (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2083,7 +2117,7 @@ GameObject:
   - component: {fileID: 1985859727}
   - component: {fileID: 1985859726}
   - component: {fileID: 1985859725}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: plateforme (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2220,7 +2254,7 @@ GameObject:
   - component: {fileID: 2118811163}
   - component: {fileID: 2118811162}
   - component: {fileID: 2118811161}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: plateforme (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
