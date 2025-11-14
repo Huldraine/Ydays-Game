@@ -12,6 +12,9 @@ TagManager:
   - no_Gravity_intermitant
   - super_Cravity_intermitant
   - super_Gravity_intermitant
+  - void
+  - right_gravity_intermitant
+  - left_gravity_intermitant
   layers:
   - Default
   - TransparentFX

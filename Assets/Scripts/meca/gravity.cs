@@ -12,7 +12,7 @@ public class Gravity : MonoBehaviour
     public bool inSuperGravityZone = false;
     public bool inIntermittentGravityZone = false;
     public bool inIntermittentSuperGravityZone = false;
-    public int indextimer = 1;
+    public int indextimer = 0;
     public float timer = 5f;
 
     [Header("changement de couleur")]
@@ -54,7 +54,7 @@ public class Gravity : MonoBehaviour
             targetRenderer.material.color = (indextimer == 0) ? colorA : colorB;
             }
 
-            if (targetRenderer != null)
+            if (targetRenderer2 != null)
             {
             targetRenderer2.material.color = (indextimer == 0) ? colorC : colorD;
             }
