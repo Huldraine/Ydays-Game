@@ -932,7 +932,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gravity
   zeroGravityForce: -3
   normalGravityForce: 1
+  superGravityForce: 5
   inZeroGravityZone: 0
+  inSuperGravityZone: 0
+  inIntermittentGravityZone: 0
+  inIntermittentSuperGravityZone: 0
+  indextimer: 0
+  timer: 5
+  targetRenderer: {fileID: 0}
+  targetRenderer2: {fileID: 0}
+  colorA: {r: 0, g: 0, b: 0, a: 1}
+  colorB: {r: 0, g: 0, b: 1, a: 1}
+  colorC: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  colorD: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &240475090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,6 +959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::superGravity
   normalGravityForce: 1
   superGravityForce: 5
+  rb: {fileID: 0}
   inSuperGravityZone: 0
 --- !u!114 &240475091
 MonoBehaviour:
@@ -961,6 +974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pushLeftForce: 50
+  rb: {fileID: 0}
   inVectorZone: 0
   zeroGravityForce: -0.005
   normalGravityForce: 1
@@ -977,6 +991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pushrightForce: 50
+  rb: {fileID: 0}
   inVectorZone: 0
   zeroGravityForce: -0.5
   normalGravityForce: 1
@@ -1048,7 +1063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -437.8, y: 221.8}
+  m_AnchoredPosition: {x: -440.54, y: 221.8}
   m_SizeDelta: {x: 52.7232, y: 52.7232}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &457092680
@@ -1290,7 +1305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -382.59875, y: 221.79999}
+  m_AnchoredPosition: {x: -379.96, y: 221.79999}
   m_SizeDelta: {x: 52.7232, y: 52.7232}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690992659

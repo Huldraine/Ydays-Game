@@ -82,16 +82,16 @@ public class PlayerController2D : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.E))
-        {
-            if (direction > 0f)
             {
-                rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);
+                if (direction > 0f)
+                {
+                    rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);
+                }
+                else
+                {
+                    rb.linearVelocity = new Vector2(-dash,rb.linearVelocity.y);
+                }
             }
-            else
-            {
-                rb.linearVelocity = new Vector2(-dash, rb.linearVelocity.y);
-            }
-        }
 
         inputX = Mathf.Clamp(x, -1, 1);
 
