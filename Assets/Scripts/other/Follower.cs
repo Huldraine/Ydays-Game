@@ -20,14 +20,25 @@ public class Follower : MonoBehaviour
     {
         Vector2 direction = Player.position - transform.position;
 
-        if (direction.sqrMagnitude > maxDistance*maxDistance )
+        if (direction.sqrMagnitude > maxDistance * maxDistance)
         {
             verif = 1f;
         }
 
-        if (verif ==1f)
+        if (verif == 1f)
         {
             transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Health playerHealth = collision.transform.GetComponent<Health>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(1);
+            }
         }
     }
 }
