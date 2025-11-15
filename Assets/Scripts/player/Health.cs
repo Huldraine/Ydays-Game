@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
     // la Vie maximale du joueur
     public int maxHealth = 5;
     // Vie actuelle du joueur
-    public int currentHealth;
+    public float currentHealth;
     // images des coeurs
     public List<Image> healthImages;
 
@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
         MettreAJourLesMasques();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth < 0)
