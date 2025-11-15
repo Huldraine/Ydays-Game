@@ -724,8 +724,6 @@ GameObject:
   - component: {fileID: 240475084}
   - component: {fileID: 240475083}
   - component: {fileID: 240475082}
-  - component: {fileID: 240475086}
-  - component: {fileID: 240475087}
   - component: {fileID: 240475088}
   - component: {fileID: 240475089}
   - component: {fileID: 240475090}
@@ -885,7 +883,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &240475086
+--- !u!114 &240475088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -897,10 +895,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a72eec0d80263542bffae5ae5f2f530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController2D
-  maxSpeed: 6
-  acceleration: 40
+  maxSpeed: 10000
+  acceleration: 100
   deceleration: 60
-  jumpForce: 8.5
+  jumpForce: 20
   maxJumpHoldTime: 0.13
   holdBoostAccel: 20
   groundLayer:
@@ -917,70 +915,8 @@ MonoBehaviour:
   apexBoostThreshold: 0.35
   apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
---- !u!114 &240475087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240475081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a72eec0d80263542bffae5ae5f2f530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController2D
-  maxSpeed: 6
-  acceleration: 40
-  deceleration: 60
-  jumpForce: 8.5
-  maxJumpHoldTime: 0.13
-  holdBoostAccel: 20
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  groundProbeSkin: 0.02
-  groundProbeHeight: 0.12
-  groundProbeWidthScale: 0.9
-  coyoteTime: 0.12
-  jumpBuffer: 0.12
-  fallMultiplier: 3.4
-  lowJumpMultiplier: 2.6
-  maxFallSpeed: -28
-  apexBoostThreshold: 0.35
-  apexBoostGravity: 1.2
-  flipSpriteOnDirection: 1
---- !u!114 &240475088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240475081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a72eec0d80263542bffae5ae5f2f530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController2D
-  maxSpeed: 6
-  acceleration: 40
-  deceleration: 60
-  jumpForce: 8.5
-  maxJumpHoldTime: 0.13
-  holdBoostAccel: 20
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  groundProbeSkin: 0.02
-  groundProbeHeight: 0.12
-  groundProbeWidthScale: 0.9
-  coyoteTime: 0.12
-  jumpBuffer: 0.12
-  fallMultiplier: 3.4
-  lowJumpMultiplier: 2.6
-  maxFallSpeed: -28
-  apexBoostThreshold: 0.35
-  apexBoostGravity: 1.2
-  flipSpriteOnDirection: 1
+  dash: 50
+  direction: 1
 --- !u!114 &240475089
 MonoBehaviour:
   m_ObjectHideFlags: 0

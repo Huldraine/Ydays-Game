@@ -30,4 +30,15 @@ public class Follower : MonoBehaviour
             transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Health playerHealth = collision.transform.GetComponent<Health>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(1);
+            }
+        }
+    }
 }
