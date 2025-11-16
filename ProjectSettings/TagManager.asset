@@ -15,6 +15,7 @@ TagManager:
   - void
   - right_gravity_intermitant
   - left_gravity_intermitant
+  - ennemy
   layers:
   - Default
   - TransparentFX
