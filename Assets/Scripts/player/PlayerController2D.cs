@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(PlayerRespawn))]   // <-- nouveau : on s'assure qu'il y a un PlayerRespawn
 public class PlayerController2D : MonoBehaviour
 {
     [Header("Vitesse")]
@@ -36,11 +37,19 @@ public class PlayerController2D : MonoBehaviour
     [Header("Orientation")]
     [SerializeField] private bool flipSpriteOnDirection = true;
 
+    [Header("Respawn Safe Position")]
+    [SerializeField] private float safeOffsetX = 0.5f;   // combien on se recule sur X
+    [SerializeField] private float safeOffsetY = 0.1f;   // petit décalage vers le haut
+
+
     [Header("Dash")]
     public float dash = 50f;
     public float direction = 1.0f;
+
     private Rigidbody2D rb;
     private Collider2D col;
+    private PlayerRespawn respawn;     // <-- nouveau
+
     private float inputX;
 
     // timers
@@ -52,12 +61,17 @@ public class PlayerController2D : MonoBehaviour
     private bool isJumping;
     private float jumpHoldTimer;
 
+    // dernier input
+    public float LastInputX => inputX;
+
+
     private bool isGrounded;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        respawn = GetComponent<PlayerRespawn>();   // <-- nouveau
 
         // Important : règle le Rigidbody2D directement depuis le code
         rb.gravityScale = 1.4f;     // Gravité un peu plus forte pour éviter le “planage”
@@ -82,16 +96,16 @@ public class PlayerController2D : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.E))
+        {
+            if (direction > 0f)
             {
-                if (direction > 0f)
-                {
-                    rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);
-                }
-                else
-                {
-                    rb.linearVelocity = new Vector2(-dash,rb.linearVelocity.y);
-                }
+                rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);
             }
+            else
+            {
+                rb.linearVelocity = new Vector2(-dash, rb.linearVelocity.y);
+            }
+        }
 
         inputX = Mathf.Clamp(x, -1, 1);
 
@@ -110,7 +124,6 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-
     private void FixedUpdate()
     {
         // ----- Détection du sol (boîte large sous les pieds) -----
@@ -121,6 +134,34 @@ public class PlayerController2D : MonoBehaviour
             Vector2 boxSize = new Vector2(b.size.x * groundProbeWidthScale, groundProbeHeight);
             isGrounded = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null;
         }
+
+        // ----- mise à jour de la dernière position safe pour le respawn -----
+        if (isGrounded && respawn != null)
+        {
+            // On part de la position actuelle
+            Vector3 safePos = transform.position;
+
+            // On regarde la direction dans laquelle le joueur se déplaçait
+            float dir = inputX;
+            if (Mathf.Abs(dir) < 0.01f)
+            {
+                // si le joueur ne bouge presque pas, on utilise la direction "facing"
+                dir = direction;
+            }
+
+            // Si on a une vraie direction (gauche ou droite)
+            if (Mathf.Abs(dir) > 0.01f)
+            {
+                // On recule un peu dans la direction opposée
+                safePos.x -= Mathf.Sign(dir) * safeOffsetX;
+            }
+
+            // On le remet aussi un poil plus haut pour être sûr d'être sur la plateforme
+            safePos.y += safeOffsetY;
+
+            respawn.UpdateLastSafePosition(safePos);
+        }
+
 
         // ----- Coyote + buffer -----
         if (isGrounded) coyoteTimer = coyoteTime;
