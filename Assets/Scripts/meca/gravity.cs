@@ -12,27 +12,15 @@ public class Gravity : MonoBehaviour
     public bool inSuperGravityZone = false;
     public bool inIntermittentGravityZone = false;
     public bool inIntermittentSuperGravityZone = false;
-    public int indextimer = 0;
-    public float timer = 5f;
+    public int indextimer = 1;
+    public float timer = 10f;
 
-    [Header("changement de couleur")]
-    public Renderer targetRenderer;
-    public Renderer targetRenderer2;
-    public Color colorA = Color.black;    
-    public Color colorB = Color.blue;
-
-    public Color colorC = Color.yellow;    
-    public Color colorD = Color.green;
 
 
     // Start is called once before the first execution of Update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        if (targetRenderer != null)
-            targetRenderer.material.color = colorA;
-         if (targetRenderer2 != null)
-            targetRenderer2.material.color = colorC;   
+        rb = GetComponent<Rigidbody2D>(); 
     }
 
         void Update()
@@ -46,18 +34,9 @@ public class Gravity : MonoBehaviour
             // On alterne entre 0 et 1
             indextimer = (indextimer == 0) ? 1 : 0;
 
-            // On remet le timer à 5 secondes
-            timer = 5f;
+            // On remet le timer à 10 secondes
+            timer = 10f;
 
-            if (targetRenderer != null)
-            {
-            targetRenderer.material.color = (indextimer == 0) ? colorA : colorB;
-            }
-
-            if (targetRenderer2 != null)
-            {
-            targetRenderer2.material.color = (indextimer == 0) ? colorC : colorD;
-            }
         }
 
         if (inIntermittentGravityZone)
