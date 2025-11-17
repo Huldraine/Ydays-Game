@@ -6,23 +6,11 @@ public class PlayerRespawn : MonoBehaviour
     [Header("Respawn")]
     [SerializeField] private Transform startingCheckpoint; // checkpoint de départ (optionnel)
 
-    [Header("Respawn après hazard (piques / vide)")]
-    [Tooltip("Décalage appliqué par rapport à la dernière position safe quand on respawn depuis un hazard.")]
-    [SerializeField] private Vector2 hazardRespawnOffset = new Vector2(-0.2f, 0.1f);
-    // X négatif = léger retour en arrière, Y positif = un peu au-dessus de la plateforme
-
-    // Pour plus tard : invulnérabilité & animations (à décommenter quand ce sera prêt)
-    /*
-    [Header("Invulnérabilité (à activer plus tard)")]
-    [SerializeField] private float hazardInvulnerabilityTime = 1.0f; // durée d'invulnérabilité après un hazard
-    [SerializeField] private Animator animator;                      // Animator du joueur
-    [SerializeField] private string respawnTriggerName = "OnHazardRespawn";
-    [SerializeField] private string invulnBoolName = "IsInvulnerable";
-
-    private bool isInvulnerable;
-    */
+    [Header("Dégâts des hazards (piques / vide)")]
+    [SerializeField] private float hazardDamage = 1f; // quantité de vie perdue par chute/piques
 
     private Rigidbody2D rb;
+    private Health health;
 
     private Vector3 checkpointPosition;  // dernier vrai checkpoint
     private Vector3 lastSafePosition;    // dernière position sûre (plateforme avant les piques)
@@ -30,6 +18,7 @@ public class PlayerRespawn : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<Health>();     // peut être null si pas encore mis, on gère le cas
 
         // Point de checkpoint de base
         if (startingCheckpoint != null)
@@ -50,30 +39,57 @@ public class PlayerRespawn : MonoBehaviour
     }
 
     /// <summary>
-    /// Appelé par une hazard (piques, vide) pour un respawn "léger".
+    /// Appelé par une zone de type Hazard (piques, vide).
+    /// Gère la perte de vie + choix entre soft/hard respawn.
+    /// </summary>
+    public void OnHazardHit()
+    {
+        if (health != null)
+        {
+            // on applique les dégâts
+            health.TakeDamage(hazardDamage);
+
+            if (health.currentHealth > 0)
+            {
+                // encore vivant → respawn proche
+                RespawnFromHazard();
+            }
+            else
+            {
+                // mort → respawn au checkpoint + vie remise au max
+                RespawnFromDeath();
+            }
+        }
+        else
+        {
+            // pas de système de vie encore branché → juste respawn proche
+            RespawnFromHazard();
+        }
+    }
+
+    /// <summary>
+    /// Respawn léger (après hazard) à la dernière position safe.
     /// </summary>
     public void RespawnFromHazard()
     {
-        // On respawn exactement à la dernière position safe calculée par le PlayerController
         TeleportTo(lastSafePosition);
-
-        // (plus tard tu pourras lancer une anim ou une invulnérabilité ici)
+        // plus tard : invulnérabilité / anim ici
     }
 
-
-
     /// <summary>
-    /// Appelé quand le joueur meurt vraiment (PV = 0) → retour au checkpoint.
-    /// Pour l'instant, tu peux l'appeler manuellement si besoin.
+    /// Respawn après une vraie mort → checkpoint + reset position safe.
     /// </summary>
     public void RespawnFromDeath()
     {
+        // si Health est présent, on remet la vie au max + maj UI
+        if (health != null)
+        {
+            health.currentHealth = health.maxHealth;
+            health.TakeDamage(0f); // déclenche MettreAJourLesMasques sans retirer de PV
+        }
+
         TeleportTo(checkpointPosition);
         lastSafePosition = checkpointPosition;
-
-        // Plus tard, quand Health sera branché :
-        // health.currentHealth = health.maxHealth;
-        // health.TakeDamage(0f); // maj de l'UI des PV sans retirer de vie
     }
 
     /// <summary>
@@ -95,48 +111,4 @@ public class PlayerRespawn : MonoBehaviour
             rb.angularVelocity = 0f;
         }
     }
-
-    // ================================
-    // Invulnérabilité & anim (optionnel)
-    // ================================
-    /*
-    // ⚠️ Si tu décommente ça, pense à ajouter :
-    // using System.Collections;
-    // en haut du fichier.
-
-    private IEnumerator HazardRespawnRoutine()
-    {
-        // 1) On téléporte d'abord le joueur à la position offsetée
-        Vector3 targetPos = lastSafePosition + (Vector3)hazardRespawnOffset;
-        TeleportTo(targetPos);
-
-        // 2) On active l'invulnérabilité
-        isInvulnerable = true;
-
-        // 3) On lance une anim de respawn si un Animator est assigné
-        if (animator != null && !string.IsNullOrEmpty(respawnTriggerName))
-            animator.SetTrigger(respawnTriggerName);
-
-        // 4) TODO : faire clignoter le sprite ici pendant hazardInvulnerabilityTime
-        //    (ex: activer/désactiver SpriteRenderer.enabled toutes les 0.1s)
-
-        // Exemple basique (à adapter) :
-        // SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        // float t = 0f;
-        // while (t < hazardInvulnerabilityTime)
-        // {
-        //     if (sr != null)
-        //         sr.enabled = !sr.enabled;
-        //     yield return new WaitForSeconds(0.1f);
-        //     t += 0.1f;
-        // }
-        // if (sr != null) sr.enabled = true;
-
-        // 5) On coupe l'état d'invulnérabilité sur l'Animator si besoin
-        if (animator != null && !string.IsNullOrEmpty(invulnBoolName))
-            animator.SetBool(invulnBoolName, false);
-
-        isInvulnerable = false;
-    }
-    */
 }

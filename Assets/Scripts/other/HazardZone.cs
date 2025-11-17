@@ -13,7 +13,11 @@ public class HazardZone : MonoBehaviour
         PlayerRespawn respawn = other.GetComponent<PlayerRespawn>();
         if (respawn != null)
         {
-            respawn.RespawnFromHazard();
+            // On passe par PlayerRespawn qui gère :
+            // - dégâts via Health
+            // - soft respawn (lastSafePosition) si encore vivant
+            // - hard respawn (checkpoint) si mort
+            respawn.OnHazardHit();
         }
     }
 }
