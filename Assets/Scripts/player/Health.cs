@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IDamageable
 {
     // la Vie maximale du joueur
     public int maxHealth = 5;
@@ -15,18 +15,20 @@ public class Health : MonoBehaviour
     public Sprite spritePlein;
     public Sprite spriteVide;
 
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
         // Definir la vie au maximum au debut
         currentHealth = maxHealth;
-
         MettreAJourLesMasques();
     }
 
+    // Implémentation de l’interface IDamageable (en int)
+    public void TakeDamage(int amount)
+    {
+        TakeDamage((float)amount);
+    }
+
+    // Version float utilisée ailleurs dans ton code (hazardDamage, etc.)
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
@@ -37,7 +39,6 @@ public class Health : MonoBehaviour
         MettreAJourLesMasques();
     }
 
-
     void MettreAJourLesMasques()
     {
         for (int i = 0; i < healthImages.Count; i++)
@@ -46,8 +47,6 @@ public class Health : MonoBehaviour
                 healthImages[i].sprite = spritePlein;
             else
                 healthImages[i].sprite = spriteVide;
-
         }
-
     }
 }

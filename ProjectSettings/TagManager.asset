@@ -15,7 +15,7 @@ TagManager:
   - void
   - right_gravity_intermitant
   - left_gravity_intermitant
-  - ennemy
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -23,7 +23,7 @@ TagManager:
   - ground
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
