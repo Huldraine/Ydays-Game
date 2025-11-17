@@ -2,7 +2,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(PlayerRespawn))]   // <-- nouveau : on s'assure qu'il y a un PlayerRespawn
+[RequireComponent(typeof(PlayerRespawn))]
+[RequireComponent(typeof(Health))]
 public class PlayerController2D : MonoBehaviour
 {
     [Header("Vitesse")]
@@ -28,59 +29,101 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float jumpBuffer = 0.12f;
 
     [Header("Gravité avancée")]
-    [SerializeField] private float fallMultiplier = 3.4f;      // Chute rapide
-    [SerializeField] private float lowJumpMultiplier = 2.6f;   // Petit saut si relâché tôt
-    [SerializeField] private float maxFallSpeed = -28f;        // Limite de chute
-    [SerializeField] private float apexBoostThreshold = 0.35f; // Zone proche du sommet
-    [SerializeField] private float apexBoostGravity = 1.2f;    // Gravité supplémentaire à l’apex
+    [SerializeField] private float fallMultiplier = 3.4f;
+    [SerializeField] private float lowJumpMultiplier = 2.6f;
+    [SerializeField] private float maxFallSpeed = -28f;
+    [SerializeField] private float apexBoostThreshold = 0.35f;
+    [SerializeField] private float apexBoostGravity = 1.2f;
 
     [Header("Orientation")]
     [SerializeField] private bool flipSpriteOnDirection = true;
 
     [Header("Respawn Safe Position")]
-    [SerializeField] private float safeOffsetX = 0.5f;   // combien on se recule sur X
-    [SerializeField] private float safeOffsetY = 0.1f;   // petit décalage vers le haut
-
+    [SerializeField] private float safeOffsetX = 0.5f;
+    [SerializeField] private float safeOffsetY = 0.1f;
 
     [Header("Dash")]
     public float dash = 50f;
     public float direction = 1.0f;
 
+    [Header("Hit / Knockback")]
+    [SerializeField] private float knockbackForceX = 10f;
+    [SerializeField] private float knockbackForceY = 6f;
+    [SerializeField] private float knockbackDuration = 0.15f;
+    [SerializeField] private float invincibilityTime = 1.0f;
+
+    [Header("Invincibilité & collisions")]
+    [Tooltip("Nom du layer utilisé par les ennemis (doit exister dans Unity).")]
+    [SerializeField] private string enemyLayerName = "Enemy";
+
+    [Tooltip("Tag utilisé par les ennemis (pour ignorer les collisions individuellement).")]
+    [SerializeField] private string enemyTagName = "Enemy";
+
     private Rigidbody2D rb;
     private Collider2D col;
-    private PlayerRespawn respawn;     // <-- nouveau
+    private PlayerRespawn respawn;
+    private Health health;
+    private SpriteRenderer spriteRenderer;
 
     private float inputX;
 
-    // timers
+    // timers saut
     private float coyoteTimer;
     private float bufferTimer;
 
-    // état du bouton saut
     private bool jumpHeld;
     private bool isJumping;
     private float jumpHoldTimer;
 
-    // dernier input
     public float LastInputX => inputX;
 
-
     private bool isGrounded;
+
+    // Knockback & invincibilité
+    private bool isKnockedBack;
+    private float knockbackTimer;
+
+    private bool isInvincible;
+    private float invincibilityTimer;
+    private float flashTimer;
+    private float flashInterval = 0.1f;
+
+    // Layers
+    private int playerLayerIndex;
+    private int enemyLayerIndex;
+
+    /// <summary>Vitesse verticale actuelle du joueur.</summary>
+    public float VerticalVelocity => rb != null ? rb.linearVelocity.y : 0f;
+    public bool IsInvincible => isInvincible;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
-        respawn = GetComponent<PlayerRespawn>();   // <-- nouveau
+        respawn = GetComponent<PlayerRespawn>();
+        health = GetComponent<Health>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        // Important : règle le Rigidbody2D directement depuis le code
-        rb.gravityScale = 1.4f;     // Gravité un peu plus forte pour éviter le “planage”
+        rb.gravityScale = 1.4f;
         rb.linearDamping = 0f;
         rb.freezeRotation = true;
+
+        // Layers
+        playerLayerIndex = gameObject.layer;
+        enemyLayerIndex = LayerMask.NameToLayer(enemyLayerName);
+        if (enemyLayerIndex < 0)
+        {
+            Debug.LogWarning($"[PlayerController2D] Layer '{enemyLayerName}' introuvable. Vérifie son nom dans les Layer Settings.");
+        }
     }
 
     private void Update()
     {
+        HandleInvincibilityTimers();
+
+        if (isKnockedBack)
+            return;
+
         // --- Input horizontal ---
         int x = 0;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -98,13 +141,9 @@ public class PlayerController2D : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             if (direction > 0f)
-            {
                 rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);
-            }
             else
-            {
                 rb.linearVelocity = new Vector2(-dash, rb.linearVelocity.y);
-            }
         }
 
         inputX = Mathf.Clamp(x, -1, 1);
@@ -126,7 +165,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // ----- Détection du sol (boîte large sous les pieds) -----
+        // Détection du sol
         if (col != null)
         {
             Bounds b = col.bounds;
@@ -135,95 +174,196 @@ public class PlayerController2D : MonoBehaviour
             isGrounded = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null;
         }
 
-        // ----- mise à jour de la dernière position safe pour le respawn -----
+        // Safe position
         if (isGrounded && respawn != null)
         {
-            // On part de la position actuelle
             Vector3 safePos = transform.position;
 
-            // On regarde la direction dans laquelle le joueur se déplaçait
             float dir = inputX;
             if (Mathf.Abs(dir) < 0.01f)
-            {
-                // si le joueur ne bouge presque pas, on utilise la direction "facing"
                 dir = direction;
-            }
 
-            // Si on a une vraie direction (gauche ou droite)
             if (Mathf.Abs(dir) > 0.01f)
-            {
-                // On recule un peu dans la direction opposée
                 safePos.x -= Mathf.Sign(dir) * safeOffsetX;
-            }
 
-            // On le remet aussi un poil plus haut pour être sûr d'être sur la plateforme
             safePos.y += safeOffsetY;
-
             respawn.UpdateLastSafePosition(safePos);
         }
 
-
-        // ----- Coyote + buffer -----
+        // Coyote / buffer
         if (isGrounded) coyoteTimer = coyoteTime;
         else coyoteTimer -= Time.fixedDeltaTime;
         bufferTimer -= Time.fixedDeltaTime;
 
-        // ----- Mouvement horizontal -----
         Vector2 vel = rb.linearVelocity;
-        float targetVX = inputX * maxSpeed;
-        float rate = (Mathf.Abs(inputX) > 0.01f) ? acceleration : deceleration;
-        vel.x = Mathf.MoveTowards(vel.x, targetVX, rate * Time.fixedDeltaTime);
 
-        // ----- Déclenchement du saut (impulsion initiale) -----
-        if (bufferTimer > 0f && coyoteTimer > 0f)
+        if (!isKnockedBack)
         {
-            if (vel.y < 0f) vel.y = 0f;
-            vel.y += jumpForce;
+            // Mouvement horizontal
+            float targetVX = inputX * maxSpeed;
+            float rate = (Mathf.Abs(inputX) > 0.01f) ? acceleration : deceleration;
+            vel.x = Mathf.MoveTowards(vel.x, targetVX, rate * Time.fixedDeltaTime);
 
-            isJumping = true;
-            jumpHoldTimer = maxJumpHoldTime;
+            // Déclenchement du saut
+            if (bufferTimer > 0f && coyoteTimer > 0f)
+            {
+                if (vel.y < 0f) vel.y = 0f;
+                vel.y += jumpForce;
 
-            bufferTimer = 0f;
-            coyoteTimer = 0f;
+                isJumping = true;
+                jumpHoldTimer = maxJumpHoldTime;
+
+                bufferTimer = 0f;
+                coyoteTimer = 0f;
+            }
+
+            // Maintien du saut
+            if (isJumping)
+            {
+                if (jumpHeld && jumpHoldTimer > 0f)
+                {
+                    vel.y += holdBoostAccel * Time.fixedDeltaTime;
+                    jumpHoldTimer -= Time.fixedDeltaTime;
+                }
+                else
+                {
+                    isJumping = false;
+                }
+            }
+        }
+        else
+        {
+            // Timer de knockback
+            knockbackTimer -= Time.fixedDeltaTime;
+            if (knockbackTimer <= 0f)
+            {
+                isKnockedBack = false;
+            }
         }
 
-        // ----- Maintien du saut -----
-        if (isJumping)
-        {
-            if (jumpHeld && jumpHoldTimer > 0f)
-            {
-                vel.y += holdBoostAccel * Time.fixedDeltaTime;
-                jumpHoldTimer -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                isJumping = false;
-            }
-        }
-
-        // ----- Gravité avancée -----
+        // Gravité avancée
         if (vel.y < 0f)
         {
-            // Chute rapide
             vel.y += Physics2D.gravity.y * (fallMultiplier - 1f) * Time.fixedDeltaTime;
         }
         else if (vel.y > 0f && !jumpHeld && !isJumping)
         {
-            // Petit saut si relâché tôt
             vel.y += Physics2D.gravity.y * (lowJumpMultiplier - 1f) * Time.fixedDeltaTime;
         }
 
-        // ----- Anti-planement -----
         if (!isGrounded && Mathf.Abs(vel.y) < apexBoostThreshold)
-        {
             vel.y += Physics2D.gravity.y * apexBoostGravity * Time.fixedDeltaTime;
-        }
 
-        // Limite la vitesse de chute
         if (vel.y < maxFallSpeed)
             vel.y = maxFallSpeed;
 
         rb.linearVelocity = vel;
+    }
+
+    /// <summary>
+    /// Appelé quand un ennemi touche le joueur : dégâts + knockback + invincibilité.
+    /// </summary>
+    public void OnHitByEnemy(Vector2 enemyPosition, int damage)
+    {
+        if (isInvincible || health == null)
+            return;
+
+        // Dégâts
+        health.TakeDamage(damage);
+
+        // Invincibilité (et ignore collisions avec ennemis)
+        SetInvincibleState(true);
+        invincibilityTimer = invincibilityTime;
+        flashTimer = 0f;
+
+        // Knockback
+        isKnockedBack = true;
+        knockbackTimer = knockbackDuration;
+
+        float dir = Mathf.Sign(transform.position.x - enemyPosition.x);
+        if (dir == 0f)
+        {
+            dir = Mathf.Sign(direction);
+            if (dir == 0f) dir = 1f;
+        }
+
+        Vector2 vel = rb.linearVelocity;
+        vel.x = dir * knockbackForceX;
+        vel.y = knockbackForceY;
+        rb.linearVelocity = vel;
+    }
+
+    /// <summary>Applique un pogo (rebond vers le haut).</summary>
+    public void ApplyPogo(float pogoForce)
+    {
+        Vector2 vel = rb.linearVelocity;
+
+        if (vel.y < 0f)
+            vel.y = 0f;
+
+        vel.y = pogoForce;
+        rb.linearVelocity = vel;
+
+        isJumping = false;
+        jumpHoldTimer = 0f;
+    }
+
+    private void HandleInvincibilityTimers()
+    {
+        if (!isInvincible)
+            return;
+
+        invincibilityTimer -= Time.deltaTime;
+        if (invincibilityTimer <= 0f)
+        {
+            SetInvincibleState(false);
+            return;
+        }
+
+        // Clignotement
+        if (spriteRenderer != null)
+        {
+            flashTimer -= Time.deltaTime;
+            if (flashTimer <= 0f)
+            {
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+                flashTimer = flashInterval;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Active/désactive l'invincibilité + ignore collisions avec les ennemis.
+    /// </summary>
+    private void SetInvincibleState(bool value)
+    {
+        isInvincible = value;
+
+        // 1) Ignore collisions par layer (si le layer Enemy existe)
+        if (enemyLayerIndex >= 0)
+        {
+            Physics2D.IgnoreLayerCollision(playerLayerIndex, enemyLayerIndex, value);
+        }
+
+        // 2) Ignore collisions directes avec chaque collider taggé Enemy
+        if (!string.IsNullOrEmpty(enemyTagName))
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTagName);
+            foreach (GameObject enemy in enemies)
+            {
+                Collider2D enemyCol = enemy.GetComponent<Collider2D>();
+                if (enemyCol != null && col != null)
+                {
+                    Physics2D.IgnoreCollision(col, enemyCol, value);
+                }
+            }
+        }
+
+        // Quand on sort de l'invincibilité, on remet le sprite visible
+        if (!value && spriteRenderer != null)
+        {
+            spriteRenderer.enabled = true;
+        }
     }
 
     private void OnDrawGizmosSelected()

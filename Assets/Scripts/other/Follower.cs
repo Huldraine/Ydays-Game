@@ -1,53 +1,71 @@
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Follower : MonoBehaviour
+public class Follower : MonoBehaviour, IDamageable
 {
-    public Transform Player;      // le joueur � suivre
-    public float speed = 2f;      // vitesse 
-    public float maxDistance = 5f; // distance maximale pour suivre le joueur
-    public float verif = 0f;
+    [Header("Suivi du joueur")]
+    public Transform Player;        // le joueur à suivre
+    public float speed = 2f;        // vitesse de déplacement horizontale
+    public float maxDistance = 5f;  // distance d'aggro en X
 
+    [Header("Vie")]
     public int maxHealth = 3;
     private int currentHealth;
 
     private Rigidbody2D rb;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+
+        // Ennemi au sol : soumis à la gravité, mais pas de rotation bizarre
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = 1f;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Vector2 direction = Player.position - transform.position;
+        if (Player == null || rb == null) return;
 
-        if (direction.sqrMagnitude > maxDistance * maxDistance)
-        {
-            verif = 1f;
-        }
+        // On ne regarde que la distance horizontale
+        float dx = Player.position.x - transform.position.x;
+        float absDx = Mathf.Abs(dx);
 
-        if (verif == 1f)
-        {
-            transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
-        }
+        // L'ennemi ne bouge que si le joueur est à moins de maxDistance en X
+        if (absDx > maxDistance)
+            return;
+
+        // Direction horizontale uniquement (-1 à gauche, +1 à droite)
+        float directionX = Mathf.Sign(dx);
+
+        // Si on est quasiment alignés, on ne bouge plus
+        if (absDx < 0.05f)
+            directionX = 0f;
+
+        // Mouvement uniquement en X, on laisse la gravité gérer Y
+        Vector2 move = new Vector2(directionX * speed * Time.fixedDeltaTime, 0f);
+        rb.MovePosition(rb.position + move);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Si l'ennemi touche le joueur → dégâts + knockback + invincibilité
         if (collision.gameObject.CompareTag("Player"))
         {
-            Health playerHealth = collision.transform.GetComponent<Health>();
-            if (playerHealth != null)
+            PlayerController2D pc = collision.gameObject.GetComponent<PlayerController2D>();
+            if (pc != null)
             {
-                playerHealth.TakeDamage(1);
+                pc.OnHitByEnemy(transform.position, 1);
             }
         }
     }
 
+    // Implémentation de IDamageable (HitBoxDamage, HazardZone...)
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -58,8 +76,7 @@ public class Follower : MonoBehaviour
     }
 
     void Die()
-    { 
+    {
         gameObject.SetActive(false);
     }
-
 }
