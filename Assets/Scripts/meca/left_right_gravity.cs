@@ -64,15 +64,15 @@ public class LeftRightGravity : MonoBehaviour
             rb.linearVelocity = new Vector2(pushForce, rb.linearVelocity.y);
         }
 
-        if (inIntermittentVectorZoneRight)
+        if (inVectorZoneLeft)
         {
-            rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(-pushForce, rb.linearVelocity.y);
         }
 
-        if (inVectorZoneLeft && indextimer == 1)
+        if (inIntermittentVectorZoneRight && indextimer == 1)
         {
             // Pousse vers la gauche
-            rb.linearVelocity = new Vector2(-pushForce, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y);
         }
         if (inIntermittentVectorZoneLeft && indextimer == 1)
         {
@@ -94,8 +94,8 @@ public class LeftRightGravity : MonoBehaviour
 
         if (col.CompareTag("right_Gravity"))
         {
-            inVectorZoneRight = true;
-            inVectorZoneLeft = false;
+            inVectorZoneRight = false;
+            inVectorZoneLeft = true;
             inIntermittentVectorZoneRight = false;
             inIntermittentVectorZoneLeft = false;
             rb.gravityScale = zeroGravityForce;

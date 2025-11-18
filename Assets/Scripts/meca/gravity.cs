@@ -14,6 +14,7 @@ public class Gravity : MonoBehaviour
     public bool inIntermittentSuperGravityZone = false;
     public int indextimer = 1;
     public float timer = 10f;
+    
 
 
 
