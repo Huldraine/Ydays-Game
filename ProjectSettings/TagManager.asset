@@ -10,6 +10,12 @@ TagManager:
   - left_Gravity
   - right_Gravity
   - no_Gravity_intermitant
+  - super_Cravity_intermitant
+  - super_Gravity_intermitant
+  - void
+  - right_gravity_intermitant
+  - left_gravity_intermitant
+  - ennemy
   layers:
   - Default
   - TransparentFX
