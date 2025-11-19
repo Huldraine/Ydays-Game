@@ -22,6 +22,9 @@ public class NPCInteract : MonoBehaviour
         "Ce dernier est pollué par la mode Fortnite xD"
     };
 
+    // Vendeur
+    public GameObject vendeurScript;
+
     void Start()
     {
         // Initialement, cacher les panneaux
@@ -45,6 +48,9 @@ public class NPCInteract : MonoBehaviour
             // Eviter débordement
             if (currentLineIndex >= dialogueLines.Length)
             {
+                // On appelle le vendeur
+                vendeurScript.GetComponent<vendeur>().OpenShop();
+
                 dialoguePanel.SetActive(false);
                 dialogueOpen = false;
                 currentLineIndex = 0;
