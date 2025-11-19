@@ -1,21 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
-    public void jouer()
+    public void Jouer()
     {
-        SceneManager.LoadScene("poumonS1");
+        SceneManager.LoadScene(1);
     }
 
-    public void parametres()
-    {
-        SceneManager.LoadScene("parametres");
-    }
-
-    public void quitter()
+    public void Quitter()
     {
         Application.Quit();
     }
 }
-
