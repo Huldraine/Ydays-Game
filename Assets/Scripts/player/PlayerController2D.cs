@@ -36,9 +36,6 @@ public class PlayerController2D : MonoBehaviour
     [Header("Orientation")]
     [SerializeField] private bool flipSpriteOnDirection = true;
 
-    [Header("Dash")]
-    public float dash = 50f;
-    public float direction = 1.0f;
     private Rigidbody2D rb;
     private Collider2D col;
     private float inputX;
@@ -69,30 +66,8 @@ public class PlayerController2D : MonoBehaviour
     {
         // --- Input horizontal ---
         int x = 0;
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            x -= 1;
-            direction = -1f;
-        }
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            x += 1;
-            direction = 1f;
-        }
-
-        if (Input.GetKey(KeyCode.E))
-            {
-                if (direction > 0f)
-                {
-                    rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);
-                }
-                else
-                {
-                    rb.linearVelocity = new Vector2(-dash,rb.linearVelocity.y);
-                }
-            }
-
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) x -= 1;
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) x += 1;
         inputX = Mathf.Clamp(x, -1, 1);
 
         // --- Saut : buffer + état maintenu ---
@@ -109,7 +84,6 @@ public class PlayerController2D : MonoBehaviour
             transform.localScale = s;
         }
     }
-
 
     private void FixedUpdate()
     {
