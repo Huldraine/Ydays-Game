@@ -13,22 +13,14 @@ public class LeftRightGravity : MonoBehaviour
 
     public bool inIntermittentVectorZoneRight = false;
     public bool inIntermittentVectorZoneLeft = false;
-    public int indextimer = 0;
+    public int indextimer = 1;
 
-    public float timer = 5f;
+    public float timer = 10f;
 
     [Header("Paramètres de gravité")]
     public float zeroGravityForce = -0.5f;   // gravité dans la zone 
     public float normalGravityForce = 1f;    // gravité normale
 
-        [Header("changement de couleur")]
-    public Renderer targetRenderer;
-    public Renderer targetRenderer2;
-    public Color colorA = Color.black;    
-    public Color colorB = Color.blue;
-
-    public Color colorC = Color.yellow;    
-    public Color colorD = Color.green;
 
     void Start()
     {
@@ -47,17 +39,8 @@ public class LeftRightGravity : MonoBehaviour
             indextimer = (indextimer == 0) ? 1 : 0;
 
             // On remet le timer à 5 secondes
-            timer = 5f;
+            timer = 10f;
 
-            if (targetRenderer != null)
-            {
-            targetRenderer.material.color = ( indextimer == 1) ? colorA : colorB;
-            }
-
-            if (targetRenderer2 != null)
-            {
-            targetRenderer2.material.color = ( indextimer == 1) ? colorC : colorD;
-            }
         }
 
         if (inIntermittentVectorZoneRight)
@@ -81,15 +64,15 @@ public class LeftRightGravity : MonoBehaviour
             rb.linearVelocity = new Vector2(pushForce, rb.linearVelocity.y);
         }
 
-        if (inIntermittentVectorZoneRight)
+        if (inVectorZoneLeft)
         {
-            rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(-pushForce, rb.linearVelocity.y);
         }
 
-        if (inVectorZoneLeft && indextimer == 1)
+        if (inIntermittentVectorZoneRight && indextimer == 1)
         {
             // Pousse vers la gauche
-            rb.linearVelocity = new Vector2(-pushForce, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y);
         }
         if (inIntermittentVectorZoneLeft && indextimer == 1)
         {
@@ -111,8 +94,8 @@ public class LeftRightGravity : MonoBehaviour
 
         if (col.CompareTag("right_Gravity"))
         {
-            inVectorZoneRight = true;
-            inVectorZoneLeft = false;
+            inVectorZoneRight = false;
+            inVectorZoneLeft = true;
             inIntermittentVectorZoneRight = false;
             inIntermittentVectorZoneLeft = false;
             rb.gravityScale = zeroGravityForce;
