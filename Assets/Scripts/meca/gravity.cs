@@ -5,12 +5,15 @@ public class Gravity : MonoBehaviour
 {
     [Header("paramêtre de gravité")]
     public float normalGravityForce = 1f;    // gravité normal normale
+<<<<<<< HEAD
     public float superGravityForce = 5f;
 
     public float zeroGravityForce;    // gravité zéro
     public float fantomegravity;
 
     [Header("rigidbody")]
+=======
+>>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
     private Rigidbody2D rb;
 
     [Header("paramêtre de zone")]
@@ -22,6 +25,7 @@ public class Gravity : MonoBehaviour
 
     [Header("zone de gravité")]
     public bool inZeroGravityZone = false;
+<<<<<<< HEAD
     public bool inSuperGravityZone = false;
     public bool inIntermittentGravityZone = false;
     public bool inIntermittentSuperGravityZone = false;
@@ -46,9 +50,12 @@ public class Gravity : MonoBehaviour
 
 
 
+=======
+>>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
 
     void Start()
     {
+<<<<<<< HEAD
         rb = GetComponent<Rigidbody2D>(); 
     }
 
@@ -110,10 +117,15 @@ public class Gravity : MonoBehaviour
         } else {
             rb.gravityScale = normalGravityForce;
         }
+=======
+        rb = GetComponent<Rigidbody2D>();
+        
+>>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
+<<<<<<< HEAD
         zoneBottomY = col.bounds.min.y;
         zoneTopY = col.bounds.max.y;
         zoneMinX = col.bounds.min.x;
@@ -149,14 +161,29 @@ public class Gravity : MonoBehaviour
         } else if (col.CompareTag("super_Gravity_intermitant")) {
 
             inIntermittentSuperGravityZone = true;}
+=======
+        if (col.CompareTag("no_Gravity"))
+        {
+            inZeroGravityZone = true;
+            rb.gravityScale = zeroGravityForce;
+        }
+        
+
+>>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
     }
 
 
     void OnTriggerExit2D(Collider2D col)
     {
+<<<<<<< HEAD
         if (col.CompareTag("no_Gravity") || col.CompareTag("no_Gravity_intermitant") || col.CompareTag("super_Gravity") || col.CompareTag("super_Gravity_intermitant"))
         {
             // Dès qu'on quitte le collider, reset complet
+=======
+        if (col.CompareTag("no_Gravity"))
+        {
+            inZeroGravityZone = false;
+>>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
             rb.gravityScale = normalGravityForce;
             
             inZeroGravityZone = false;
