@@ -39,6 +39,9 @@ public class PlayerController2D : MonoBehaviour
     [Header("Dash")]
     public float dash = 50f;
     public float direction = 1.0f;
+    public float timerInterDash = 0f;
+    public int indexDash = 1;
+
     private Rigidbody2D rb;
     private Collider2D col;
     private float inputX;
@@ -81,15 +84,29 @@ public class PlayerController2D : MonoBehaviour
             direction = 1f;
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E) && indexDash  == 1)
             {
                 if (direction > 0f)
                 {
                     rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);
+                    indexDash = 0;
+                    
                 }
                 else
                 {
                     rb.linearVelocity = new Vector2(-dash,rb.linearVelocity.y);
+                    indexDash = 0;
+                }
+            }
+
+        
+
+        if (indexDash  == 0)
+                {
+                    timerInterDash += Time.deltaTime;
+                    if (timerInterDash >= 2f) {
+                        indexDash = 1;
+                        timerInterDash = 0f;
                 }
             }
 
