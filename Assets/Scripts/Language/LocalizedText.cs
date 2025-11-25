@@ -15,19 +15,26 @@ public class LocalizedText : MonoBehaviour
 
     private void OnEnable()
     {
-        if (LanguageManager.Instance != null)
+        if (LanguageTranslate.Instance != null)
         { 
-            LanguageManager.Instance.OnLanguageChanged += UpdateText
+            LanguageTranslate.Instance.OnLanguageChanged += UpdateText;
         }
+        UpdateText();
     }
 
     private void OnDisable()
     {
-
+        if (LanguageTranslate.Instance != null)
+        { 
+            LanguageTranslate.Instance.OnLanguageChanged -= UpdateText;
+        }
     }
 
     private void UpdateText()
     {
+        if (LanguageTranslate.Instance == null) return;
 
+        string translated = LanguageTranslate.Instance.GetText(key);
+        textComponent.text = translated;
     }
 }
