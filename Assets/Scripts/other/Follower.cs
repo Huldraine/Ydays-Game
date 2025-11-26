@@ -7,7 +7,6 @@ public class Follower : MonoBehaviour, IDamageable
     public float speed = 2f;        // vitesse de déplacement horizontale
     public float maxDistance = 5f;  // distance d'aggro en X
 
-<<<<<<< HEAD
     [Header("Vie")]
     public int maxHealth = 3;
     private int currentHealth;
@@ -27,21 +26,12 @@ public class Follower : MonoBehaviour, IDamageable
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         }
-=======
-    private Rigidbody2D rb;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
->>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
     }
 
     void FixedUpdate()
     {
         if (Player == null || rb == null) return;
 
-<<<<<<< HEAD
         // On ne regarde que la distance horizontale
         float dx = Player.position.x - transform.position.x;
         float absDx = Mathf.Abs(dx);
@@ -89,16 +79,4 @@ public class Follower : MonoBehaviour, IDamageable
     {
         gameObject.SetActive(false);
     }
-=======
-        if (direction.sqrMagnitude > maxDistance*maxDistance )
-        {
-            verif = 1f;
-        }
-
-        if (verif ==1f)
-        {
-            transform.position += (Vector3)(direction.normalized * speed * Time.deltaTime);
-        }
-    }
->>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
 }

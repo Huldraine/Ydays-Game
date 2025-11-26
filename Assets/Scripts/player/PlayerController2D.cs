@@ -38,7 +38,6 @@ public class PlayerController2D : MonoBehaviour
     [Header("Orientation")]
     [SerializeField] private bool flipSpriteOnDirection = true;
 
-<<<<<<< HEAD
     [Header("Respawn Safe Position")]
     [SerializeField] private float safeOffsetX = 0.5f;
     [SerializeField] private float safeOffsetY = 0.1f;
@@ -60,8 +59,6 @@ public class PlayerController2D : MonoBehaviour
     [Tooltip("Tag utilisé par les ennemis (pour ignorer les collisions individuellement).")]
     [SerializeField] private string enemyTagName = "Enemy";
 
-=======
->>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
     private Rigidbody2D rb;
     private Collider2D col;
     private PlayerRespawn respawn;
@@ -129,7 +126,6 @@ public class PlayerController2D : MonoBehaviour
 
         // --- Input horizontal ---
         int x = 0;
-<<<<<<< HEAD
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             x -= 1;
@@ -150,10 +146,6 @@ public class PlayerController2D : MonoBehaviour
                 rb.linearVelocity = new Vector2(-dash, rb.linearVelocity.y);
         }
 
-=======
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) x -= 1;
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) x += 1;
->>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
         inputX = Mathf.Clamp(x, -1, 1);
 
         // --- Saut : buffer + état maintenu ---

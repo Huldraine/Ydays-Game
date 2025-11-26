@@ -5,15 +5,12 @@ public class Gravity : MonoBehaviour
 {
     [Header("paramêtre de gravité")]
     public float normalGravityForce = 1f;    // gravité normal normale
-<<<<<<< HEAD
     public float superGravityForce = 5f;
 
     public float zeroGravityForce;    // gravité zéro
     public float fantomegravity;
 
     [Header("rigidbody")]
-=======
->>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
     private Rigidbody2D rb;
 
     [Header("paramêtre de zone")]
@@ -25,7 +22,6 @@ public class Gravity : MonoBehaviour
 
     [Header("zone de gravité")]
     public bool inZeroGravityZone = false;
-<<<<<<< HEAD
     public bool inSuperGravityZone = false;
     public bool inIntermittentGravityZone = false;
     public bool inIntermittentSuperGravityZone = false;
@@ -36,30 +32,28 @@ public class Gravity : MonoBehaviour
     public int indexsol = 0;
     public int indexverif = 0;
     public float timer = 10f;
-    public float HightY ;
+    public float HightY;
     float LogGravity(float currentY, float bottomY, float topY, float targetGravity = -2f, float startGravity = -7f, float k = 9f)
-{
-    float height = Mathf.Max(0.0001f, topY - bottomY);
-    float t = Mathf.Clamp01((currentY - bottomY) / height);
+    {
+        float height = Mathf.Max(0.0001f, topY - bottomY);
+        float t = Mathf.Clamp01((currentY - bottomY) / height);
 
-    // Logarithme inversé pour que la gravité reste forte longtemps
-    float logT = 1f - Mathf.Log(1f + k * (1f - t)) / Mathf.Log(1f + k);
+        // Logarithme inversé pour que la gravité reste forte longtemps
+        float logT = 1f - Mathf.Log(1f + k * (1f - t)) / Mathf.Log(1f + k);
 
-    return startGravity + logT * (targetGravity - startGravity);
-}
+        return startGravity + logT * (targetGravity - startGravity);
+    }
 
 
 
-=======
->>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
 
     void Start()
     {
-<<<<<<< HEAD
-        rb = GetComponent<Rigidbody2D>(); 
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update() {
+    void Update()
+    {
 
         float currentY = transform.position.y;
         float currentX = transform.position.x;
@@ -72,60 +66,73 @@ public class Gravity : MonoBehaviour
 
         // Décrémenter le timer
         timer -= Time.deltaTime;
-        if (timer <= 0f) {
+        if (timer <= 0f)
+        {
             indextimer = (indextimer == 0) ? 1 : 0;
             timer = 10f;
         }
 
-        if (exitFantomeZoneDroite || exitFantomeZoneGauche || exitFantomeZoneHaut) {
+        if (exitFantomeZoneDroite || exitFantomeZoneGauche || exitFantomeZoneHaut)
+        {
             indexsol = 1;
         }
 
         // PRIORITÉ : zone fantôme
-        if (inFantomeZone) {
+        if (inFantomeZone)
+        {
             indexverif = 1;
-            
-            if (indexsol == 0) {
+
+            if (indexsol == 0)
+            {
                 rb.gravityScale = 7f;
-                
-                return; }
-            
-            if (indexsol == 1) {
+
+                return;
+            }
+
+            if (indexsol == 1)
+            {
                 rb.gravityScale = normalGravityForce;
-                return; }
-       
-        } else {
+                return;
+            }
+
+        }
+        else
+        {
             indexverif = 0;
-            
+
         }
 
         // Gravité selon la zone
-        if (inZeroGravityZone) {
+        if (inZeroGravityZone)
+        {
             float zeroGravityForce = LogGravity(currentY, zoneBottomY, zoneTopY);
             rb.gravityScale = zeroGravityForce;
-        
-        } else if (inIntermittentGravityZone) {
+
+        }
+        else if (inIntermittentGravityZone)
+        {
             float zeroGravityForce = LogGravity(currentY, zoneBottomY, zoneTopY);
             rb.gravityScale = (indextimer == 1) ? zeroGravityForce : normalGravityForce;
-        
-        } else if (inSuperGravityZone) {
+
+        }
+        else if (inSuperGravityZone)
+        {
             rb.gravityScale = superGravityForce;
-       
-        } else if (inIntermittentSuperGravityZone) {
+
+        }
+        else if (inIntermittentSuperGravityZone)
+        {
             rb.gravityScale = (indextimer == 1) ? superGravityForce : normalGravityForce;
-        
-        } else {
+
+        }
+        else
+        {
             rb.gravityScale = normalGravityForce;
         }
-=======
-        rb = GetComponent<Rigidbody2D>();
-        
->>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-<<<<<<< HEAD
         zoneBottomY = col.bounds.min.y;
         zoneTopY = col.bounds.max.y;
         zoneMinX = col.bounds.min.x;
@@ -133,7 +140,7 @@ public class Gravity : MonoBehaviour
 
         HightY = zoneTopY - zoneBottomY;
         enterHeight = HightY / 2f; // <- toujours recalculé
-        
+
 
         // Reset toutes les zones
         inZeroGravityZone = false;
@@ -142,50 +149,43 @@ public class Gravity : MonoBehaviour
         inIntermittentSuperGravityZone = false;
 
         // Activation selon tag
-        if (col.CompareTag("no_Gravity")) {
+        if (col.CompareTag("no_Gravity"))
+        {
 
             inZeroGravityZone = true;
 
             indexsol = 0;
 
-        } else if (col.CompareTag("no_Gravity_intermitant")) {
+        }
+        else if (col.CompareTag("no_Gravity_intermitant"))
+        {
 
             inIntermittentGravityZone = true;
 
             indexsol = 0;
 
-        }else if (col.CompareTag("super_Gravity")) {
+        }
+        else if (col.CompareTag("super_Gravity"))
+        {
 
             inSuperGravityZone = true;
 
-        } else if (col.CompareTag("super_Gravity_intermitant")) {
-
-            inIntermittentSuperGravityZone = true;}
-=======
-        if (col.CompareTag("no_Gravity"))
-        {
-            inZeroGravityZone = true;
-            rb.gravityScale = zeroGravityForce;
         }
-        
+        else if (col.CompareTag("super_Gravity_intermitant"))
+        {
 
->>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
+            inIntermittentSuperGravityZone = true;
+        }
     }
 
 
     void OnTriggerExit2D(Collider2D col)
     {
-<<<<<<< HEAD
         if (col.CompareTag("no_Gravity") || col.CompareTag("no_Gravity_intermitant") || col.CompareTag("super_Gravity") || col.CompareTag("super_Gravity_intermitant"))
         {
             // Dès qu'on quitte le collider, reset complet
-=======
-        if (col.CompareTag("no_Gravity"))
-        {
-            inZeroGravityZone = false;
->>>>>>> 99c3d66cf01e516158fc31bcb5ebcf11543ad983
             rb.gravityScale = normalGravityForce;
-            
+
             inZeroGravityZone = false;
             inIntermittentGravityZone = false;
             inSuperGravityZone = false;
@@ -193,5 +193,3 @@ public class Gravity : MonoBehaviour
         }
     }
 }
-
-
