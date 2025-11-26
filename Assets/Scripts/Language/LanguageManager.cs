@@ -49,7 +49,7 @@ public class LanguageTranslate : MonoBehaviour
         {
             { "pause", "MENU PAUSE" },
             { "resume", "Reprendre" },
-            { "settings", "Paramètre" },
+            { "settings", "Parametres" },
             { "save", "Sauvegarder" },
             { "quit", "Quitter" }
         };
@@ -57,8 +57,8 @@ public class LanguageTranslate : MonoBehaviour
     private void LoadSavedLanguage()
     {
         string savedLang = PlayerPrefs.GetString("language", "en");
-        if (savedLang == "fr")
-            currentLanguage = Language.French; 
+        if (langCodes.TryGetValue(savedLang, out Language lang))
+            currentLanguage = lang;
         else
             currentLanguage = Language.English;
     }
