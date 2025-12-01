@@ -1,6 +1,15 @@
 using UnityEngine;
 
-public class DontDestroyOnLoadScene : GameManager
+public class DontDestroyOnLoadScene : MonoBehaviour
 {
-    // Compatibility wrapper kept for existing scene references.
+    // List of object that we don't destroy on load
+    public GameObject[] objects;
+
+    void Awake()
+    {
+        foreach (var element in objects)
+        {
+            DontDestroyOnLoad(element);
+        }
+    }
 }
