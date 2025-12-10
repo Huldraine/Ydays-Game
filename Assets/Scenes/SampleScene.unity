@@ -1015,21 +1015,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325f0283f6d2f4c4a92b823e01028e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gravity
-  zeroGravityForce: -3
   normalGravityForce: 1
   superGravityForce: 5
+  zeroGravityForce: -3
+  fantomegravity: 0
   inZeroGravityZone: 0
   inSuperGravityZone: 0
   inIntermittentGravityZone: 0
   inIntermittentSuperGravityZone: 0
+  inFantomeZone: 0
   indextimer: 0
-  timer: 300
-  targetRenderer: {fileID: 796643913}
-  targetRenderer2: {fileID: 735324081}
-  colorA: {r: 1, g: 0, b: 0, a: 1}
-  colorB: {r: 0, g: 0, b: 1, a: 1}
-  colorC: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  colorD: {r: 0, g: 1, b: 0, a: 1}
+  indexsol: 0
+  indexverif: 0
+  timer: 10
+  HightY: 0
 --- !u!114 &240475090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,15 +1048,9 @@ MonoBehaviour:
   inIntermittentVectorZoneRight: 0
   inIntermittentVectorZoneLeft: 0
   indextimer: 1
-  timer: 60
+  timer: 10
   zeroGravityForce: -0.5
   normalGravityForce: 1
-  targetRenderer: {fileID: 1445028369}
-  targetRenderer2: {fileID: 969767292}
-  colorA: {r: 0, g: 0, b: 0, a: 1}
-  colorB: {r: 0, g: 0, b: 1, a: 1}
-  colorC: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  colorD: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &240475091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,6 +1512,7 @@ GameObject:
   - component: {fileID: 735324082}
   - component: {fileID: 735324081}
   - component: {fileID: 735324080}
+  - component: {fileID: 735324083}
   m_Layer: 0
   m_Name: courant_descendant  intermitant (1)
   m_TagString: super_Gravity_intermitant
@@ -1645,6 +1639,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &735324083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735324079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626c5534e324b0d419bda27d88e2066e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeColorEvery10Seconds
 --- !u!1 &754696005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,6 +1799,7 @@ GameObject:
   - component: {fileID: 796643914}
   - component: {fileID: 796643913}
   - component: {fileID: 796643912}
+  - component: {fileID: 796643915}
   m_Layer: 0
   m_Name: courant_ascendant  intermitant
   m_TagString: no_Gravity_intermitant
@@ -1919,6 +1926,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &796643915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796643910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626c5534e324b0d419bda27d88e2066e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeColorEvery10Seconds
 --- !u!1 &810656709
 GameObject:
   m_ObjectHideFlags: 0
@@ -3148,7 +3167,7 @@ SpriteRenderer:
   m_Size: {x: 0.09, y: 0.09}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1399079991
