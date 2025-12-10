@@ -15,6 +15,7 @@ public class LanguageTranslate : MonoBehaviour
     // Dictionnaire de traductions // 
     private Dictionary<string, string> english;
     private Dictionary<string, string> french;
+    private Dictionary<string, Language> langCodes; 
 
     //  //
     public delegate void LanguageChanged(); 
@@ -32,11 +33,22 @@ public class LanguageTranslate : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         InitDictionaries();
+        InitLanguageCodes(); 
         LoadSavedLanguage();
     }
+
+    private void InitLanguageCodes()
+    {
+        langCodes = new Dictionary<string, Language>()
+        {
+            { "en", Language.English },
+            { "fr", Language.French }
+        };    
+    }
+
     private void InitDictionaries()
     {
-        english = new Dictionary<string, string>()
+        english = new Dictionary<string, string>() 
         {
             { "pause", "GAME PAUSED" },
             { "resume", "Resume" },
