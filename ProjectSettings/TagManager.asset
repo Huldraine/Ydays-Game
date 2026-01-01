@@ -3,26 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-<<<<<<< Updated upstream
-  tags:
-  - 'zeroGzone '
-  - no_Gravity
-  - super_Gravity
-  - left_Gravity
-  - right_Gravity
-  - no_Gravity_intermitant
-=======
   tags: []
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-<<<<<<< Updated upstream
-  - ground
-=======
   - 
->>>>>>> Stashed changes
   - Water
   - UI
   - 
