@@ -3,16 +3,30 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - right_Gravity
+  - Enemy
+  - super_Gravity_intermitant
+  - no_Gravity_intermitant
+  - super_Gravity
+  - left_gravity_intermitant
+  - no_Gravity
+  - right_gravity_intermitant
+  - left_Gravity
+  - void
+  - gravity_interupteur
+  - interupteur
+  - right_gravity_interupteur
+  - left_gravity_interupteur
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ground
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 
