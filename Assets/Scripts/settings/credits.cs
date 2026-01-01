@@ -4,6 +4,6 @@ using UnityEngine.SceneManagement;
 public class credits : MonoBehaviour
 {
     public void credits_redirect () {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("credits");
     }
 }

@@ -5,12 +5,12 @@ public class MenuScript : MonoBehaviour
 {
     public void Jouer()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("SampleScene");
     }
 
     public void Parametres()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("parametres");
     }
 
     public void Quitter()

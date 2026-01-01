@@ -1,69 +1,66 @@
-﻿using UnityEngine;
+using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.SceneManagement;
 
 public class ScreenSettings : MonoBehaviour
 {
-    public static ScreenSettings Instance { get; private set; }
+    Resolution[] resolutions;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
-    Resolution[] resolutions; 
+    // Dropdown
     public TMP_Dropdown resolutionDropdown;
-    public int currentResolutionIndex;
 
-    public void Start()
+     public void Start ()
     {
-        if (SceneManager.GetActiveScene().name != "parametres") // Maxime buggé
+        // Get all available resolutions and remove duplicates
+        resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
+
+        // Clear old options of the dropdown
+        resolutionDropdown.ClearOptions();
+
+        // Create a list of options
+        List<string> options = new List<string>();
+
+        // Get current resolution index
+        int currentResolutionIndex = 0;
+
+        // Add resolutions to the options
+        for (int i = 0; i < resolutions.Length; i++)
         {
-            resolutions = Screen.resolutions
-                .Select(res => new Resolution { width = res.width, height = res.height })
-                .Distinct()
-                .ToArray();
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            options.Add(option);
 
-            resolutionDropdown.ClearOptions();
-            List<string> options = new List<string>();
-
-            currentResolutionIndex = 0;
-
-            for (int i = 0; i < resolutions.Length; i++)
+            // Check if this resolution is the current one
+            if (resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height)
             {
-                string option = resolutions[i].width + " x " + resolutions[i].height;
-                options.Add(option);
-
-                if (resolutions[i].width == Screen.currentResolution.width &&
-                    resolutions[i].height == Screen.currentResolution.height)
-                {
-                    currentResolutionIndex = i;
-                }
+                currentResolutionIndex = i;
             }
-
-            resolutionDropdown.AddOptions(options);
-            resolutionDropdown.value = currentResolutionIndex;
-            resolutionDropdown.RefreshShownValue();
-
-            Screen.fullScreen = true;
         }
+
+        // Add options to the dropdown
+        resolutionDropdown.AddOptions(options);
+
+        // Set the dropdown value to the current resolution
+        resolutionDropdown.value = currentResolutionIndex;
+
+        // Refresh the shown value
+        resolutionDropdown.RefreshShownValue();
+
+        // Set fullscreen auto
+        Screen.fullScreen = true;
     }
 
-    public void setResolution(int resolutionIndex)
+    // Set resolution
+    public void SetResolution (int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        currentResolutionIndex = resolutionIndex;
     }
 
-    public void setFullscreen(bool isFullscreen)
+    // Set fullscreen mode
+
+    public void setFullscreen (bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
     }
