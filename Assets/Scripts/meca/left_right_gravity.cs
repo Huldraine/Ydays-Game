@@ -10,7 +10,8 @@ public class LeftRightGravity : MonoBehaviour
     private Rigidbody2D rb;
     public bool inVectorZoneRight = false;
     public bool inVectorZoneLeft = false;
-
+    public bool inInterupteurVectorZoneLeft = false;
+    public bool inInterupteurVectorZoneRight = false;
     public bool inIntermittentVectorZoneRight = false;
     public bool inIntermittentVectorZoneLeft = false;
     public int indextimer = 1;
@@ -20,6 +21,10 @@ public class LeftRightGravity : MonoBehaviour
     [Header("Paramètres de gravité")]
     public float zeroGravityForce = -0.5f;   // gravité dans la zone 
     public float normalGravityForce = 1f;    // gravité normale
+
+    public bool interupteuractif = false;
+    public bool isInRange = false;
+    public float pushForceInterupteur;
 
 
     void Start()
@@ -43,16 +48,17 @@ public class LeftRightGravity : MonoBehaviour
 
         }
 
-        if (inIntermittentVectorZoneRight)
+        if ( ((inIntermittentVectorZoneRight) && (indextimer == 1)) || ((inIntermittentVectorZoneLeft) && (indextimer == 1)) )
         {
-            pushForceIntermitant = (indextimer == 1) ? 50f : 0f;
+            pushForceIntermitant = 50f;
+            rb.gravityScale = zeroGravityForce;
 
         }
 
-        if (inIntermittentVectorZoneLeft)
+        if ( ( (inInterupteurVectorZoneRight) && (interupteuractif) ) || ( (inInterupteurVectorZoneLeft) && (interupteuractif) ) )
         {
-            pushForceIntermitant = (indextimer == 1) ? 50f : 0f;
-
+            pushForceInterupteur = 50f;
+            rb.gravityScale = zeroGravityForce;
         }
     }
 
@@ -62,22 +68,39 @@ public class LeftRightGravity : MonoBehaviour
         {
             // Pousse vers la droite
             rb.linearVelocity = new Vector2(pushForce, rb.linearVelocity.y);
+            rb.gravityScale = zeroGravityForce;
         }
 
         if (inVectorZoneLeft)
         {
             rb.linearVelocity = new Vector2(-pushForce, rb.linearVelocity.y);
+            rb.gravityScale = zeroGravityForce;
         }
 
         if (inIntermittentVectorZoneRight && indextimer == 1)
         {
             // Pousse vers la gauche
             rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y);
+            rb.gravityScale = zeroGravityForce;
         }
         if (inIntermittentVectorZoneLeft && indextimer == 1)
         {
             // Pousse vers la gauche
             rb.linearVelocity = new Vector2(-pushForceIntermitant, rb.linearVelocity.y);
+            rb.gravityScale = zeroGravityForce;
+        }
+
+        if (inInterupteurVectorZoneRight && interupteuractif == true)
+        {
+            // Pousse vers la gauche
+            rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y);
+            rb.gravityScale = zeroGravityForce;
+        }
+        if (inInterupteurVectorZoneLeft && interupteuractif == true)
+        {
+            // Pousse vers la gauche
+            rb.linearVelocity = new Vector2(-pushForceIntermitant, rb.linearVelocity.y);
+            rb.gravityScale = zeroGravityForce;
         }
     }
 
@@ -89,16 +112,20 @@ public class LeftRightGravity : MonoBehaviour
             inVectorZoneRight = false;
             inIntermittentVectorZoneRight = false;
             inIntermittentVectorZoneLeft = false;
-            rb.gravityScale = zeroGravityForce;
+            inInterupteurVectorZoneLeft = false;
+            inInterupteurVectorZoneRight = false;
+  
         }
 
         if (col.CompareTag("right_Gravity"))
         {
-            inVectorZoneRight = false;
-            inVectorZoneLeft = true;
+            inVectorZoneRight = true;
+            inVectorZoneLeft = false;
             inIntermittentVectorZoneRight = false;
             inIntermittentVectorZoneLeft = false;
-            rb.gravityScale = zeroGravityForce;
+            inInterupteurVectorZoneLeft = false;
+            inInterupteurVectorZoneRight = false;
+
         }
 
         if (col.CompareTag("right_gravity_intermitant"))
@@ -107,7 +134,9 @@ public class LeftRightGravity : MonoBehaviour
             inVectorZoneLeft = false;
             inIntermittentVectorZoneRight = true;
             inIntermittentVectorZoneLeft = false;
-            rb.gravityScale = zeroGravityForce;
+            inInterupteurVectorZoneLeft = false;
+            inInterupteurVectorZoneRight = false;
+
         }
 
         if (col.CompareTag("left_gravity_intermitant"))
@@ -116,7 +145,31 @@ public class LeftRightGravity : MonoBehaviour
             inVectorZoneLeft = false;
             inIntermittentVectorZoneRight = false;
             inIntermittentVectorZoneLeft = true;
-            rb.gravityScale = zeroGravityForce;
+            inInterupteurVectorZoneLeft = false;
+            inInterupteurVectorZoneRight = false;
+
+        }
+
+        if (col.CompareTag("left_gravity_interupteur"))
+        {
+            inVectorZoneRight = false;
+            inVectorZoneLeft = false;
+            inIntermittentVectorZoneRight = false;
+            inIntermittentVectorZoneLeft = false;
+            inInterupteurVectorZoneLeft = true;
+            inInterupteurVectorZoneRight = false;
+
+        }
+
+        if (col.CompareTag("right_gravity_interupteur"))
+        {
+            inVectorZoneRight = false;
+            inVectorZoneLeft = false;
+            inIntermittentVectorZoneRight = false;
+            inIntermittentVectorZoneLeft = false;
+            inInterupteurVectorZoneLeft = false;
+            inInterupteurVectorZoneRight = true;
+
         }
     }
 
@@ -128,8 +181,24 @@ public class LeftRightGravity : MonoBehaviour
             inVectorZoneLeft = false;
             inIntermittentVectorZoneRight = false;
             inIntermittentVectorZoneLeft = false;
+            inInterupteurVectorZoneLeft = false;
+            inInterupteurVectorZoneRight = false;
             rb.gravityScale = normalGravityForce;
-            
+
+
+        }
+    }
+
+    private void Interupteur()
+    {
+
+        if (interupteuractif)
+        {
+            interupteuractif = false;
+        }
+        else
+        {
+            interupteuractif = true;
         }
     }
 }

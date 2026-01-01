@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class Gravity : MonoBehaviour
 {
     [Header("paramêtre de gravité")]
@@ -25,7 +24,10 @@ public class Gravity : MonoBehaviour
     public bool inSuperGravityZone = false;
     public bool inIntermittentGravityZone = false;
     public bool inIntermittentSuperGravityZone = false;
+    public bool inInterupteurGravityZone = false;
     public bool inFantomeZone;
+    public bool isInRange = false;
+    public bool interupteuractif = false;
 
     [Header("index et timer")]
     public int indextimer = 1;
@@ -33,6 +35,8 @@ public class Gravity : MonoBehaviour
     public int indexverif = 0;
     public float timer = 10f;
     public float HightY;
+    
+
     float LogGravity(float currentY, float bottomY, float topY, float targetGravity = -2f, float startGravity = -7f, float k = 9f)
     {
         float height = Mathf.Max(0.0001f, topY - bottomY);
@@ -43,9 +47,6 @@ public class Gravity : MonoBehaviour
 
         return startGravity + logT * (targetGravity - startGravity);
     }
-
-
-
 
     void Start()
     {
@@ -103,7 +104,7 @@ public class Gravity : MonoBehaviour
         }
 
         // Gravité selon la zone
-        if (inZeroGravityZone)
+        if ((inZeroGravityZone) || (inInterupteurGravityZone))
         {
             float zeroGravityForce = LogGravity(currentY, zoneBottomY, zoneTopY);
             rb.gravityScale = zeroGravityForce;
@@ -113,7 +114,6 @@ public class Gravity : MonoBehaviour
         {
             float zeroGravityForce = LogGravity(currentY, zoneBottomY, zoneTopY);
             rb.gravityScale = (indextimer == 1) ? zeroGravityForce : normalGravityForce;
-
         }
         else if (inSuperGravityZone)
         {
@@ -128,6 +128,11 @@ public class Gravity : MonoBehaviour
         else
         {
             rb.gravityScale = normalGravityForce;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && isInRange)
+        {
+            Interupteur();
         }
     }
 
@@ -148,12 +153,12 @@ public class Gravity : MonoBehaviour
         inSuperGravityZone = false;
         inIntermittentSuperGravityZone = false;
 
+
         // Activation selon tag
         if (col.CompareTag("no_Gravity"))
         {
 
             inZeroGravityZone = true;
-
             indexsol = 0;
 
         }
@@ -161,7 +166,6 @@ public class Gravity : MonoBehaviour
         {
 
             inIntermittentGravityZone = true;
-
             indexsol = 0;
 
         }
@@ -176,12 +180,24 @@ public class Gravity : MonoBehaviour
 
             inIntermittentSuperGravityZone = true;
         }
+        else if (col.CompareTag("gravity_interupteur") && interupteuractif)
+        {
+
+            inInterupteurGravityZone = true;
+            indexsol = 0;
+
+        }
+
+        if (col.CompareTag("interupteur"))
+        {
+            isInRange = true;
+        }
     }
 
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.CompareTag("no_Gravity") || col.CompareTag("no_Gravity_intermitant") || col.CompareTag("super_Gravity") || col.CompareTag("super_Gravity_intermitant"))
+        if (col.CompareTag("no_Gravity") || col.CompareTag("no_Gravity_intermitant") || col.CompareTag("super_Gravity") || col.CompareTag("super_Gravity_intermitant") || col.CompareTag("gravity_interupteur"))
         {
             // Dès qu'on quitte le collider, reset complet
             rb.gravityScale = normalGravityForce;
@@ -190,6 +206,26 @@ public class Gravity : MonoBehaviour
             inIntermittentGravityZone = false;
             inSuperGravityZone = false;
             inIntermittentSuperGravityZone = false;
+            inInterupteurGravityZone = false;
+
         }
+
+        if (col.CompareTag("interupteur"))
+        {
+            isInRange = false;
+        }
+    }
+
+    private void Interupteur()
+    {
+
+        if (interupteuractif)
+        {
+            interupteuractif = false;
+        }
+        else
+        {
+            interupteuractif = true;    
+        } 
     }
 }
