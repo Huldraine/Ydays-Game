@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &9192676839792892472
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -20.007212
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10.002483
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -90.00298
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.9972
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 45517255067311797, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707873936714606756, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707873936714606756, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_Color.g
+      value: 0.97735846
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707873936714606756, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_Color.r
+      value: 0.47741246
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739451355816578783, guid: c9bcda627737f1848a93e29617b74f03, type: 3}
+      propertyPath: m_Name
+      value: plateforme vent Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c9bcda627737f1848a93e29617b74f03, type: 3}

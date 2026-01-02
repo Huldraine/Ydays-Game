@@ -223,7 +223,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.5, y: -1.46, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.010115, y: 3.8896084, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1006190643787426545}
@@ -424,7 +424,10 @@ MonoBehaviour:
   inSuperGravityZone: 0
   inIntermittentGravityZone: 0
   inIntermittentSuperGravityZone: 0
+  inInterupteurGravityZone: 0
   inFantomeZone: 0
+  isInRange: 0
+  interupteuractif: 0
   indextimer: 0
   indexsol: 0
   indexverif: 0
@@ -446,12 +449,19 @@ MonoBehaviour:
   pushForceIntermitant: 50
   inVectorZoneRight: 0
   inVectorZoneLeft: 0
+  inInterupteurVectorZoneLeft: 0
+  inInterupteurVectorZoneRight: 0
   inIntermittentVectorZoneRight: 0
   inIntermittentVectorZoneLeft: 0
   indextimer: 1
   timer: 10
+  milieuhaut: 0
+  milieuBas: 0
   zeroGravityForce: -0.5
   normalGravityForce: 1
+  interupteuractif: 0
+  isInRange: 0
+  pushForceInterupteur: 0
 --- !u!114 &3185480323317547968
 MonoBehaviour:
   m_ObjectHideFlags: 0

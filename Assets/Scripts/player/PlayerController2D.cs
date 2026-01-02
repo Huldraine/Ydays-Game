@@ -138,7 +138,7 @@ public class PlayerController2D : MonoBehaviour
             direction = 1f;
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             if (direction > 0f)
                 rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);

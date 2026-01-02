@@ -5,9 +5,9 @@ using System.Collections;
 
 public class NPCInteract : MonoBehaviour
 {
-    public GameObject pressEPanel;  
-    public GameObject dialoguePanel;  
-    public TMPro.TMP_Text dialogueText;   
+    public GameObject pressEPanel;
+    public GameObject dialoguePanel;
+    public TMPro.TMP_Text dialogueText;
 
     bool playerInRange = false;
 
@@ -39,9 +39,10 @@ public class NPCInteract : MonoBehaviour
             OpenDialogue();
 
             // Afficher les lignes de dialogue
-        } else if (dialogueOpen && Input.GetKeyDown(KeyCode.E))
-            {
-                currentLineIndex++;
+        }
+        else if (dialogueOpen && Input.GetKeyDown(KeyCode.E))
+        {
+            currentLineIndex++;
             // Eviter débordement
             if (currentLineIndex >= dialogueLines.Length)
             {
@@ -50,9 +51,9 @@ public class NPCInteract : MonoBehaviour
                 currentLineIndex = 0;
                 return;
             }
-                // Mettre à jour le texte
-                OpenDialogue();
-            }
+            // Mettre à jour le texte
+            OpenDialogue();
+        }
     }
 
     // Ouvrir le dialogue
