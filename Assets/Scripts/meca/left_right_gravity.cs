@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class LeftRightGravity : MonoBehaviour
@@ -15,8 +16,22 @@ public class LeftRightGravity : MonoBehaviour
     public bool inIntermittentVectorZoneRight = false;
     public bool inIntermittentVectorZoneLeft = false;
     public int indextimer = 1;
-
     public float timer = 10f;
+
+    [Header("paramêtre de zone")]
+    private float zoneBottomY;
+    private float zoneTopY;
+
+    private float milieu;
+
+    public bool milieuhaut;
+    public bool milieuBas;
+    
+
+    private float hauteur;
+
+    private float currentY;
+    private float currentX;
 
     [Header("Paramètres de gravité")]
     public float zeroGravityForce = -0.5f;   // gravité dans la zone 
@@ -27,6 +42,8 @@ public class LeftRightGravity : MonoBehaviour
     public float pushForceInterupteur;
 
 
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,6 +51,10 @@ public class LeftRightGravity : MonoBehaviour
 
     void Update()
     {
+        currentY = transform.position.y;
+        milieuBas = currentY < milieu && currentY > zoneBottomY;
+        milieuhaut = currentY > milieu && currentY < zoneTopY;
+
         // Décrémenter le timer
         timer -= Time.deltaTime;
 
@@ -51,61 +72,105 @@ public class LeftRightGravity : MonoBehaviour
         if ( ((inIntermittentVectorZoneRight) && (indextimer == 1)) || ((inIntermittentVectorZoneLeft) && (indextimer == 1)) )
         {
             pushForceIntermitant = 50f;
-            rb.gravityScale = zeroGravityForce;
+            
 
         }
 
         if ( ( (inInterupteurVectorZoneRight) && (interupteuractif) ) || ( (inInterupteurVectorZoneLeft) && (interupteuractif) ) )
         {
             pushForceInterupteur = 50f;
-            rb.gravityScale = zeroGravityForce;
+            
         }
     }
 
     void FixedUpdate()
     {
+        
         if (inVectorZoneRight)
         {
             // Pousse vers la droite
-            rb.linearVelocity = new Vector2(pushForce, rb.linearVelocity.y);
-            rb.gravityScale = zeroGravityForce;
+            if (milieuhaut)
+            {
+                rb.linearVelocity = new Vector2(pushForce, rb.linearVelocity.y - 5);
+            } 
+            if (milieuBas)
+            {
+                rb.linearVelocity = new Vector2(pushForce, rb.linearVelocity.y + 5);
+            }
         }
 
         if (inVectorZoneLeft)
         {
-            rb.linearVelocity = new Vector2(-pushForce, rb.linearVelocity.y);
-            rb.gravityScale = zeroGravityForce;
+            if (milieuhaut)
+            {
+                rb.linearVelocity = new Vector2(-pushForce, rb.linearVelocity.y - 5);
+            } 
+            if (milieuBas)
+            {
+                rb.linearVelocity = new Vector2(-pushForce, rb.linearVelocity.y + 5);
+            }
         }
 
         if (inIntermittentVectorZoneRight && indextimer == 1)
         {
             // Pousse vers la gauche
             rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y);
-            rb.gravityScale = zeroGravityForce;
+            if (milieuhaut)
+            {
+                rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y - 5);
+            } 
+            if (milieuBas)
+            {
+                rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y + 5);
+            }
         }
         if (inIntermittentVectorZoneLeft && indextimer == 1)
         {
             // Pousse vers la gauche
-            rb.linearVelocity = new Vector2(-pushForceIntermitant, rb.linearVelocity.y);
-            rb.gravityScale = zeroGravityForce;
+            if (milieuhaut)
+            {
+                rb.linearVelocity = new Vector2(-pushForceIntermitant, rb.linearVelocity.y - 5);
+            } 
+            if (milieuBas)
+            {
+                rb.linearVelocity = new Vector2(-pushForceIntermitant, rb.linearVelocity.y + 5);
+            }
         }
 
         if (inInterupteurVectorZoneRight && interupteuractif == true)
         {
             // Pousse vers la gauche
-            rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y);
-            rb.gravityScale = zeroGravityForce;
+            if (milieuhaut)
+            {
+                rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y - 5);
+            } 
+            if (milieuBas)
+            {
+                rb.linearVelocity = new Vector2(pushForceIntermitant, rb.linearVelocity.y + 5);
+            }
         }
         if (inInterupteurVectorZoneLeft && interupteuractif == true)
         {
             // Pousse vers la gauche
-            rb.linearVelocity = new Vector2(-pushForceIntermitant, rb.linearVelocity.y);
-            rb.gravityScale = zeroGravityForce;
+            if (milieuhaut)
+            {
+                rb.linearVelocity = new Vector2(-pushForceIntermitant, rb.linearVelocity.y - 5);
+            } 
+            if (milieuBas)
+            {
+                rb.linearVelocity = new Vector2(-pushForceIntermitant, rb.linearVelocity.y + 5);
+            }
         }
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        zoneBottomY = col.bounds.min.y;
+        zoneTopY = col.bounds.max.y;
+        milieu = (zoneTopY + zoneBottomY)/2f ;
+        
+
+
         if (col.CompareTag("left_Gravity"))
         {
             inVectorZoneLeft = true;
@@ -177,13 +242,15 @@ public class LeftRightGravity : MonoBehaviour
     {
         if (col.CompareTag("left_Gravity") || col.CompareTag("right_Gravity") || col.CompareTag("left_gravity_intermitant") || col.CompareTag("right_gravity_intermitant"))
         {
+
             inVectorZoneRight = false;
             inVectorZoneLeft = false;
             inIntermittentVectorZoneRight = false;
             inIntermittentVectorZoneLeft = false;
             inInterupteurVectorZoneLeft = false;
             inInterupteurVectorZoneRight = false;
-            rb.gravityScale = normalGravityForce;
+            milieuBas = false;
+            milieuhaut = false;
 
 
         }
