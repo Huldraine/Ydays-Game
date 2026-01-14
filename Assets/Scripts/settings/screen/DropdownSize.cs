@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,13 +47,13 @@ public class DropdownSize : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
 
         // Link dropdown to resolution change
-        resolutionDropdown.onValueChanged.AddListener(setResolution);
+        resolutionDropdown.onValueChanged.AddListener(SetResolution);
     }
 
     // Set resolution
-    public void setResolution(int resolutionIndex)
+    public void SetResolution(int resolutionIndex)
     {
-        screenSettings.setResolution(resolutionIndex);
+        screenSettings.SetResolution(resolutionIndex);
     }
 
     void OnDestroy()
@@ -61,4 +61,3 @@ public class DropdownSize : MonoBehaviour
         resolutionDropdown.onValueChanged.RemoveAllListeners();
     }
 }
-
