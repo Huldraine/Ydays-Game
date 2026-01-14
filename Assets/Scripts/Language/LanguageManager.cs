@@ -4,7 +4,10 @@ using UnityEngine;
 public enum Language
 {
     English,
-    French
+    French,
+    Spanish,
+    Deutsch,
+    Italian
 }
 public class LanguageTranslate : MonoBehaviour
 {
@@ -15,6 +18,9 @@ public class LanguageTranslate : MonoBehaviour
     // Dictionnaire de traductions // 
     private Dictionary<string, string> english;
     private Dictionary<string, string> french;
+    private Dictionary<string, string> spanish;
+    private Dictionary<string, string> deutsch;
+    private Dictionary<string, string> italian;
     private Dictionary<string, Language> langCodes; 
 
     //  //
@@ -42,7 +48,10 @@ public class LanguageTranslate : MonoBehaviour
         langCodes = new Dictionary<string, Language>()
         {
             { "en", Language.English },
-            { "fr", Language.French }
+            { "fr", Language.French },
+            { "es", Language.Spanish},
+            { "de", Language.Deutsch},
+            { "it", Language.Italian}
         };    
     }
 
@@ -64,6 +73,33 @@ public class LanguageTranslate : MonoBehaviour
             { "settings", "Parametres" },
             { "save", "Sauvegarder" },
             { "quit", "Quitter" }
+        };
+
+        spanish = new Dictionary<string, string>()
+        {
+            { "pause", "JUEGO EN PAUSA" },
+            { "resume", "Continuar" },
+            { "settings", "Opciones" },
+            { "save", "Guardar" },
+            { "quit", "Salir" },
+        };
+        
+        deutsch = new Dictionary<string, string>()
+        {
+            { "pause", "SPIEL PAUSIERT" },
+            { "resume", "Weiter" },
+            { "settings", "Optionen" },
+            { "save", "Speichern" },
+            { "quit", "Verlassen" },
+        };
+        
+        italian = new Dictionary<string, string>()
+        {
+            { "pause", "GIOCO IN PAUSA" },
+            { "resume", "Continua" },
+            { "settings", "Opzioni" },
+            { "save", "Salva" },
+            { "quit", "Esci" },
         };
     }
     private void LoadSavedLanguage()
