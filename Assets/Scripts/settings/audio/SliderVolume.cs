@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SliderVolume : MonoBehaviour
@@ -19,15 +19,14 @@ public class SliderVolume : MonoBehaviour
         }
 
         // Initialize slider value without triggering OnValueChanged
-        slider.SetValueWithoutNotify(volumeSettings.getVolume());
+        slider.SetValueWithoutNotify(volumeSettings.GetVolume());
 
         // Link OnValueChanged to VolumeSettings
-        slider.onValueChanged.AddListener(volumeSettings.setVolume);
+        slider.onValueChanged.AddListener(volumeSettings.SetVolume);
     }
 
     void OnDestroy()
     {
-        slider.onValueChanged.RemoveListener(volumeSettings.setVolume);
+        slider.onValueChanged.RemoveListener(volumeSettings.SetVolume);
     }
 }
-
