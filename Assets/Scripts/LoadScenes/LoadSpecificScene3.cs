@@ -7,7 +7,7 @@ public class LoadSpecificScene3 : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            SceneManager.LoadScene("niveau1/S1");
+            SceneManager.LoadScene("poumonS1");
         }
     }
 }
