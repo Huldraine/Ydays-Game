@@ -49,7 +49,7 @@ public class PlayerRespawn : MonoBehaviour
             // on applique les dégâts
             health.takeDamage(hazardDamage);
 
-            if (health.currentHealth > 0)
+            if (health.currentHealth >= 0)
             {
                 // encore vivant → respawn proche
                 respawnFromHazard();
@@ -59,7 +59,7 @@ public class PlayerRespawn : MonoBehaviour
                 // mort → respawn au checkpoint + vie remise au max
                 respawnFromDeath();
             }
-        }
+        }   
         else
         {
             // pas de système de vie encore branché → juste respawn proche

@@ -1,41 +1,50 @@
-﻿    using UnityEngine;
+using UnityEngine;
 
-    public class PauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
+{
+    public GameObject PausePanel;
+    private bool IsPaused = false;
+
+    void Start()
     {
-        public GameObject PausePanel;
-        private bool IsPaused = false;
+        Resume();
+    }
 
-    void Start() {
-        resume();
-            }
-        void Update()
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (!IsPaused)
             {
-                if (!IsPaused)
-                {
-                pause();
-                }
-                else
-                {
-                resume();
-                }
+                Pause();
+            }
+            else
+            {
+                Resume();
             }
         }
-    public void resume()
+    }
+
+    public void Resume()
     {
         PausePanel.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
     }
-    void pause()
+
+    void Pause()
     {
         PausePanel.SetActive(true);
         Time.timeScale = 0f;
         IsPaused = true;
     }
 
-    public void quitGame()
+    public void Parameter()
+    {
+
+    }
+
+    public void QuitGame()
     {
         Application.Quit();
     }

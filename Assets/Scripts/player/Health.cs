@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -28,12 +28,12 @@ public class Health : MonoBehaviour, IDamageable
         mettreAJourLesMasques();
     }
 
-    public void takeDamage(int amount)
+    public void TakeDamage(int amount)
     {
-        takeDamage((float)amount);
+        TakeDamage((float)amount);
     }
 
-    public void takeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         if (hasDied)
             return;
@@ -99,4 +99,3 @@ public class Health : MonoBehaviour, IDamageable
         targetImage.sprite = spriteVide;
     }
 }
-
