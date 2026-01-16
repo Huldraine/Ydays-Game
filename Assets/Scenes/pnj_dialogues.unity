@@ -574,7 +574,7 @@ MonoBehaviour:
   Player: {fileID: 240475085}
   speed: 2
   maxDistance: 5
-  verif: 0
+  maxHealth: 3
 --- !u!1 &200469737
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +732,8 @@ GameObject:
   - component: {fileID: 240475091}
   - component: {fileID: 240475092}
   - component: {fileID: 240475093}
+  - component: {fileID: 240475095}
+  - component: {fileID: 240475094}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -917,6 +919,16 @@ MonoBehaviour:
   apexBoostThreshold: 0.35
   apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
+  safeOffsetX: 0.5
+  safeOffsetY: 0.1
+  dash: 50
+  direction: 1
+  knockbackForceX: 10
+  knockbackForceY: 6
+  knockbackDuration: 0.15
+  invincibilityTime: 1
+  enemyLayerName: Enemy
+  enemyTagName: Enemy
 --- !u!114 &240475087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -949,6 +961,16 @@ MonoBehaviour:
   apexBoostThreshold: 0.35
   apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
+  safeOffsetX: 0.5
+  safeOffsetY: 0.1
+  dash: 50
+  direction: 1
+  knockbackForceX: 10
+  knockbackForceY: 6
+  knockbackDuration: 0.15
+  invincibilityTime: 1
+  enemyLayerName: Enemy
+  enemyTagName: Enemy
 --- !u!114 &240475088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,6 +1003,16 @@ MonoBehaviour:
   apexBoostThreshold: 0.35
   apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
+  safeOffsetX: 0.5
+  safeOffsetY: 0.1
+  dash: 50
+  direction: 1
+  knockbackForceX: 10
+  knockbackForceY: 6
+  knockbackDuration: 0.15
+  invincibilityTime: 1
+  enemyLayerName: Enemy
+  enemyTagName: Enemy
 --- !u!114 &240475089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,9 +1025,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325f0283f6d2f4c4a92b823e01028e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gravity
-  zeroGravityForce: -3
   normalGravityForce: 1
+  superGravityForce: 5
+  zeroGravityForce: -3
+  fantomegravity: 0
   inZeroGravityZone: 0
+  inSuperGravityZone: 0
+  inIntermittentGravityZone: 0
+  inIntermittentSuperGravityZone: 0
+  inInterupteurGravityZone: 0
+  inFantomeZone: 0
+  isInRange: 0
+  interupteuractif: 0
+  indextimer: 1
+  indexsol: 0
+  indexverif: 0
+  timer: 10
+  HightY: 0
 --- !u!114 &240475090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,6 +1101,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aa5387a02dc8c4aa13ebf75512ee6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::gravityIntermitant
+--- !u!114 &240475094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240475081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa70f4772fb1f9478d9ff753a67f865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 5
+  currentHealth: 0
+  healthImages: []
+  spritePlein: {fileID: 0}
+  spriteVide: {fileID: 0}
+--- !u!114 &240475095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240475081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bbdfc5f4b7375418dc5a18bdf1e3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
+  startingCheckpoint: {fileID: 0}
+  hazardDamage: 1
 --- !u!1 &346135344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,7 +1214,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 346135347}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 988940980}
+        m_TargetAssemblyTypeName: DataSave, Assembly-CSharp
+        m_MethodName: SaveToJson
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &346135347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2109,6 +2198,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927677001}
   m_CullTransparentMesh: 1
+--- !u!1 &988940979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 988940981}
+  - component: {fileID: 988940980}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &988940980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988940979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00041af979bc9cb63b98d53c3cfe06b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DataSave
+  player: {fileID: 240475085}
+  life: {fileID: 240475094}
+--- !u!4 &988940981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988940979}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1009998297
 GameObject:
   m_ObjectHideFlags: 0
@@ -4234,3 +4369,4 @@ SceneRoots:
   - {fileID: 1238383672}
   - {fileID: 1156744655}
   - {fileID: 1904338456}
+  - {fileID: 988940981}

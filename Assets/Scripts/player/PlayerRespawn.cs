@@ -49,7 +49,7 @@ public class PlayerRespawn : MonoBehaviour
             // on applique les dégâts
             health.TakeDamage(hazardDamage);
 
-            if (health.currentHealth > 0)
+            if (health.currentHealth >= 0)
             {
                 // encore vivant → respawn proche
                 RespawnFromHazard();
@@ -59,7 +59,7 @@ public class PlayerRespawn : MonoBehaviour
                 // mort → respawn au checkpoint + vie remise au max
                 RespawnFromDeath();
             }
-        }
+        }   
         else
         {
             // pas de système de vie encore branché → juste respawn proche

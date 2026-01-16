@@ -13,12 +13,12 @@
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (!IsPaused)
-                {
-                Pause();
+                { 
+                    Pause();
                 }
                 else
                 {
-                Resume();
+                    Resume();
                 }
             }
         }
@@ -33,6 +33,11 @@
         PausePanel.SetActive(true);
         Time.timeScale = 0f;
         IsPaused = true;
+    }
+
+    public void Parameter()
+    {
+        
     }
 
     public void QuitGame()
