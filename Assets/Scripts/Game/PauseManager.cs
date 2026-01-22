@@ -28,6 +28,7 @@
         Time.timeScale = 1f;
         IsPaused = false;
     }
+    
     void Pause()
     {
         PausePanel.SetActive(true);
