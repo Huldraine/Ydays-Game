@@ -57,42 +57,16 @@ public class DataSave : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log($"OnSceneLoaded: scene={scene.name}, mode={mode}");
-
-        if (waitLoadData == null)
-        {
-            Debug.LogError("waitLoadData is NULL (JSON not loaded or got cleared).");
-            return;
-        }
-
-        var playerGo = GameObject.FindWithTag("Player");
-        if (playerGo == null)
-        {
-            Debug.LogError("Player not found (tag 'Player').");
-            return;
-        }
-
-        player = playerGo.transform;
-        if (player == null)
-        {
-            Debug.LogError("player transform is NULL (unexpected).");
-            return;
-        }
-
-        life = playerGo.GetComponent<Health>();
-        if (life == null)
-        {
-            Debug.LogError("Health component not found on Player.");
-            return;
-        }
-        
         // Stoper l'évènement du chargement de la scène 
         SceneManager.sceneLoaded -= OnSceneLoaded;
         
         // Re-Bind des refs dans la nouvelle scène
-        //GameObject playerGo = GameObject.FindWithTag("Player");
+        GameObject playerGo = GameObject.FindWithTag("Player");
         player = playerGo.transform;
         life = player.GetComponent<Health>();
+        var pause = FindObjectOfType<PauseMenu>();
+        
+        pause.Resume();
         
         if (playerGo == null)
         {
@@ -104,7 +78,7 @@ public class DataSave : MonoBehaviour
         player.position = waitLoadData.playerPosition;
         life.currentHealth = waitLoadData.playerHealth;
         
-        Debug.Log("Sauvegarde en cours " + waitLoadData + " " + filePath);
+        Debug.Log("Chargement en cours " + waitLoadData + " " + filePath);
         waitLoadData = null;
     }
 }
