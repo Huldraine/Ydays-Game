@@ -18,6 +18,7 @@ TagManager:
   - interupteur
   - right_gravity_interupteur
   - left_gravity_interupteur
+  - PauseUI
   layers:
   - Default
   - TransparentFX

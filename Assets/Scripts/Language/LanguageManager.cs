@@ -42,6 +42,7 @@ public class LanguageTranslate : MonoBehaviour
             { "resume", "Resume" },
             { "settings", "Settings" },
             { "save", "Save" },
+            {  "load", "Load" },
             { "quit", "Quit" }
         };
 
@@ -51,6 +52,7 @@ public class LanguageTranslate : MonoBehaviour
             { "resume", "Reprendre" },
             { "settings", "Paramètre" },
             { "save", "Sauvegarder" },
+            { "load", "Charger"},
             { "quit", "Quitter" }
         };
     }

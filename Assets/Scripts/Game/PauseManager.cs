@@ -4,7 +4,7 @@
     public class PauseMenu : MonoBehaviour
     {
         public GameObject PausePanel;
-        private bool IsPaused = true;
+        private bool IsPaused = false;
 
     void Start() { PausePanel.SetActive(IsPaused); }
         void Update()
@@ -37,7 +37,7 @@
             PausePanel.SetActive(IsPaused);
         }
 
-    public void Parameter()
+    public void Settings()
     {
         SceneManager.LoadScene("pnj_dialogues pierre"); // Paramètre pierre
     }
