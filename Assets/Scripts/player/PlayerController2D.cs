@@ -11,12 +11,9 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float acceleration = 55f;
     [SerializeField] private float deceleration = 85f;
 
-    [Header("Saut - impulsion initiale")]
+    [Header("Saut")]
     [SerializeField] private float jumpForce = 8.5f;
-
-    [Header("Saut - maintien (hauteur variable)")]
-    [SerializeField] private float maxJumpHoldTime = 0.13f;
-    [SerializeField] private float holdBoostAccel = 20f;
+    [SerializeField] private int maxJumps = 2;
 
     [Header("Détection du sol")]
     [SerializeField] private LayerMask groundLayer;
@@ -67,13 +64,11 @@ public class PlayerController2D : MonoBehaviour
 
     private float inputX;
 
-    // timers saut
+    // timers et compteurs de saut
     private float coyoteTimer;
     private float bufferTimer;
 
-    private bool jumpHeld;
-    private bool isJumping;
-    private float jumpHoldTimer;
+    private int jumpCount; // nombre de sauts restants (réinitialisé au sol)
 
     public float LastInputX => inputX;
 
@@ -108,6 +103,9 @@ public class PlayerController2D : MonoBehaviour
         rb.linearDamping = 0f;
         rb.freezeRotation = true;
 
+        // prépare le compteur de sauts (initialement au sol)
+        jumpCount = maxJumps;
+
         // Layers
         playerLayerIndex = gameObject.layer;
         enemyLayerIndex = LayerMask.NameToLayer(enemyLayerName);
@@ -124,37 +122,46 @@ public class PlayerController2D : MonoBehaviour
         if (isKnockedBack)
             return;
 
-        // --- Input horizontal ---
+        HandleInput();
+        FlipSprite();
+    }
+
+    private void HandleInput()
+    {
+        inputX = GetHorizontalInput();
+        ApplyDash();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            bufferTimer = jumpBuffer;
+    }
+
+    private float GetHorizontalInput()
+    {
         int x = 0;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             x -= 1;
             direction = -1f;
         }
-
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             x += 1;
             direction = 1f;
         }
+        return Mathf.Clamp(x, -1, 1);
+    }
 
+    private void ApplyDash()
+    {
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            if (direction > 0f)
-                rb.linearVelocity = new Vector2(dash, rb.linearVelocity.y);
-            else
-                rb.linearVelocity = new Vector2(-dash, rb.linearVelocity.y);
+            float dashVel = dash * (direction > 0f ? 1f : -1f);
+            rb.linearVelocity = new Vector2(dashVel, rb.linearVelocity.y);
         }
+    }
 
-        inputX = Mathf.Clamp(x, -1, 1);
-
-        // --- Saut : buffer + état maintenu ---
-        if (Input.GetKeyDown(KeyCode.Space))
-            bufferTimer = jumpBuffer;
-
-        jumpHeld = Input.GetKey(KeyCode.Space);
-
-        // --- Flip du sprite ---
+    private void FlipSprite()
+    {
         if (flipSpriteOnDirection && inputX != 0f)
         {
             Vector3 s = transform.localScale;
@@ -165,99 +172,110 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Détection du sol
-        if (col != null)
-        {
-            Bounds b = col.bounds;
-            Vector2 boxCenter = new Vector2(b.center.x, b.min.y - groundProbeSkin);
-            Vector2 boxSize = new Vector2(b.size.x * groundProbeWidthScale, groundProbeHeight);
-            isGrounded = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null;
-        }
-
-        // Safe position
-        if (isGrounded && respawn != null)
-        {
-            Vector3 safePos = transform.position;
-
-            float dir = inputX;
-            if (Mathf.Abs(dir) < 0.01f)
-                dir = direction;
-
-            if (Mathf.Abs(dir) > 0.01f)
-                safePos.x -= Mathf.Sign(dir) * safeOffsetX;
-
-            safePos.y += safeOffsetY;
-            respawn.UpdateLastSafePosition(safePos);
-        }
-
-        // Coyote / buffer
-        if (isGrounded) coyoteTimer = coyoteTime;
-        else coyoteTimer -= Time.fixedDeltaTime;
-        bufferTimer -= Time.fixedDeltaTime;
+        UpdateGroundedState();
+        UpdateSafePosition();
+        UpdateTimers();
 
         Vector2 vel = rb.linearVelocity;
 
         if (!isKnockedBack)
         {
-            // Mouvement horizontal
-            float targetVX = inputX * maxSpeed;
-            float rate = (Mathf.Abs(inputX) > 0.01f) ? acceleration : deceleration;
-            vel.x = Mathf.MoveTowards(vel.x, targetVX, rate * Time.fixedDeltaTime);
-
-            // Déclenchement du saut
-            if (bufferTimer > 0f && coyoteTimer > 0f)
-            {
-                if (vel.y < 0f) vel.y = 0f;
-                vel.y += jumpForce;
-
-                isJumping = true;
-                jumpHoldTimer = maxJumpHoldTime;
-
-                bufferTimer = 0f;
-                coyoteTimer = 0f;
-            }
-
-            // Maintien du saut
-            if (isJumping)
-            {
-                if (jumpHeld && jumpHoldTimer > 0f)
-                {
-                    vel.y += holdBoostAccel * Time.fixedDeltaTime;
-                    jumpHoldTimer -= Time.fixedDeltaTime;
-                }
-                else
-                {
-                    isJumping = false;
-                }
-            }
+            ApplyHorizontalMovement(ref vel);
+            TryJump(ref vel);
         }
         else
         {
-            // Timer de knockback
-            knockbackTimer -= Time.fixedDeltaTime;
-            if (knockbackTimer <= 0f)
-            {
-                isKnockedBack = false;
-            }
+            HandleKnockbackTimer();
         }
 
-        // Gravité avancée
+        ApplyGravity(ref vel);
+
+        rb.linearVelocity = vel;
+    }
+
+    // helper methods for FixedUpdate logic ------------------------------------------------
+    private void UpdateGroundedState()
+    {
+        if (col != null)
+        {
+            Vector2 boxCenter, boxSize;
+            GetGroundProbeBox(out boxCenter, out boxSize);
+            isGrounded = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null;
+        }
+    }
+
+    private void GetGroundProbeBox(out Vector2 center, out Vector2 size)
+    {
+        Bounds b = col.bounds;
+        center = new Vector2(b.center.x, b.min.y - groundProbeSkin);
+        size = new Vector2(b.size.x * groundProbeWidthScale, groundProbeHeight);
+    }
+
+    private void UpdateSafePosition()
+    {
+        if (isGrounded && respawn != null)
+        {
+            Vector3 safePos = transform.position;
+            float dir = inputX;
+            if (Mathf.Abs(dir) < 0.01f)
+                dir = direction;
+            if (Mathf.Abs(dir) > 0.01f)
+                safePos.x -= Mathf.Sign(dir) * safeOffsetX;
+            safePos.y += safeOffsetY;
+            respawn.UpdateLastSafePosition(safePos);
+        }
+    }
+
+    private void UpdateTimers()
+    {
+        if (isGrounded)
+        {
+            coyoteTimer = coyoteTime;
+            jumpCount = maxJumps;
+        }
+        else
+        {
+            coyoteTimer -= Time.fixedDeltaTime;
+        }
+        bufferTimer -= Time.fixedDeltaTime;
+    }
+
+    private void ApplyHorizontalMovement(ref Vector2 vel)
+    {
+        float targetVX = inputX * maxSpeed;
+        float rate = (Mathf.Abs(inputX) > 0.01f) ? acceleration : deceleration;
+        vel.x = Mathf.MoveTowards(vel.x, targetVX, rate * Time.fixedDeltaTime);
+    }
+
+    private void TryJump(ref Vector2 vel)
+    {
+        if (bufferTimer > 0f && jumpCount > 0)
+        {
+            if (vel.y < 0f) vel.y = 0f;
+            vel.y += jumpForce;
+            jumpCount--;
+            bufferTimer = 0f;
+            coyoteTimer = 0f;
+        }
+    }
+
+    private void HandleKnockbackTimer()
+    {
+        knockbackTimer -= Time.fixedDeltaTime;
+        if (knockbackTimer <= 0f)
+            isKnockedBack = false;
+    }
+
+    private void ApplyGravity(ref Vector2 vel)
+    {
         if (vel.y < 0f)
         {
             vel.y += Physics2D.gravity.y * (fallMultiplier - 1f) * Time.fixedDeltaTime;
         }
-        else if (vel.y > 0f && !jumpHeld && !isJumping)
-        {
-            vel.y += Physics2D.gravity.y * (lowJumpMultiplier - 1f) * Time.fixedDeltaTime;
-        }
-
         if (!isGrounded && Mathf.Abs(vel.y) < apexBoostThreshold)
             vel.y += Physics2D.gravity.y * apexBoostGravity * Time.fixedDeltaTime;
-
         if (vel.y < maxFallSpeed)
             vel.y = maxFallSpeed;
-
-        rb.linearVelocity = vel;
     }
 
     /// <summary>
@@ -304,8 +322,9 @@ public class PlayerController2D : MonoBehaviour
         vel.y = pogoForce;
         rb.linearVelocity = vel;
 
-        isJumping = false;
-        jumpHoldTimer = 0f;
+        // considérer le pogo comme un saut consommé (perte d'un jump)
+        if (jumpCount > 0)
+            jumpCount--;
     }
 
     private void HandleInvincibilityTimers()
@@ -370,9 +389,8 @@ public class PlayerController2D : MonoBehaviour
     {
         if (col == null && !TryGetComponent(out col)) return;
 
-        Bounds b = col.bounds;
-        Vector2 boxCenter = new Vector2(b.center.x, b.min.y - groundProbeSkin);
-        Vector2 boxSize = new Vector2(b.size.x * groundProbeWidthScale, groundProbeHeight);
+        Vector2 boxCenter, boxSize;
+        GetGroundProbeBox(out boxCenter, out boxSize);
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(boxCenter, boxSize);
