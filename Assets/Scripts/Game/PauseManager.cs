@@ -39,7 +39,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Parameter()
     {
-        SceneManager.LoadScene("pnj_dialogues pierre");
+        SceneManager.LoadScene("pnj_dialogues pierre"); // Paramètre pierre
     }
 
     public void QuitGame()
