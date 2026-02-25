@@ -27,24 +27,15 @@ public class DataSave : MonoBehaviour
         saveData.levelName = SceneManager.GetActiveScene().name;
         saveData.playerPosition = player.position;
         saveData.playerHealth = life.currentHealth;
-        Debug.Log("Données récupéré et sauvegardé");
         
         string dataJson = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(GetFilePath(), dataJson);
-        
-        Debug.Log("Sauvegarde en cours " + saveData + " " + filePath);
     }
+    
     private Data waitLoadData;
     public void LoadFromJson()
     {
-        
-        
-        if (!File.Exists(GetFilePath())) 
-        { 
-            Debug.LogError("Aucune sauvegarde trouvé");
-            return;
-        }
-        Debug.Log("Sauvegarde trouvé !");
+        if (!File.Exists(GetFilePath())) return; 
         
         waitLoadData =  JsonUtility.FromJson<Data>(File.ReadAllText(GetFilePath()));
         
@@ -68,19 +59,14 @@ public class DataSave : MonoBehaviour
         PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
         if (pauseMenu != null)
             pauseMenu.ForceResume();
-        
-        
-        if (playerGo == null)
-        {
-            Debug.LogError("Joueur introuvable dans la scène chargée (tag 'Player')");
-            return;
-        }
+
+
+        if (playerGo == null) return;
         
         // Appliquer les données
         player.position = waitLoadData.playerPosition;
         life.currentHealth = waitLoadData.playerHealth;
         
-        Debug.Log("Chargement en cours " + waitLoadData + " " + filePath);
         waitLoadData = null;
     }
 }
