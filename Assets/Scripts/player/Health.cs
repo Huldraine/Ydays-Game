@@ -22,13 +22,13 @@ public class Health : MonoBehaviour, IDamageable
         MettreAJourLesMasques();
     }
 
-    // Implémentation de l’interface IDamageable (en int)
+    // Implï¿½mentation de lï¿½interface IDamageable (en int)
     public void TakeDamage(int amount)
     {
         TakeDamage((float)amount);
     }
 
-    // Version float utilisée ailleurs dans ton code (hazardDamage, etc.)
+    // Version float utilisï¿½e ailleurs dans ton code (hazardDamage, etc.)
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
