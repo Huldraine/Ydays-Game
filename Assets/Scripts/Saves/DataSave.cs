@@ -64,9 +64,11 @@ public class DataSave : MonoBehaviour
         GameObject playerGo = GameObject.FindWithTag("Player");
         player = playerGo.transform;
         life = player.GetComponent<Health>();
-        var pause = FindObjectOfType<PauseMenu>();
         
-        pause.Resume();
+        PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
+        if (pauseMenu != null)
+            pauseMenu.ForceResume();
+        
         
         if (playerGo == null)
         {
