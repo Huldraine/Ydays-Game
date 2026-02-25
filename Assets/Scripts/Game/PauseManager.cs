@@ -4,40 +4,37 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject PausePanel;
-    private bool IsPaused = false;
+    private bool IsPaused = true;
 
-    void Start()
-    {
-        Resume();
-    }
+    void Start() { PausePanel.SetActive(IsPaused); }
 
     void Update()
     {
+        if (!PausePanel) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!IsPaused)
-            {
-                Pause();
-            }
-            else
-            {
-                Resume();
-            }
+            TogglePause();
         }
     }
 
-    public void Resume()
+    public void ForceResume()
     {
-        PausePanel.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
+
+        if (PausePanel)
+            PausePanel.SetActive(false);
     }
 
-    void Pause()
+    public void TogglePause()
     {
-        PausePanel.SetActive(true);
-        Time.timeScale = 0f;
-        IsPaused = true;
+        if (!PausePanel) return;
+
+        IsPaused = !IsPaused;
+
+        Time.timeScale = IsPaused ? 0f : 1f;
+        PausePanel.SetActive(IsPaused);
     }
 
     public void Parameter()
@@ -48,5 +45,30 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    private void RebindPausePanel(Scene scene, LoadSceneMode mode)
+    {
+        PausePanel = null;
+
+        GameObject found = GameObject.FindWithTag("PauseUI");
+        if (found != null)
+        {
+            PausePanel = found;
+            PausePanel.SetActive(false);
+        }
+
+        Time.timeScale = 1f;
+        IsPaused = false;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += RebindPausePanel;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= RebindPausePanel;
     }
 }
