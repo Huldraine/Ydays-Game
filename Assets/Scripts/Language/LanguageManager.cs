@@ -8,6 +8,8 @@ public enum Language
 }
 public class LanguageTranslate : MonoBehaviour
 {
+    [SerializeField] private string language;
+
     public static LanguageTranslate Instance { get; private set; }
 
     public Language currentLanguage = Language.English;
@@ -85,5 +87,15 @@ public class LanguageTranslate : MonoBehaviour
 
         // Si clé non trouvée --> renvoyer la clé pour debug
         return key;
+    }
+
+    public void SetLanguage(string lang)
+    {
+        language = lang;
+    }
+
+    public string GetLanguage()
+    {
+        return language;
     }
 }
