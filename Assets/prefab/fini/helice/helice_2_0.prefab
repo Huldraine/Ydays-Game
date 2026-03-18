@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2377592765103609890}
   - component: {fileID: 152019945612456798}
   - component: {fileID: -3490680510338821012}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: helice_2_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,10 +77,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1781233453
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -8178945314815758948, guid: 650a72453dcb2f0429e088b3b25e6efb, type: 3}
+  m_Sprite: {fileID: -8178945314815758948, guid: fd710d63b1c703049a1104190c2d6f2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3140585246717647134}
   - component: {fileID: 8681947930007223115}
   - component: {fileID: -937347768826475440}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plateforme_Milieu1_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,10 +77,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1804366669
-  m_SortingLayer: 4
+  m_SortingLayerID: 283694493
+  m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 8543138567033658147, guid: c5e810955b600644ea1798a7674e5503, type: 3}
+  m_Sprite: {fileID: 8543138567033658147, guid: abf585ae47d10524bb8db74a7c01bd38, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

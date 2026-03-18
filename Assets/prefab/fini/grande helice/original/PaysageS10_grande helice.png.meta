@@ -1,0 +1,468 @@
+fileFormatVersion: 2
+guid: f46c50a91e71e044c861d9f2938de0b2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6486912634595146864
+    second: PaysageS10_grande helice_0
+  - first:
+      213: 2706239849679742473
+    second: PaysageS10_grande helice_1
+  - first:
+      213: -5256691616263605216
+    second: PaysageS10_grande helice_2
+  - first:
+      213: -8986405376432410501
+    second: PaysageS10_grande helice_3
+  - first:
+      213: 935748752825805158
+    second: PaysageS10_grande helice_4
+  - first:
+      213: -4409609823881592702
+    second: PaysageS10_grande helice_5
+  - first:
+      213: -3335458808137843630
+    second: PaysageS10_grande helice_6
+  - first:
+      213: 4913643744547213549
+    second: PaysageS10_grande helice_7
+  - first:
+      213: 2457802518439424800
+    second: PaysageS10_grande helice_8
+  - first:
+      213: 4395983813064119890
+    second: PaysageS10_grande helice_9
+  - first:
+      213: -204009436853564782
+    second: PaysageS10_grande helice_10
+  - first:
+      213: -7360453139782518141
+    second: PaysageS10_grande helice_11
+  - first:
+      213: -2802388860176904202
+    second: PaysageS10_grande helice_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1361
+        width: 1748
+        height: 2160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07c790a0ca4260a50800000000000000
+      internalID: 6486912634595146864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_1
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 2342
+        width: 405
+        height: 1167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 906ea251ece7e8520800000000000000
+      internalID: 2706239849679742473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_2
+      rect:
+        serializedVersion: 2
+        x: 1907
+        y: 2281
+        width: 647
+        height: 1108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02475de73da7c07b0800000000000000
+      internalID: -5256691616263605216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_3
+      rect:
+        serializedVersion: 2
+        x: 2065
+        y: 2194
+        width: 834
+        height: 999
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b70f5121cefd94380800000000000000
+      internalID: -8986405376432410501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_4
+      rect:
+        serializedVersion: 2
+        x: 2183
+        y: 2072
+        width: 1037
+        height: 858
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 669623b68827cfc00800000000000000
+      internalID: 935748752825805158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_5
+      rect:
+        serializedVersion: 2
+        x: 2277
+        y: 1926
+        width: 1120
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28007717a3bedc2c0800000000000000
+      internalID: -4409609823881592702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_6
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 0
+        width: 1766
+        height: 1775
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25cfef1d2e116b1d0800000000000000
+      internalID: -3335458808137843630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_7
+      rect:
+        serializedVersion: 2
+        x: 2335
+        y: 1774
+        width: 1181
+        height: 407
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de09e8ab3f4c03440800000000000000
+      internalID: 4913643744547213549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_8
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 970
+        width: 1123
+        height: 641
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02374a75e5edb1220800000000000000
+      internalID: 2457802518439424800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_9
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 610
+        width: 1026
+        height: 856
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 256dd00bcfba10d30800000000000000
+      internalID: 4395983813064119890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_10
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 320
+        width: 854
+        height: 1022
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29a04818f763b2df0800000000000000
+      internalID: -204009436853564782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_11
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 123
+        width: 633
+        height: 1121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38aba51edda6ad990800000000000000
+      internalID: -7360453139782518141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PaysageS10_grande helice_12
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 25
+        width: 407
+        height: 1166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ffc4aaed2aeb19d0800000000000000
+      internalID: -2802388860176904202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PaysageS10_grande helice_0: 6486912634595146864
+      PaysageS10_grande helice_1: 2706239849679742473
+      PaysageS10_grande helice_10: -204009436853564782
+      PaysageS10_grande helice_11: -7360453139782518141
+      PaysageS10_grande helice_12: -2802388860176904202
+      PaysageS10_grande helice_2: -5256691616263605216
+      PaysageS10_grande helice_3: -8986405376432410501
+      PaysageS10_grande helice_4: 935748752825805158
+      PaysageS10_grande helice_5: -4409609823881592702
+      PaysageS10_grande helice_6: -3335458808137843630
+      PaysageS10_grande helice_7: 4913643744547213549
+      PaysageS10_grande helice_8: 2457802518439424800
+      PaysageS10_grande helice_9: 4395983813064119890
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7991078568703547509}
   - component: {fileID: 8649249037424020185}
   - component: {fileID: 7338850914991535625}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plateforme_ExtremiteDroite_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,15 +77,15 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1804366669
-  m_SortingLayer: 4
+  m_SortingLayerID: 283694493
+  m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -3740940738887283763, guid: cfe4378dbbdaf8b4db8d81ebd19cfbdf, type: 3}
+  m_Sprite: {fileID: 7832565810963601760, guid: 5ccff46406420ed44aabff70de8f4e01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.63, y: 1.52}
+  m_Size: {x: 2.08, y: 1.54}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -129,8 +129,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.63, y: 1.52}
-    newSize: {x: 2.63, y: 1.52}
+    oldSize: {x: 2.08, y: 1.54}
+    newSize: {x: 2.08, y: 1.54}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
