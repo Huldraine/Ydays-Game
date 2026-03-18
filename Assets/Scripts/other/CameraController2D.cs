@@ -1,10 +1,10 @@
 using UnityEngine;
 
 /// <summary>
-/// Caméra 2D "calme" :
-/// - follow avec smoothing séparé horizontal/vertical
-/// - léger look ahead horizontal
-/// - dead zone verticale : la caméra ne bouge pas en Y tant que le joueur reste dans une zone centrale
+/// Camï¿½ra 2D "calme" :
+/// - follow avec smoothing sï¿½parï¿½ horizontal/vertical
+/// - lï¿½ger look ahead horizontal
+/// - dead zone verticale : la camï¿½ra ne bouge pas en Y tant que le joueur reste dans une zone centrale
 /// - clamp dans des bounds globaux ou de CameraZone2D.
 /// </summary>
 [RequireComponent(typeof(Camera))]
@@ -36,38 +36,21 @@ public class CameraController2D : MonoBehaviour
     private float lookAheadVelocityX;
 
     [Header("Dead zone verticale")]
-    [Tooltip("Taille de la zone verticale dans laquelle la caméra ne bouge presque pas.")]
+    [Tooltip("Taille de la zone verticale dans laquelle la camï¿½ra ne bouge presque pas.")]
     [SerializeField] private float verticalDeadZone = 1.0f;
 
-    [Header("Limites de la caméra")]
-    [Tooltip("Bounds global de la caméra. Un BoxCollider2D qui englobe ton niveau.")]
+    [Header("Limites de la camï¿½ra")]
+    [Tooltip("Bounds global de la camï¿½ra. Un BoxCollider2D qui englobe ton niveau.")]
     [SerializeField] private BoxCollider2D worldBounds;
 
     private Camera cam;
     private PlayerController2D playerController;
     private CameraZone2D activeZone;
 
-    private void Awake()
+    private void GetCurrentOffsetAndBounds(out Vector2 offset, out BoxCollider2D boundsToUse)
     {
-        cam = GetComponent<Camera>();
-
-        if (target != null)
-        {
-            playerController = target.GetComponent<PlayerController2D>();
-        }
-
-        currentCamPosX = transform.position.x;
-        currentCamPosY = transform.position.y;
-    }
-
-    private void LateUpdate()
-    {
-        if (target == null)
-            return;
-
-        // --- Offset de base + éventuelle CameraZone ---
-        Vector2 offset = baseOffset;
-        BoxCollider2D boundsToUse = worldBounds;
+        offset = baseOffset;
+        boundsToUse = worldBounds;
 
         if (activeZone != null)
         {
@@ -79,6 +62,86 @@ public class CameraController2D : MonoBehaviour
             if (activeZone.boundsOverride != null)
                 boundsToUse = activeZone.boundsOverride;
         }
+    }
+
+    private Vector3 ClampToBounds(Vector3 position, BoxCollider2D boundsToUse)
+    {
+        if (boundsToUse == null)
+            return position;
+
+        Bounds b = boundsToUse.bounds;
+
+        float camHalfHeight = cam.orthographicSize;
+        float camHalfWidth = camHalfHeight * cam.aspect;
+
+        float minX = b.min.x + camHalfWidth;
+        float maxX = b.max.x - camHalfWidth;
+        float minY = b.min.y + camHalfHeight;
+        float maxY = b.max.y - camHalfHeight;
+
+        if (minX > maxX)
+        {
+            float midX = (b.min.x + b.max.x) * 0.5f;
+            minX = maxX = midX;
+        }
+
+        if (minY > maxY)
+        {
+            float midY = (b.min.y + b.max.y) * 0.5f;
+            minY = maxY = midY;
+        }
+
+        position.x = Mathf.Clamp(position.x, minX, maxX);
+        position.y = Mathf.Clamp(position.y, minY, maxY);
+        return position;
+    }
+
+    private bool TryResolveTarget()
+    {
+        if (target != null)
+        {
+            if (playerController == null)
+                playerController = target.GetComponent<PlayerController2D>();
+            return true;
+        }
+
+        PlayerController2D foundPlayer = FindObjectOfType<PlayerController2D>();
+        if (foundPlayer != null)
+        {
+            SetTarget(foundPlayer.transform);
+            return true;
+        }
+
+        GameObject taggedPlayer = GameObject.FindWithTag("Player");
+        if (taggedPlayer != null)
+        {
+            SetTarget(taggedPlayer.transform);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void Awake()
+    {
+        cam = GetComponent<Camera>();
+
+        TryResolveTarget();
+
+        currentCamPosX = transform.position.x;
+        currentCamPosY = transform.position.y;
+
+        if (target != null)
+            SnapToTargetInstant();
+    }
+
+    private void LateUpdate()
+    {
+        if (!TryResolveTarget())
+            return;
+
+        // --- Offset de base + ï¿½ventuelle CameraZone ---
+        GetCurrentOffsetAndBounds(out Vector2 offset, out BoxCollider2D boundsToUse);
 
         Vector3 focusPoint = target.position + (Vector3)offset;
 
@@ -107,22 +170,22 @@ public class CameraController2D : MonoBehaviour
         float targetY = focusPoint.y;
 
         // --- Dead zone verticale ---
-        // Tant que le joueur reste à l'intérieur d'une bande horizontale autour de la caméra,
-        // on ne bouge pas (ou très peu) la caméra en Y.
+        // Tant que le joueur reste ï¿½ l'intï¿½rieur d'une bande horizontale autour de la camï¿½ra,
+        // on ne bouge pas (ou trï¿½s peu) la camï¿½ra en Y.
         float dy = targetY - currentCamPosY;
 
         if (Mathf.Abs(dy) < verticalDeadZone)
         {
-            // On "freeze" la cible verticale : la caméra reste là
+            // On "freeze" la cible verticale : la camï¿½ra reste lï¿½
             targetY = currentCamPosY;
         }
         else
         {
-            // Option : on peut commencer à bouger la caméra en poussant légèrement
-            // targetY vers l'extérieur de la dead zone, mais ici on laisse la valeur brute
+            // Option : on peut commencer ï¿½ bouger la camï¿½ra en poussant lï¿½gï¿½rement
+            // targetY vers l'extï¿½rieur de la dead zone, mais ici on laisse la valeur brute
         }
 
-        // --- Smoothing séparé X / Y ---
+        // --- Smoothing sï¿½parï¿½ X / Y ---
         currentCamPosX = Mathf.SmoothDamp(
             currentCamPosX,
             targetX,
@@ -140,33 +203,7 @@ public class CameraController2D : MonoBehaviour
         Vector3 smoothedPos = new Vector3(currentCamPosX, currentCamPosY, transform.position.z);
 
         // --- Clamp dans les bounds ---
-        if (boundsToUse != null)
-        {
-            Bounds b = boundsToUse.bounds;
-
-            float camHalfHeight = cam.orthographicSize;
-            float camHalfWidth = camHalfHeight * cam.aspect;
-
-            float minX = b.min.x + camHalfWidth;
-            float maxX = b.max.x - camHalfWidth;
-            float minY = b.min.y + camHalfHeight;
-            float maxY = b.max.y - camHalfHeight;
-
-            if (minX > maxX)
-            {
-                float midX = (b.min.x + b.max.x) * 0.5f;
-                minX = maxX = midX;
-            }
-
-            if (minY > maxY)
-            {
-                float midY = (b.min.y + b.max.y) * 0.5f;
-                minY = maxY = midY;
-            }
-
-            smoothedPos.x = Mathf.Clamp(smoothedPos.x, minX, maxX);
-            smoothedPos.y = Mathf.Clamp(smoothedPos.y, minY, maxY);
-        }
+        smoothedPos = ClampToBounds(smoothedPos, boundsToUse);
 
         transform.position = smoothedPos;
     }
@@ -188,8 +225,38 @@ public class CameraController2D : MonoBehaviour
     {
         target = newTarget;
         if (target != null)
+        {
             playerController = target.GetComponent<PlayerController2D>();
+            currentCamPosX = transform.position.x;
+            currentCamPosY = transform.position.y;
+            SnapToTargetInstant();
+        }
         else
             playerController = null;
+    }
+
+    public void SnapToTargetInstant(bool resetLookAhead = true)
+    {
+        if (!TryResolveTarget())
+            return;
+
+        if (resetLookAhead)
+        {
+            currentLookAheadX = 0f;
+            targetLookAheadX = 0f;
+            lookAheadVelocityX = 0f;
+        }
+
+        GetCurrentOffsetAndBounds(out Vector2 offset, out BoxCollider2D boundsToUse);
+
+        Vector3 pos = target.position + (Vector3)offset;
+        pos.z = transform.position.z;
+        pos = ClampToBounds(pos, boundsToUse);
+
+        transform.position = pos;
+        currentCamPosX = pos.x;
+        currentCamPosY = pos.y;
+        velocityX = 0f;
+        velocityY = 0f;
     }
 }
