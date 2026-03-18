@@ -6,6 +6,7 @@ public class close_credits : MonoBehaviour
     // Retour aux paramètres
     public void Close_Credits()
     {
-        SceneManager.LoadScene(1);
+        Debug.Log("CLIC DETECTE");
+        SceneManager.LoadScene("parametres");
     }
 }
