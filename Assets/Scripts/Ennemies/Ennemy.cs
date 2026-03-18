@@ -13,12 +13,12 @@ public class Enemy : MonoBehaviour
     public float attackSpeed = 1.5f; 
     public float moveSpeed = 2.5f;
     public float stoppingDistance = 1.2f;
-
     private float lastAttackTime;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindWithTag("Player").transform;
     }
 
     void Update()
@@ -66,7 +66,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0) Die();
+        if (health <= 0) 
+        {
+            Die();
+        }
     }
 
     void Die()

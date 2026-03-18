@@ -905,7 +905,7 @@ MonoBehaviour:
   holdBoostAccel: 20
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   groundProbeSkin: 0.02
   groundProbeHeight: 0.12
   groundProbeWidthScale: 0.9
@@ -917,6 +917,8 @@ MonoBehaviour:
   apexBoostThreshold: 0.35
   apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
+  dash: 50
+  direction: 1
 --- !u!114 &240475087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -949,6 +951,8 @@ MonoBehaviour:
   apexBoostThreshold: 0.35
   apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
+  dash: 50
+  direction: 1
 --- !u!114 &240475088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,6 +985,8 @@ MonoBehaviour:
   apexBoostThreshold: 0.35
   apexBoostGravity: 1.2
   flipSpriteOnDirection: 1
+  dash: 50
+  direction: 1
 --- !u!114 &240475089
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Follower : MonoBehaviour
 {
-    public Transform Player;      // le joueur à suivre
+    public Transform Player;      // le joueur ï¿½ suivre
     public float speed = 2f;      // vitesse 
     public float maxDistance = 5f; // distance maximale pour suivre le joueur
     public float verif = 0f;
