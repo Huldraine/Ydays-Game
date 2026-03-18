@@ -636,7 +636,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1983778915
-  m_SortingLayer: 9
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -3448120935943364757, guid: 4dd0929738d533e449b39aab39d2d8b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1316,9 +1316,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 555646315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea724a92d3e62c24a81f2166dad35477, type: 3}
+  m_Script: {fileID: 11500000, guid: b419d0b2a383fec42a4951a0ebe04ef7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LoadSpecificScene4
+  m_EditorClassIdentifier: Assembly-CSharp::LoadSpecificScene5
 --- !u!1001 &591921095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3220,7 +3220,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1804366669
-  m_SortingLayer: 6
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6cfeb54e4718bad41bbdd8368fb6995e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
