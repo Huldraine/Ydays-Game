@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 2.5f;
     public float stoppingDistance = 1.2f;
     private float lastAttackTime;
+    public float hoverHeight = 4f;
 
     void Start()
     {
@@ -40,18 +41,18 @@ public class Enemy : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-        float directionX = (player.position.x - transform.position.x);
-        directionX = Mathf.Sign(directionX);
+        Vector2 targetPosition = new Vector2(player.position.x, player.position.y + hoverHeight);
+        Vector2 direction = ((Vector2)transform.position - targetPosition).normalized;
+        
+        rb.linearVelocity = -direction * moveSpeed;
 
-        rb.linearVelocity = new Vector2(directionX * moveSpeed, rb.linearVelocity.y);
-
-        if (directionX > 0) transform.localScale = new Vector3(1, 1, 1);
+        if (direction.x > 0) transform.localScale = new Vector3(1, 1, 1);
         else transform.localScale = new Vector3(-1, 1, 1);
     }
 
     void StopMovement()
     {
-        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        rb.linearVelocity = Vector2.zero;
     }
 
     void TryAttack()
