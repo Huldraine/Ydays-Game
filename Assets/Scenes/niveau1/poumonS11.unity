@@ -1355,8 +1355,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7184147436367824701, guid: 5496ffda87b5808418fc055dba87bc92, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 506334390}
   m_SourcePrefab: {fileID: 100100000, guid: 5496ffda87b5808418fc055dba87bc92, type: 3}
+--- !u!1 &506334389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7184147436367824701, guid: 5496ffda87b5808418fc055dba87bc92, type: 3}
+  m_PrefabInstance: {fileID: 506334388}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &506334390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506334389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea724a92d3e62c24a81f2166dad35477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadSpecificScene2
 --- !u!1001 &513717154
 PrefabInstance:
   m_ObjectHideFlags: 0

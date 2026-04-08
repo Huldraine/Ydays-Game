@@ -1643,6 +1643,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7184147436367824701, guid: 5496ffda87b5808418fc055dba87bc92, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1334801032}
+    - targetCorrespondingSourceObject: {fileID: 7184147436367824701, guid: 5496ffda87b5808418fc055dba87bc92, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1334801033}
   m_SourcePrefab: {fileID: 100100000, guid: 5496ffda87b5808418fc055dba87bc92, type: 3}
 --- !u!1 &1334801031 stripped
 GameObject:
@@ -1661,6 +1664,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ff892bf3cf15f49943add3a823ece3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadSpecificScene2
+--- !u!114 &1334801033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334801031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556853748875a004e899725201b6b654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadSpecificScene9
 --- !u!1001 &1688430120
 PrefabInstance:
   m_ObjectHideFlags: 0

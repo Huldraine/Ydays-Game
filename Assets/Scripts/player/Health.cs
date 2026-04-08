@@ -1,41 +1,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Health : MonoBehaviour, IDamageable
 {
-    // la Vie maximale du joueur
     public int maxHealth = 5;
-    // Vie actuelle du joueur
     public float currentHealth;
-    // images des coeurs
     public List<Image> healthImages;
 
-    // permet de changer pour les coeurs vides ou pleins
     public Sprite spritePlein;
     public Sprite spriteVide;
 
+    public Sprite[] animationFrames;
+    public float frameDuration = 0.08f;
+
+    private HashSet<int> animatingIndices = new HashSet<int>();
+
     void Start()
     {
-        // Definir la vie au maximum au debut
         currentHealth = maxHealth;
         MettreAJourLesMasques();
     }
 
-    // Implémentation de l’interface IDamageable (en int)
     public void TakeDamage(int amount)
     {
         TakeDamage((float)amount);
     }
 
-    // Version float utilisée ailleurs dans ton code (hazardDamage, etc.)
     public void TakeDamage(float damage)
     {
+        float oldHealth = currentHealth;
         currentHealth -= damage;
-        if (currentHealth < 0)
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        for (int i = Mathf.FloorToInt(currentHealth); i < Mathf.FloorToInt(oldHealth); i++)
         {
-            currentHealth = 0;
+            if (animationFrames != null && animationFrames.Length > 0 && i < healthImages.Count && i >= 0)
+            {
+                StartCoroutine(AnimateHeartLoss(i));
+            }
         }
+
         MettreAJourLesMasques();
     }
 
@@ -43,10 +49,27 @@ public class Health : MonoBehaviour, IDamageable
     {
         for (int i = 0; i < healthImages.Count; i++)
         {
+            if (animatingIndices.Contains(i)) continue;
+
             if (i < currentHealth)
                 healthImages[i].sprite = spritePlein;
             else
                 healthImages[i].sprite = spriteVide;
         }
+    }
+
+    IEnumerator AnimateHeartLoss(int index)
+    {
+        animatingIndices.Add(index);
+        Image targetImage = healthImages[index];
+
+        foreach (Sprite frame in animationFrames)
+        {
+            targetImage.sprite = frame;
+            yield return new WaitForSeconds(frameDuration);
+        }
+
+        animatingIndices.Remove(index);
+        targetImage.sprite = spriteVide;
     }
 }
