@@ -18,13 +18,13 @@ public class ScreenSettings : MonoBehaviour
         Instance = this;
     }
 
-    Resolution[] resolutions;
+    Resolution[] resolutions; 
     public TMP_Dropdown resolutionDropdown;
     public int currentResolutionIndex;
 
     public void Start()
     {
-        if (SceneManager.GetActiveScene().name != "parametres")
+        if (SceneManager.GetActiveScene().name != "parametres") // Maxime buggé
         {
             resolutions = Screen.resolutions
                 .Select(res => new Resolution { width = res.width, height = res.height })
