@@ -54,15 +54,14 @@ public class DataSave : MonoBehaviour
         // Re-Bind des refs dans la nouvelle scène
         GameObject playerGo = GameObject.FindWithTag("Player");
         player = playerGo.transform;
+        if (playerGo == null) return;
+        if (player.GetComponent<Health>() == null) return;
         life = player.GetComponent<Health>();
         
-        PauseMenu pauseMenu = FindObjectOfType<PauseMenu>();
-        if (pauseMenu != null)
-            pauseMenu.ForceResume();
+        PauseMenu pauseMenu = FindFirstObjectByType<PauseMenu>();
+        //if (pauseMenu != null)
+        //    pauseMenu.ForceResume();
 
-
-        if (playerGo == null) return;
-        
         // Appliquer les données
         player.position = waitLoadData.playerPosition;
         life.currentHealth = waitLoadData.playerHealth;

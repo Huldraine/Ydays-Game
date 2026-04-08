@@ -4,9 +4,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject PausePanel;
-    private bool IsPaused = true;
+    private bool IsPaused = false;
 
-    void Start() { PausePanel.SetActive(IsPaused); }
+    void Start()
+    {
+        PausePanel.SetActive(IsPaused);
+    }
 
     void Update()
     {
@@ -39,22 +42,26 @@ public class PauseMenu : MonoBehaviour
 
     public void Parameter()
     {
-        SceneManager.LoadScene("pnj_dialogues pierre"); // Paramètre pierre
+        SceneManager.LoadScene("parametres");
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            SceneManager.LoadScene("main_menu");
+        #endif
     }
 
     private void RebindPausePanel(Scene scene, LoadSceneMode mode)
     {
         PausePanel = null;
 
-        GameObject found = GameObject.FindWithTag("PauseUI");
-        if (found != null)
+        GameObject pauseui = GameObject.FindWithTag("PauseUI");
+        if (pauseui != null)
         {
-            PausePanel = found;
+            PausePanel = pauseui;
             PausePanel.SetActive(false);
         }
 
