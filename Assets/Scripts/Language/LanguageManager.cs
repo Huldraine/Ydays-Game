@@ -8,7 +8,6 @@ public enum Language
 }
 public class LanguageTranslate : MonoBehaviour
 {
-    [SerializeField] private string language;
 
     public static LanguageTranslate Instance { get; private set; }
 
@@ -19,7 +18,7 @@ public class LanguageTranslate : MonoBehaviour
     private Dictionary<string, string> french;
 
     //  //
-    public delegate void LanguageChanged(); 
+    public delegate void LanguageChanged();
     public event LanguageChanged OnLanguageChanged;
 
     private void Awake()
@@ -60,7 +59,7 @@ public class LanguageTranslate : MonoBehaviour
     {
         string savedLang = PlayerPrefs.GetString("language", "en");
         if (savedLang == "fr")
-            currentLanguage = Language.French; 
+            currentLanguage = Language.French;
         else
             currentLanguage = Language.English;
     }
@@ -89,14 +88,12 @@ public class LanguageTranslate : MonoBehaviour
         return key;
     }
 
-    public void setLanguage(string lang)
+    public void setLanguageFromButton(string langCode)
     {
-        language = lang;
-    }
-
-    public string getLanguage()
-    {
-        return language;
+        if (langCode == "fr")
+            setLanguage(Language.French);
+        else
+            setLanguage(Language.English);
     }
 }
 

@@ -2,6 +2,7 @@
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class ScreenSettings : MonoBehaviour
 {
@@ -17,49 +18,52 @@ public class ScreenSettings : MonoBehaviour
         Instance = this;
     }
 
-    Resolution[] resolutions;
+    Resolution[] resolutions; 
     public TMP_Dropdown resolutionDropdown;
-    public int currentResolutionIndex; 
+    public int currentResolutionIndex;
 
-    public void Start ()
+    public void Start()
     {
-        resolutions = Screen.resolutions
-            .Select(res => new Resolution { width = res.width, height = res.height })
-            .Distinct()
-            .ToArray();
-
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-
-        currentResolutionIndex = 0;
-
-        for (int i = 0; i < resolutions.Length; i++)
+        if (SceneManager.GetActiveScene().name != "parametres") // Maxime buggé
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+            resolutions = Screen.resolutions
+                .Select(res => new Resolution { width = res.width, height = res.height })
+                .Distinct()
+                .ToArray();
 
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+            resolutionDropdown.ClearOptions();
+            List<string> options = new List<string>();
+
+            currentResolutionIndex = 0;
+
+            for (int i = 0; i < resolutions.Length; i++)
             {
-                currentResolutionIndex = i;
-            }
-        }
+                string option = resolutions[i].width + " x " + resolutions[i].height;
+                options.Add(option);
 
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
-        
-        Screen.fullScreen = true;
+                if (resolutions[i].width == Screen.currentResolution.width &&
+                    resolutions[i].height == Screen.currentResolution.height)
+                {
+                    currentResolutionIndex = i;
+                }
+            }
+
+            resolutionDropdown.AddOptions(options);
+            resolutionDropdown.value = currentResolutionIndex;
+            resolutionDropdown.RefreshShownValue();
+
+            Screen.fullScreen = true;
+        }
     }
 
-    public void setResolution (int resolutionIndex)
+    public void setResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         currentResolutionIndex = resolutionIndex;
     }
 
-    public void setFullscreen (bool isFullscreen)
+    public void setFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
     }
