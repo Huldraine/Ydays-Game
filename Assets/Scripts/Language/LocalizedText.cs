@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(TMP_Text))]
@@ -17,24 +17,25 @@ public class LocalizedText : MonoBehaviour
     {
         if (LanguageTranslate.Instance != null)
         { 
-            LanguageTranslate.Instance.OnLanguageChanged += UpdateText;
+            LanguageTranslate.Instance.OnLanguageChanged += updateText;
         }
-        UpdateText();
+        updateText();
     }
 
     private void OnDisable()
     {
         if (LanguageTranslate.Instance != null)
         { 
-            LanguageTranslate.Instance.OnLanguageChanged -= UpdateText;
+            LanguageTranslate.Instance.OnLanguageChanged -= updateText;
         }
     }
 
-    private void UpdateText()
+    private void updateText()
     {
         if (LanguageTranslate.Instance == null) return;
 
-        string translated = LanguageTranslate.Instance.GetText(key);
+        string translated = LanguageTranslate.Instance.getText(key);
         textComponent.text = translated;
     }
 }
+

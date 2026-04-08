@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
 /// IA de patrouille + poursuite simple :
 /// - patrouille de base en ligne droite
 /// - tourne au bord des plateformes ou contre un mur
-/// - optionnel : passe en mode chase si le joueur est à portée
+/// - optionnel : passe en mode chase si le joueur est Ã  portÃ©e
 /// </summary>
 [RequireComponent(typeof(EnemyBase))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -17,38 +17,38 @@ public class EnemyPatrol : MonoBehaviour
         Chase
     }
 
-    [Header("Références")]
-    [Tooltip("Transform du joueur. Si laissé vide, sera trouvé via le tag 'Player'.")]
+    [Header("RÃ©fÃ©rences")]
+    [Tooltip("Transform du joueur. Si laissÃ© vide, sera trouvÃ© via le tag 'Player'.")]
     public Transform player;
 
     private EnemyBase enemyBase;
     private Rigidbody2D rb;
     private Collider2D col;
 
-    [Header("Mouvement général")]
-    [Tooltip("Vitesse de déplacement en patrouille.")]
+    [Header("Mouvement gÃ©nÃ©ral")]
+    [Tooltip("Vitesse de dÃ©placement en patrouille.")]
     public float patrolSpeed = 2f;
 
-    [Tooltip("Vitesse de déplacement en poursuite.")]
+    [Tooltip("Vitesse de dÃ©placement en poursuite.")]
     public float chaseSpeed = 3.5f;
 
-    [Tooltip("Direction de départ (1 = droite, -1 = gauche).")]
+    [Tooltip("Direction de dÃ©part (1 = droite, -1 = gauche).")]
     [SerializeField] private int moveDirection = 1;
 
     [Tooltip("Flip automatique du sprite en fonction de la direction.")]
     public bool flipSpriteOnDirection = true;
 
-    [Header("Détection du sol / murs")]
+    [Header("DÃ©tection du sol / murs")]
     [Tooltip("Layer du sol pour les raycasts.")]
     public LayerMask groundLayer;
 
-    [Tooltip("Point de check pour le sol devant l'ennemi (à placer légèrement devant).")]
+    [Tooltip("Point de check pour le sol devant l'ennemi (Ã  placer lÃ©gÃ¨rement devant).")]
     public Transform groundCheck;
 
     [Tooltip("Distance verticale du raycast au sol.")]
     public float groundCheckDistance = 0.2f;
 
-    [Tooltip("Point de check pour le mur devant l'ennemi (même position que groundCheck ou un peu plus haut).")]
+    [Tooltip("Point de check pour le mur devant l'ennemi (mÃªme position que groundCheck ou un peu plus haut).")]
     public Transform wallCheck;
 
     [Tooltip("Distance horizontale du raycast vers le mur.")]
@@ -58,17 +58,17 @@ public class EnemyPatrol : MonoBehaviour
     [Tooltip("Activer la poursuite du joueur ? Si false, l'ennemi fait seulement une patrouille.")]
     public bool enableChase = true;
 
-    [Tooltip("Distance horizontale à partir de laquelle l'ennemi commence à poursuivre.")]
+    [Tooltip("Distance horizontale Ã  partir de laquelle l'ennemi commence Ã  poursuivre.")]
     public float chaseRange = 6f;
 
-    [Tooltip("Distance horizontale à partir de laquelle l'ennemi abandonne la poursuite.")]
+    [Tooltip("Distance horizontale Ã  partir de laquelle l'ennemi abandonne la poursuite.")]
     public float loseChaseRange = 8f;
 
-    [Tooltip("Tolérance en hauteur pour passer en mode chase (difference de Y).")]
+    [Tooltip("TolÃ©rance en hauteur pour passer en mode chase (difference de Y).")]
     public float verticalChaseTolerance = 2f;
 
-    [Header("Patrouille avancée")]
-    [Tooltip("Temps d'arrêt quand l'ennemi se retourne (0 = pas d'arrêt).")]
+    [Header("Patrouille avancÃ©e")]
+    [Tooltip("Temps d'arrÃªt quand l'ennemi se retourne (0 = pas d'arrÃªt).")]
     public float idleTimeOnTurn = 0f;
 
     private State state = State.Patrol;
@@ -90,14 +90,14 @@ public class EnemyPatrol : MonoBehaviour
                 player = playerObj.transform;
         }
 
-        // Empêche les rotations physiques
+        // EmpÃªche les rotations physiques
         rb.freezeRotation = true;
 
         // S'assure que moveDirection est bien 1 ou -1
         if (moveDirection == 0)
             moveDirection = 1;
 
-        UpdateSpriteFlip();
+        updateSpriteFlip();
     }
 
     private void FixedUpdate()
@@ -113,22 +113,22 @@ public class EnemyPatrol : MonoBehaviour
             return;
         }
 
-        // Mise à jour de l'état (Patrol / Chase)
-        UpdateState();
+        // Mise Ã  jour de l'Ã©tat (Patrol / Chase)
+        updateState();
 
-        // Mouvement selon l'état
+        // Mouvement selon l'Ã©tat
         switch (state)
         {
             case State.Patrol:
-                DoPatrol();
+                doPatrol();
                 break;
             case State.Chase:
-                DoChase();
+                doChase();
                 break;
         }
     }
 
-    private void UpdateState()
+    private void updateState()
     {
         if (!enableChase || player == null)
         {
@@ -140,10 +140,10 @@ public class EnemyPatrol : MonoBehaviour
         float absDx = Mathf.Abs(dx);
         float dy = Mathf.Abs(player.position.y - transform.position.y);
 
-        // Critères pour entrer en chase
+        // CritÃ¨res pour entrer en chase
         bool canSeePlayer = absDx <= chaseRange && dy <= verticalChaseTolerance;
 
-        // Critères pour sortir de chase
+        // CritÃ¨res pour sortir de chase
         bool lostPlayer = absDx >= loseChaseRange || dy > verticalChaseTolerance * 1.5f;
 
         if (state == State.Patrol && canSeePlayer)
@@ -156,14 +156,14 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    private void DoPatrol()
+    private void doPatrol()
     {
-        // Vérifie si on doit tourner (bord / mur)
-        bool shouldTurn = ShouldTurn();
+        // VÃ©rifie si on doit tourner (bord / mur)
+        bool shouldTurnNow = shouldTurn();
 
-        if (shouldTurn)
+        if (shouldTurnNow)
         {
-            TurnAround();
+            turnAround();
         }
 
         float speed = patrolSpeed;
@@ -172,28 +172,28 @@ public class EnemyPatrol : MonoBehaviour
         rb.linearVelocity = velocity;
     }
 
-    private void DoChase()
+    private void doChase()
     {
         if (player == null)
         {
-            DoPatrol();
+            doPatrol();
             return;
         }
 
-        // Détermine la direction à partir de la position du joueur
+        // DÃ©termine la direction Ã  partir de la position du joueur
         float dx = player.position.x - transform.position.x;
         if (Mathf.Abs(dx) > 0.05f)
         {
             moveDirection = dx > 0f ? 1 : -1;
-            UpdateSpriteFlip();
+            updateSpriteFlip();
         }
 
-        // Même logique de bord / mur que la patrouille
-        bool shouldTurn = ShouldTurn();
+        // MÃªme logique de bord / mur que la patrouille
+        bool shouldTurnNow = shouldTurn();
 
-        if (shouldTurn)
+        if (shouldTurnNow)
         {
-            TurnAround();
+            turnAround();
         }
 
         float speed = chaseSpeed;
@@ -203,9 +203,9 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     /// <summary>
-    /// Renvoie true si l'ennemi est au bord d'une plateforme ou face à un mur.
+    /// Renvoie true si l'ennemi est au bord d'une plateforme ou face Ã  un mur.
     /// </summary>
-    private bool ShouldTurn()
+    private bool shouldTurn()
     {
         bool noGroundAhead = false;
         bool wallAhead = false;
@@ -239,12 +239,12 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     /// <summary>
-    /// Inverse la direction de déplacement + optionnellement un temps d'arrêt.
+    /// Inverse la direction de dÃ©placement + optionnellement un temps d'arrÃªt.
     /// </summary>
-    private void TurnAround()
+    private void turnAround()
     {
         moveDirection = -moveDirection;
-        UpdateSpriteFlip();
+        updateSpriteFlip();
 
         if (idleTimeOnTurn > 0f)
         {
@@ -252,7 +252,7 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    private void UpdateSpriteFlip()
+    private void updateSpriteFlip()
     {
         if (!flipSpriteOnDirection) return;
 
@@ -295,3 +295,4 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 }
+

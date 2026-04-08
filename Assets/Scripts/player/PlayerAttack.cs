@@ -44,11 +44,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && cooldownTimer <= 0f)
         {
-            DoAttack();
+            doAttack();
         }
     }
 
-    void DoAttack()
+    void doAttack()
     {
         cooldownTimer = attackCooldown;
 
@@ -56,20 +56,20 @@ public class PlayerAttack : MonoBehaviour
 
         if (v < 0f)
         {
-            StartCoroutine(AttackDown());
+            StartCoroutine(attackDown());
             return;
         }
 
         if (v > 0f)
         {
-            StartCoroutine(AttackUp());
+            StartCoroutine(attackUp());
             return;
         }
 
-        StartCoroutine(AttackSide());
+        StartCoroutine(attackSide());
     }
 
-    IEnumerator AttackSide()
+    IEnumerator attackSide()
     {
         isAttacking = true;
         isDownAttack = false;
@@ -89,7 +89,7 @@ public class PlayerAttack : MonoBehaviour
         isDownAttack = false;
     }
 
-    IEnumerator AttackUp()
+    IEnumerator attackUp()
     {
         isAttacking = true;
         isDownAttack = false;
@@ -109,7 +109,7 @@ public class PlayerAttack : MonoBehaviour
         isDownAttack = false;
     }
 
-    IEnumerator AttackDown()
+    IEnumerator attackDown()
     {
         isAttacking = true;
         isDownAttack = true;
@@ -129,9 +129,10 @@ public class PlayerAttack : MonoBehaviour
         isDownAttack = false;
     }
 
-    public void RequestPogo()
+    public void requestPogo()
     {
         if (playerController != null)
-            playerController.ApplyPogo(pogoForce);
+            playerController.applyPogo(pogoForce);
     }
 }
+

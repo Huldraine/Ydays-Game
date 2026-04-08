@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
@@ -16,7 +16,7 @@ public class InputMapper : MonoBehaviour
     // Call InputManager script
     public InputManager inputManager;
 
-    public void OnButtonClick()
+    public void onButtonClick()
     {
         // If we are already waiting for input, do nothing
         if (isEditing)
@@ -59,7 +59,8 @@ public class InputMapper : MonoBehaviour
             isEditing = false;
 
             // Update the key mappings in InputManager
-            inputManager.UpdateMapping();
+            inputManager.updateMapping();
         }
     }
 }
+

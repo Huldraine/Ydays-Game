@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +56,7 @@ public class ScreenSettings : MonoBehaviour
         }
     }
 
-    public void SetResolution(int resolutionIndex)
+    public void setResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);

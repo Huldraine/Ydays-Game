@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -25,15 +25,15 @@ public class Health : MonoBehaviour, IDamageable
     {
         currentHealth = maxHealth;
         hasDied = false;
-        MettreAJourLesMasques();
+        mettreAJourLesMasques();
     }
 
-    public void TakeDamage(int amount)
+    public void takeDamage(int amount)
     {
-        TakeDamage((float)amount);
+        takeDamage((float)amount);
     }
 
-    public void TakeDamage(float damage)
+    public void takeDamage(float damage)
     {
         if (hasDied)
             return;
@@ -49,7 +49,7 @@ public class Health : MonoBehaviour, IDamageable
                 if (animatingIndices.Contains(i))
                     continue;
 
-                StartCoroutine(AnimateHeartLoss(i));
+                StartCoroutine(animateHeartLoss(i));
             }
         }
 
@@ -59,19 +59,19 @@ public class Health : MonoBehaviour, IDamageable
             onDeath?.Invoke();
         }
 
-        MettreAJourLesMasques();
+        mettreAJourLesMasques();
     }
 
-    public void RestoreFullHealth()
+    public void restoreFullHealth()
     {
         hasDied = false;
         StopAllCoroutines();
         animatingIndices.Clear();
         currentHealth = maxHealth;
-        MettreAJourLesMasques();
+        mettreAJourLesMasques();
     }
 
-    void MettreAJourLesMasques()
+    void mettreAJourLesMasques()
     {
         for (int i = 0; i < healthImages.Count; i++)
         {
@@ -84,7 +84,7 @@ public class Health : MonoBehaviour, IDamageable
         }
     }
 
-    IEnumerator AnimateHeartLoss(int index)
+    IEnumerator animateHeartLoss(int index)
     {
         animatingIndices.Add(index);
         Image targetImage = healthImages[index];
@@ -99,3 +99,4 @@ public class Health : MonoBehaviour, IDamageable
         targetImage.sprite = spriteVide;
     }
 }
+

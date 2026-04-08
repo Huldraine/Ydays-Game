@@ -256,7 +256,7 @@ public class LeftRightGravity : MonoBehaviour
         }
     }
 
-    private void Interupteur()
+    private void toggleInterupteur()
     {
 
         if (interupteuractif)
