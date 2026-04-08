@@ -84,8 +84,7 @@ public class PlayerRespawn : MonoBehaviour
         // si Health est présent, on remet la vie au max + maj UI
         if (health != null)
         {
-            health.currentHealth = health.maxHealth;
-            health.TakeDamage(0f); // déclenche MettreAJourLesMasques sans retirer de PV
+            health.RestoreFullHealth();
         }
 
         TeleportTo(checkpointPosition);

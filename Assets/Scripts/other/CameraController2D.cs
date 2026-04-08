@@ -105,7 +105,7 @@ public class CameraController2D : MonoBehaviour
             return true;
         }
 
-        PlayerController2D foundPlayer = FindObjectOfType<PlayerController2D>();
+        PlayerController2D foundPlayer = FindAnyObjectByType<PlayerController2D>();
         if (foundPlayer != null)
         {
             SetTarget(foundPlayer.transform);

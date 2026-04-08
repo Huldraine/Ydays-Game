@@ -272,6 +272,10 @@ public class PlayerController2D : MonoBehaviour
         {
             vel.y += Physics2D.gravity.y * (fallMultiplier - 1f) * Time.fixedDeltaTime;
         }
+        else if (vel.y > 0f && !Input.GetKey(KeyCode.Space))
+        {
+            vel.y += Physics2D.gravity.y * (lowJumpMultiplier - 1f) * Time.fixedDeltaTime;
+        }
         if (!isGrounded && Mathf.Abs(vel.y) < apexBoostThreshold)
             vel.y += Physics2D.gravity.y * apexBoostGravity * Time.fixedDeltaTime;
         if (vel.y < maxFallSpeed)

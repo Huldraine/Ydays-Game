@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -9,6 +10,8 @@ public class Health : MonoBehaviour, IDamageable
     public float currentHealth;
     public List<Image> healthImages;
 
+    public UnityEvent onDeath = new UnityEvent();
+
     public Sprite spritePlein;
     public Sprite spriteVide;
 
@@ -16,10 +19,12 @@ public class Health : MonoBehaviour, IDamageable
     public float frameDuration = 0.08f;
 
     private HashSet<int> animatingIndices = new HashSet<int>();
+    private bool hasDied;
 
     void Start()
     {
         currentHealth = maxHealth;
+        hasDied = false;
         MettreAJourLesMasques();
     }
 
@@ -30,6 +35,9 @@ public class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (hasDied)
+            return;
+
         float oldHealth = currentHealth;
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -42,6 +50,19 @@ public class Health : MonoBehaviour, IDamageable
             }
         }
 
+        if (oldHealth > 0f && currentHealth <= 0f)
+        {
+            hasDied = true;
+            onDeath?.Invoke();
+        }
+
+        MettreAJourLesMasques();
+    }
+
+    public void RestoreFullHealth()
+    {
+        hasDied = false;
+        currentHealth = maxHealth;
         MettreAJourLesMasques();
     }
 
