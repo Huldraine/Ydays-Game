@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class interupteur : MonoBehaviour
+public class Interupteur : MonoBehaviour
 {
 
 
@@ -10,7 +9,7 @@ public class interupteur : MonoBehaviour
    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void start()
+    void Start()
     {
     
     }
@@ -20,13 +19,13 @@ public class interupteur : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && isInRange)
         {
-            Interupteur();
+            toggleInterupteur();
         }
 
 
     }
 
-    void Interupteur()
+    void toggleInterupteur()
     {
         
         interupteuractif = true;

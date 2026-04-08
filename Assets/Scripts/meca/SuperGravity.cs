@@ -1,11 +1,11 @@
 using UnityEngine;
 
 
-public class superGravity : MonoBehaviour
+public class SuperGravity : MonoBehaviour
 {
-    [Header("paramêtre de gravité")]   
-    public float normalGravityForce = 1f;    // gravité normal normale
-    public float superGravityForce = 5f;    // gravité accentué dans la zone 
+    [Header("paramï¿½tre de gravitï¿½")]   
+    public float normalGravityForce = 1f;    // gravitï¿½ normal normale
+    public float superGravityForce = 5f;    // gravitï¿½ accentuï¿½ dans la zone 
     private Rigidbody2D rb;
     public bool inSuperGravityZone = false;
 

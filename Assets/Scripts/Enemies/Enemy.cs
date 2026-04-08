@@ -1,14 +1,10 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : EnemyBase
 {
     public Transform player;
 
-    [Header("Components")]
-    private Rigidbody2D rb;
-
     [Header("Stats")]
-    public int health = 5;
     public int attackDamage = 1;
     public float attackSpeed = 1.5f;
     public float moveSpeed = 2.5f;
@@ -16,10 +12,13 @@ public class Enemy : MonoBehaviour
     private float lastAttackTime;
     public float hoverHeight = 4f;
 
-    void Start()
+    protected override void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindWithTag("Player").transform;
+        base.Start();
+
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        if (playerObject != null)
+            player = playerObject.transform;
     }
 
     void Update()
@@ -30,16 +29,16 @@ public class Enemy : MonoBehaviour
 
         if (distance > stoppingDistance)
         {
-            MoveTowardsPlayer();
+            moveTowardsPlayer();
         }
         else
         {
-            StopMovement();
-            TryAttack();
+            stopMovement();
+            tryAttack();
         }
     }
 
-    void MoveTowardsPlayer()
+    void moveTowardsPlayer()
     {
         float currentYOffset = (Time.time >= lastAttackTime + attackSpeed) ? 0f : hoverHeight;
         Vector2 targetPosition;
@@ -60,31 +59,17 @@ public class Enemy : MonoBehaviour
         else if (direction.x < 0) transform.localScale = new Vector3(1, 1, 1);
     }
 
-    void StopMovement()
+    void stopMovement()
     {
         rb.linearVelocity = Vector2.zero;
     }
 
-    void TryAttack()
+    void tryAttack()
     {
         if (Time.time >= lastAttackTime + attackSpeed)
         {
             Debug.Log("Attaque");
             lastAttackTime = Time.time;
         }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        Destroy(gameObject);
     }
 }

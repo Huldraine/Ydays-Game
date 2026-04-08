@@ -1,17 +1,17 @@
 using UnityEngine;
 
 /// <summary>
-/// Inflige des dégâts au joueur au contact, avec un cooldown.
-/// À mettre sur le même GameObject que l'ennemi (collider non-trigger).
+/// Inflige des dï¿½gï¿½ts au joueur au contact, avec un cooldown.
+/// ï¿½ mettre sur le mï¿½me GameObject que l'ennemi (collider non-trigger).
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
 public class EnemyContactDamage : MonoBehaviour
 {
-    [Header("Dégâts au joueur")]
-    [Tooltip("Dégâts infligés au joueur au contact.")]
+    [Header("Dï¿½gï¿½ts au joueur")]
+    [Tooltip("Dï¿½gï¿½ts infligï¿½s au joueur au contact.")]
     public int contactDamage = 1;
 
-    [Tooltip("Temps minimal entre deux applications de dégâts (en secondes).")]
+    [Tooltip("Temps minimal entre deux applications de dï¿½gï¿½ts (en secondes).")]
     public float damageInterval = 0.5f;
 
     private float lastDamageTime = -999f;
@@ -28,7 +28,7 @@ public class EnemyContactDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Si jamais tu veux utiliser un collider en trigger pour les dégâts
+        // Si jamais tu veux utiliser un collider en trigger pour les dï¿½gï¿½ts
         TryDamage(other);
     }
 
@@ -39,13 +39,18 @@ public class EnemyContactDamage : MonoBehaviour
 
     private void TryDamage(Collider2D other)
     {
-        if (!other.CompareTag("Player"))
-            return;
-
         if (Time.time < lastDamageTime + damageInterval)
             return;
 
-        Health playerHealth = other.GetComponent<Health>();
+        PlayerController2D playerController = other.GetComponentInParent<PlayerController2D>();
+        if (playerController != null)
+        {
+            playerController.OnHitByEnemy(transform.position, contactDamage);
+            lastDamageTime = Time.time;
+            return;
+        }
+
+        Health playerHealth = other.GetComponentInParent<Health>();
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(contactDamage);

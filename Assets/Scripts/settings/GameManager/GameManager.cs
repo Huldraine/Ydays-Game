@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     // List of object that we don't destroy on load
     public GameObject[] objects;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         // Singleton
         if (Instance == null)

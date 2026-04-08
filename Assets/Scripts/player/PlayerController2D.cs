@@ -293,6 +293,13 @@ public class PlayerController2D : MonoBehaviour
         // Dégâts
         health.TakeDamage(damage);
 
+        if (health.currentHealth <= 0f)
+        {
+            if (respawn != null)
+                respawn.RespawnFromDeath();
+            return;
+        }
+
         // Invincibilité (et ignore collisions avec ennemis)
         SetInvincibleState(true);
         invincibilityTimer = invincibilityTime;

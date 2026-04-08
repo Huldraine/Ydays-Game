@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI; // Ajout pour la référence au Slider
 
-public class soundVolume : MonoBehaviour
+public class SoundVolume : MonoBehaviour
 {
     public AudioMixer masterMixer; // Votre référence à l'AudioMixer
     public Slider volumeSlider;   // Référence au composant Slider
@@ -10,7 +10,7 @@ public class soundVolume : MonoBehaviour
     void Start()
     {
         // Récupère la valeur actuelle du volume au démarrage
-        LoadVolumeFromMixer();
+        loadVolumeFromMixer();
     }
     
     // Changer volume de l'AudioMixer
@@ -20,7 +20,7 @@ public class soundVolume : MonoBehaviour
     }
     
     // MAJ du Slider avec la valeur actuelle du volume
-    private void LoadVolumeFromMixer()
+    private void loadVolumeFromMixer()
     {
         float mixerValue;
         // Tente d'obtenir la valeur exposée "MasterVolume"

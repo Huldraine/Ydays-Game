@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
 
-public class rightGravity : MonoBehaviour
+public class RightGravity : MonoBehaviour
 {
     [Header("parametre de vecteur")]
-    public float pushrightForce = 1f;
+    public float pushRightForce = 1f;
     private Rigidbody2D rb;
     public bool inVectorZone = false;
     [Header("parametre de gravite")]
@@ -23,7 +23,7 @@ public class rightGravity : MonoBehaviour
     {
         if (inVectorZone)
         {
-            rb.linearVelocity = new Vector2(pushrightForce, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(pushRightForce, rb.linearVelocity.y);
         }
     }
 

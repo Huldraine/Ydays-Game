@@ -23,7 +23,7 @@ public class HazardZone : MonoBehaviour
         // 1) Cas spécial : le joueur (géré par PlayerRespawn)
         if (affectPlayer)
         {
-            PlayerRespawn respawn = other.GetComponent<PlayerRespawn>();
+            PlayerRespawn respawn = other.GetComponentInParent<PlayerRespawn>();
             if (respawn != null)
             {
                 // Le PlayerRespawn s'occupe :

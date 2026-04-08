@@ -1,24 +1,17 @@
 using UnityEngine;
 
-public class FlyingFollower : MonoBehaviour, IDamageable
+public class FlyingFollower : EnemyBase
 {
     [Header("Suivi du joueur")]
-    public Transform Player;        // le joueur à suivre
-    public float speed = 2f;        // vitesse de déplacement
-    public float maxDistance = 5f;  // distance à partir de laquelle il commence à suivre
+    public Transform Player;        // le joueur ï¿½ suivre
+    public float speed = 2f;        // vitesse de dï¿½placement
+    public float maxDistance = 5f;  // distance ï¿½ partir de laquelle il commence ï¿½ suivre
 
-    [Header("Vie")]
-    public int maxHealth = 3;
-    private int currentHealth;
-
-    private Rigidbody2D rb;
-
-    void Start()
+    protected override void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
+        base.Start();
 
-        // Ennemi volant : pas affecté par la gravité, pas poussé par les forces
+        // Ennemi volant : pas affectï¿½ par la gravitï¿½, pas poussï¿½ par les forces
         if (rb != null)
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
@@ -33,7 +26,7 @@ public class FlyingFollower : MonoBehaviour, IDamageable
 
         Vector2 direction = Player.position - transform.position;
 
-        // Il commence à suivre seulement si le joueur est à moins de maxDistance
+        // Il commence ï¿½ suivre seulement si le joueur est ï¿½ moins de maxDistance
         if (direction.sqrMagnitude > maxDistance * maxDistance)
             return;
 
@@ -42,31 +35,4 @@ public class FlyingFollower : MonoBehaviour, IDamageable
         transform.position += (Vector3)move;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            PlayerController2D pc = collision.gameObject.GetComponent<PlayerController2D>();
-            if (pc != null)
-            {
-                // Knockback + dégâts + invincibilité côté joueur
-                pc.OnHitByEnemy(transform.position, 1);
-            }
-        }
-    }
-
-    // Implémentation de IDamageable (HitBoxDamage, HazardZone peuvent l'utiliser)
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        gameObject.SetActive(false);
-    }
 }

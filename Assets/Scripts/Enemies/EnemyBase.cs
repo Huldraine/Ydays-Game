@@ -1,8 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Base générique pour les ennemis : vie, dégâts reçus, mort.
-/// Ne gère pas le mouvement : utilise des scripts séparés (EnemyPatrol, etc.).
+/// Base gï¿½nï¿½rique pour les ennemis : vie, dï¿½gï¿½ts reï¿½us, mort.
+/// Ne gï¿½re pas le mouvement : utilise des scripts sï¿½parï¿½s (EnemyPatrol, etc.).
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -15,14 +15,26 @@ public class EnemyBase : MonoBehaviour, IDamageable
     [Tooltip("Points de vie actuels (debug).")]
     [SerializeField] private int currentHealth;
 
+    [Header("Contact")]
+    [Tooltip("Infliger des dÃ©gÃ¢ts au joueur au contact.")]
+    public bool damagePlayerOnContact = true;
+
+    [Tooltip("DÃ©gÃ¢ts infligÃ©s au joueur au contact.")]
+    public int contactDamage = 1;
+
+    [Tooltip("Temps minimal entre deux dÃ©gÃ¢ts au joueur.")]
+    public float contactDamageInterval = 0.5f;
+
+    private float lastContactDamageTime = -999f;
+
     [Header("Mort")]
-    [Tooltip("Désactiver le GameObject au lieu de le détruire.")]
+    [Tooltip("Dï¿½sactiver le GameObject au lieu de le dï¿½truire.")]
     public bool disableOnDeath = true;
 
-    [Tooltip("Détruire l'ennemi au lieu de le désactiver.")]
+    [Tooltip("Dï¿½truire l'ennemi au lieu de le dï¿½sactiver.")]
     public bool destroyOnDeath = false;
 
-    [Tooltip("Effet visuel optionnel instancié à la mort.")]
+    [Tooltip("Effet visuel optionnel instanciï¿½ ï¿½ la mort.")]
     public GameObject deathVFX;
 
     protected Rigidbody2D rb;
@@ -40,8 +52,52 @@ public class EnemyBase : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
     }
 
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        tryDamagePlayer(collision.collider);
+    }
+
+    protected virtual void OnCollisionStay2D(Collision2D collision)
+    {
+        tryDamagePlayer(collision.collider);
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        tryDamagePlayer(other);
+    }
+
+    protected virtual void OnTriggerStay2D(Collider2D other)
+    {
+        tryDamagePlayer(other);
+    }
+
+    protected void tryDamagePlayer(Collider2D other)
+    {
+        if (!damagePlayerOnContact || other == null)
+            return;
+
+        if (Time.time < lastContactDamageTime + contactDamageInterval)
+            return;
+
+        PlayerController2D playerController = other.GetComponentInParent<PlayerController2D>();
+        if (playerController != null)
+        {
+            playerController.OnHitByEnemy(transform.position, contactDamage);
+            lastContactDamageTime = Time.time;
+            return;
+        }
+
+        Health playerHealth = other.GetComponentInParent<Health>();
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(contactDamage);
+            lastContactDamageTime = Time.time;
+        }
+    }
+
     /// <summary>
-    /// Implémentation d'IDamageable. Appelée par HitBoxDamage, HazardZone, etc.
+    /// Implï¿½mentation d'IDamageable. Appelï¿½e par HitBoxDamage, HazardZone, etc.
     /// </summary>
     public virtual void TakeDamage(int damage)
     {
@@ -57,7 +113,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     }
 
     /// <summary>
-    /// Hook pour effets de dégâts (flash, son, animation, etc.).
+    /// Hook pour effets de dï¿½gï¿½ts (flash, son, animation, etc.).
     /// </summary>
     protected virtual void OnDamaged()
     {
@@ -65,7 +121,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     }
 
     /// <summary>
-    /// Gère la mort : stop physique, désactive colliders, VFX, etc.
+    /// Gï¿½re la mort : stop physique, dï¿½sactive colliders, VFX, etc.
     /// </summary>
     protected virtual void Die()
     {
@@ -80,7 +136,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
             rb.simulated = false;
         }
 
-        // Désactivation du collider pour éviter les collisions fantômes
+        // Dï¿½sactivation du collider pour ï¿½viter les collisions fantï¿½mes
         if (col != null)
         {
             col.enabled = false;
@@ -92,7 +148,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
             Instantiate(deathVFX, transform.position, Quaternion.identity);
         }
 
-        // Destruction ou désactivation
+        // Destruction ou dï¿½sactivation
         if (destroyOnDeath)
         {
             Destroy(gameObject);

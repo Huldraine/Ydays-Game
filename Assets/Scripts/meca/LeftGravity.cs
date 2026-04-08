@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class leftGravity : MonoBehaviour
+public class LeftGravity : MonoBehaviour
 {
     [Header("param�tre de vecteur")]
     public float pushLeftForce = 1f;

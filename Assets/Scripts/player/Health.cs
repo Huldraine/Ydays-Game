@@ -46,6 +46,9 @@ public class Health : MonoBehaviour, IDamageable
         {
             if (animationFrames != null && animationFrames.Length > 0 && i < healthImages.Count && i >= 0)
             {
+                if (animatingIndices.Contains(i))
+                    continue;
+
                 StartCoroutine(AnimateHeartLoss(i));
             }
         }
@@ -62,6 +65,8 @@ public class Health : MonoBehaviour, IDamageable
     public void RestoreFullHealth()
     {
         hasDied = false;
+        StopAllCoroutines();
+        animatingIndices.Clear();
         currentHealth = maxHealth;
         MettreAJourLesMasques();
     }

@@ -1,22 +1,15 @@
 using UnityEngine;
 
-public class Follower : MonoBehaviour, IDamageable
+public class Follower : EnemyBase
 {
     [Header("Suivi du joueur")]
     public Transform Player;        // le joueur à suivre
     public float speed = 2f;        // vitesse de déplacement horizontale
     public float maxDistance = 5f;  // distance d'aggro en X
 
-    [Header("Vie")]
-    public int maxHealth = 3;
-    private int currentHealth;
-
-    private Rigidbody2D rb;
-
-    void Start()
+    protected override void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
+        base.Start();
 
         // Ennemi au sol : soumis à la gravité, mais pas de rotation bizarre
         if (rb != null)
@@ -52,31 +45,4 @@ public class Follower : MonoBehaviour, IDamageable
         rb.MovePosition(rb.position + move);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Si l'ennemi touche le joueur → dégâts + knockback + invincibilité
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            PlayerController2D pc = collision.gameObject.GetComponent<PlayerController2D>();
-            if (pc != null)
-            {
-                pc.OnHitByEnemy(transform.position, 1);
-            }
-        }
-    }
-
-    // Implémentation de IDamageable (HitBoxDamage, HazardZone...)
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        gameObject.SetActive(false);
-    }
 }
