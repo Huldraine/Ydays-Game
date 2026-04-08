@@ -18,8 +18,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
-            return;
+            Destroy(Instance.gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         // Dont destroy on load scene for each object in the list

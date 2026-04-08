@@ -30,6 +30,7 @@ public class LanguageTranslate : MonoBehaviour
             return;
         }
         Instance = this;
+        transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
 
         initDictionaries();
@@ -43,6 +44,7 @@ public class LanguageTranslate : MonoBehaviour
             { "resume", "Resume" },
             { "settings", "Settings" },
             { "save", "Save" },
+            { "load", "Load" },
             { "quit", "Quit" }
         };
 
@@ -52,6 +54,7 @@ public class LanguageTranslate : MonoBehaviour
             { "resume", "Reprendre" },
             { "settings", "Parametre" },
             { "save", "Sauvegarder" },
+            { "load", "Charger" },
             { "quit", "Quitter" }
         };
     }
@@ -88,12 +91,13 @@ public class LanguageTranslate : MonoBehaviour
         return key;
     }
 
-    public void setLanguageFromButton(string langCode)
+    public void SetFrench()
     {
-        if (langCode == "fr")
-            setLanguage(Language.French);
-        else
-            setLanguage(Language.English);
+        LanguageTranslate.Instance.SetLanguage(Language.French);
+    }
+
+    public void SetEnglish()
+    {
+        LanguageTranslate.Instance.SetLanguage(Language.English);
     }
 }
-

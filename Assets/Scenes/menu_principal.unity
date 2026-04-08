@@ -203,9 +203,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 800069855}
-        m_TargetAssemblyTypeName: Language, Assembly-CSharp
-        m_MethodName: SetLanguage
-        m_Mode: 5
+        m_TargetAssemblyTypeName: LanguageTranslate, Assembly-CSharp
+        m_MethodName: SetFrench
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -421,7 +421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -123.45972}
+  m_AnchoredPosition: {x: 0, y: -122.80002}
   m_SizeDelta: {x: 0, y: 246.9195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &549948754
@@ -545,15 +545,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 800069855}
-        m_TargetAssemblyTypeName: Language, Assembly-CSharp
-        m_MethodName: SetLanguage
-        m_Mode: 5
+        m_TargetAssemblyTypeName: LanguageTranslate, Assembly-CSharp
+        m_MethodName: SetFrench
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: FR
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &635485977
@@ -664,7 +664,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 100, y: 91.6}
   m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &741385599
@@ -802,10 +802,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 800069853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d6e9713be741954287fb5281a4f0594, type: 3}
+  m_Script: {fileID: 11500000, guid: 90372d053fba3034e998268f5a2585ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Language
-  language: 
+  currentLanguage: 0
 --- !u!1 &939829277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,9 +1060,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 800069855}
-        m_TargetAssemblyTypeName: Language, Assembly-CSharp
-        m_MethodName: SetLanguage
-        m_Mode: 5
+        m_TargetAssemblyTypeName: LanguageTranslate, Assembly-CSharp
+        m_MethodName: SetEnglish
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1668,9 +1668,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 800069855}
-        m_TargetAssemblyTypeName: Language, Assembly-CSharp
-        m_MethodName: SetLanguage
-        m_Mode: 5
+        m_TargetAssemblyTypeName: LanguageTranslate, Assembly-CSharp
+        m_MethodName: SetEnglish
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1886,7 +1886,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -7.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1613422927

@@ -23,6 +23,8 @@ public class ScreenSettings : MonoBehaviour
 
     public void Start ()
     {
+        if (resolutionDropdown == null) { Debug.LogError("ScreenSettings: resolutionDropdown non assigné dans l'Inspector"); return; }
+
         resolutions = Screen.resolutions
             .Select(res => new Resolution { width = res.width, height = res.height })
             .Distinct()

@@ -6,9 +6,10 @@ public class PauseMenu : MonoBehaviour
     public GameObject PausePanel;
     private bool IsPaused = false;
 
-    void Start()
+    void Awake()
     {
-        PausePanel.SetActive(IsPaused);
+        Time.timeScale = 1f;
+        if (PausePanel) PausePanel.SetActive(false);
     }
 
     void Update()
@@ -47,11 +48,8 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            SceneManager.LoadScene("main_menu");
-        #endif
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("menu_principal");
     }
 
     private void RebindPausePanel(Scene scene, LoadSceneMode mode)

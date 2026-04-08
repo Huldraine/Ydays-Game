@@ -17,7 +17,9 @@ public class DontDestroyOnLoadScene : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(Instance.gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         foreach (var element in objects)

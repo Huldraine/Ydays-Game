@@ -5,7 +5,7 @@ public class MenuScript : MonoBehaviour
 {
     public void Jouer()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("pnj_dialogues");
     }
 
     public void Parametres()
@@ -15,6 +15,10 @@ public class MenuScript : MonoBehaviour
 
     public void Quitter()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
