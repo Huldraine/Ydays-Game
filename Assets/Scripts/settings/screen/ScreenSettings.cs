@@ -24,7 +24,7 @@ public class ScreenSettings : MonoBehaviour
 
     public void Start()
     {
-        if (SceneManager.GetActiveScene().name != "paramètres")
+        if (SceneManager.GetActiveScene().name != "parametres")
         {
             resolutions = Screen.resolutions
                 .Select(res => new Resolution { width = res.width, height = res.height })
