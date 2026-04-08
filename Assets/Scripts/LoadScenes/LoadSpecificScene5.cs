@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadSpecificScene3 : MonoBehaviour
+public class LoadSpecificScene5 : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
-            SceneManager.LoadScene("poumonS3");
+            SceneManager.LoadScene("poumonS5");
         }
     }
 }
