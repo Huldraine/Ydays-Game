@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour 
+public class Enemy : MonoBehaviour
 {
     public Transform player;
-    
+
     [Header("Components")]
     private Rigidbody2D rb;
 
     [Header("Stats")]
     public int health = 5;
     public int attackDamage = 1;
-    public float attackSpeed = 1.5f; 
+    public float attackSpeed = 1.5f;
     public float moveSpeed = 2.5f;
     public float stoppingDistance = 1.2f;
     private float lastAttackTime;
@@ -41,13 +41,23 @@ public class Enemy : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-        Vector2 targetPosition = new Vector2(player.position.x, player.position.y + hoverHeight);
-        Vector2 direction = ((Vector2)transform.position - targetPosition).normalized;
-        
-        rb.linearVelocity = -direction * moveSpeed;
+        float currentYOffset = (Time.time >= lastAttackTime + attackSpeed) ? 0f : hoverHeight;
+        Vector2 targetPosition;
 
-        if (direction.x > 0) transform.localScale = new Vector3(1, 1, 1);
-        else transform.localScale = new Vector3(-1, 1, 1);
+        if (hoverHeight > 0)
+        {
+            targetPosition = new Vector2(player.position.x, player.position.y + currentYOffset);
+        }
+        else
+        {
+            targetPosition = new Vector2(player.position.x, transform.position.y);
+        }
+
+        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+        rb.linearVelocity = direction * moveSpeed;
+
+        if (direction.x > 0) transform.localScale = new Vector3(-1, 1, 1);
+        else if (direction.x < 0) transform.localScale = new Vector3(1, 1, 1);
     }
 
     void StopMovement()
@@ -59,7 +69,7 @@ public class Enemy : MonoBehaviour
     {
         if (Time.time >= lastAttackTime + attackSpeed)
         {
-            Debug.Log("L'ennemi attaque !");
+            Debug.Log("Attaque");
             lastAttackTime = Time.time;
         }
     }
@@ -67,7 +77,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0) 
+        if (health <= 0)
         {
             Die();
         }
