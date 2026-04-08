@@ -29,7 +29,7 @@ public class HazardZone : MonoBehaviour
                 // Le PlayerRespawn s'occupe :
                 // - d'appliquer les dégâts au joueur via Health
                 // - de choisir soft respawn / hard respawn
-                respawn.OnHazardHit();
+                respawn.onHazardHit();
                 return; // IMPORTANT : on ne continue pas, pour éviter de double-dégâts via IDamageable
             }
         }
@@ -40,8 +40,9 @@ public class HazardZone : MonoBehaviour
             IDamageable damageable = other.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                damageable.TakeDamage(damageToOthers);
+                damageable.takeDamage(damageToOthers);
             }
         }
     }
 }
+

@@ -1,13 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HitBoxDamage : MonoBehaviour
 {
-    [Header("D�g�ts")]
+    [Header("Dï¿½gï¿½ts")]
     public int damage = 1;
 
     [Header("Pogo (optionnel)")]
     [Tooltip("Activer uniquement sur la hitbox bas du joueur.")]
-    public bool causePogo = false;      // coche �a sur la hitboxDown
+    public bool causePogo = false;      // coche ï¿½a sur la hitboxDown
     public float pogoForce = 10f;       // force de base du pogo
 
     private PlayerController2D playerController;
@@ -29,15 +29,15 @@ public class HitBoxDamage : MonoBehaviour
 
         bool hitSomething = false;
 
-        // 1) Tout ce qui peut prendre des d�g�ts (ennemi, joueur, autre)
+        // 1) Tout ce qui peut prendre des dï¿½gï¿½ts (ennemi, joueur, autre)
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(damage);
+            damageable.takeDamage(damage);
             hitSomething = true;
         }
 
-        // 2) Surfaces de pogo (piques, blocs sp�ciaux, etc.)
+        // 2) Surfaces de pogo (piques, blocs spï¿½ciaux, etc.)
         PogoSurface pogoSurface = other.GetComponent<PogoSurface>();
         if (pogoSurface != null)
         {
@@ -57,10 +57,11 @@ public class HitBoxDamage : MonoBehaviour
                 float finalPogoForce = pogoForce;
 
                 if (pogoSurface != null)
-                    finalPogoForce = pogoSurface.ComputePogoForce(finalPogoForce);
+                    finalPogoForce = pogoSurface.computePogoForce(finalPogoForce);
 
-                playerController.ApplyPogo(finalPogoForce);
+                playerController.applyPogo(finalPogoForce);
             }
         }
     }
 }
+

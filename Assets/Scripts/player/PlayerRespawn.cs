@@ -33,7 +33,7 @@ public class PlayerRespawn : MonoBehaviour
     /// <summary>
     /// Appelé par le PlayerController quand le joueur est bien au sol.
     /// </summary>
-    public void UpdateLastSafePosition(Vector3 pos)
+    public void updateLastSafePosition(Vector3 pos)
     {
         lastSafePosition = pos;
     }
@@ -42,65 +42,65 @@ public class PlayerRespawn : MonoBehaviour
     /// Appelé par une zone de type Hazard (piques, vide).
     /// Gère la perte de vie + choix entre soft/hard respawn.
     /// </summary>
-    public void OnHazardHit()
+    public void onHazardHit()
     {
         if (health != null)
         {
             // on applique les dégâts
-            health.TakeDamage(hazardDamage);
+            health.takeDamage(hazardDamage);
 
             if (health.currentHealth > 0)
             {
                 // encore vivant → respawn proche
-                RespawnFromHazard();
+                respawnFromHazard();
             }
             else
             {
                 // mort → respawn au checkpoint + vie remise au max
-                RespawnFromDeath();
+                respawnFromDeath();
             }
         }
         else
         {
             // pas de système de vie encore branché → juste respawn proche
-            RespawnFromHazard();
+            respawnFromHazard();
         }
     }
 
     /// <summary>
     /// Respawn léger (après hazard) à la dernière position safe.
     /// </summary>
-    public void RespawnFromHazard()
+    public void respawnFromHazard()
     {
-        TeleportTo(lastSafePosition);
+        teleportTo(lastSafePosition);
         // plus tard : invulnérabilité / anim ici
     }
 
     /// <summary>
     /// Respawn après une vraie mort → checkpoint + reset position safe.
     /// </summary>
-    public void RespawnFromDeath()
+    public void respawnFromDeath()
     {
         // si Health est présent, on remet la vie au max + maj UI
         if (health != null)
         {
-            health.RestoreFullHealth();
+            health.restoreFullHealth();
         }
 
-        TeleportTo(checkpointPosition);
+        teleportTo(checkpointPosition);
         lastSafePosition = checkpointPosition;
     }
 
     /// <summary>
     /// Appelé par un checkpoint (banc, statue…).
     /// </summary>
-    public void SetCheckpoint(Transform checkpoint)
+    public void setCheckpoint(Transform checkpoint)
     {
         checkpointPosition = checkpoint.position;
         lastSafePosition = checkpointPosition;
     }
 
-    private void TeleportTo(Vector3 pos)
+    private void teleportTo(Vector3 pos)
     {
         transform.position = pos;
 
@@ -111,3 +111,4 @@ public class PlayerRespawn : MonoBehaviour
         }
     }
 }
+

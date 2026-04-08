@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CloseSettings : MonoBehaviour
@@ -10,8 +10,9 @@ public class CloseSettings : MonoBehaviour
     }
 
     // Compatibility alias for existing button bindings.
-    public void CloseSettingsButton()
+    public void closeSettingsButton()
     {
         closeSettings();
     }
 }
+

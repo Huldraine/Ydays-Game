@@ -37,7 +37,7 @@ public class Gravity : MonoBehaviour
     public float HightY;
     
 
-    float LogGravity(float currentY, float bottomY, float topY, float targetGravity = -2f, float startGravity = -7f, float k = 9f)
+    float logGravity(float currentY, float bottomY, float topY, float targetGravity = -2f, float startGravity = -7f, float k = 9f)
     {
         float height = Mathf.Max(0.0001f, topY - bottomY);
         float t = Mathf.Clamp01((currentY - bottomY) / height);
@@ -106,13 +106,13 @@ public class Gravity : MonoBehaviour
         // Gravité selon la zone
         if ((inZeroGravityZone) || (inInterupteurGravityZone))
         {
-            float zeroGravityForce = LogGravity(currentY, zoneBottomY, zoneTopY);
+            float zeroGravityForce = logGravity(currentY, zoneBottomY, zoneTopY);
             rb.gravityScale = zeroGravityForce;
 
         }
         else if (inIntermittentGravityZone)
         {
-            float zeroGravityForce = LogGravity(currentY, zoneBottomY, zoneTopY);
+            float zeroGravityForce = logGravity(currentY, zoneBottomY, zoneTopY);
             rb.gravityScale = (indextimer == 1) ? zeroGravityForce : normalGravityForce;
         }
         else if (inSuperGravityZone)
@@ -132,7 +132,7 @@ public class Gravity : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && isInRange)
         {
-            Interupteur();
+            toggleInterupteur();
         }
     }
 
@@ -216,7 +216,7 @@ public class Gravity : MonoBehaviour
         }
     }
 
-    private void Interupteur()
+    private void toggleInterupteur()
     {
 
         if (interupteuractif)

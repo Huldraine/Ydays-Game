@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
@@ -11,10 +11,10 @@ public class InputManager : MonoBehaviour
     private void Start()
     {
         // Initialize key mappings
-        UpdateMapping();
+        updateMapping();
     }
 
-    public void UpdateMapping()
+    public void updateMapping()
     {
         // Load key mappings from PlayerPrefs
 
@@ -35,3 +35,4 @@ public class InputManager : MonoBehaviour
         rightKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), rightKeyText);
     }
 }
+

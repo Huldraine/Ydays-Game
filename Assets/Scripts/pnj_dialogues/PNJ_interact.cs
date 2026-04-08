@@ -1,4 +1,4 @@
-// Imports
+﻿// Imports
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -19,7 +19,7 @@ public class NPCInteract : MonoBehaviour
     {
         "Bonjour, Luminaris!",
         "Vous vous trouvez dans le golem.",
-        "Ce dernier est pollué par la mode Fortnite xD"
+        "Ce dernier est polluÃ© par la mode Fortnite xD"
     };
 
     void Start()
@@ -31,19 +31,19 @@ public class NPCInteract : MonoBehaviour
 
     void Update()
     {
-        // Vérifier l'entrée du joueur pour ouvrir
+        // VÃ©rifier l'entrÃ©e du joueur pour ouvrir
         if (playerInRange && Input.GetKeyDown(KeyCode.E) && dialogueOpen == false)
         {
             dialogueOpen = true;
             currentLineIndex = 0;
-            OpenDialogue();
+            openDialogue();
 
             // Afficher les lignes de dialogue
         }
         else if (dialogueOpen && Input.GetKeyDown(KeyCode.E))
         {
             currentLineIndex++;
-            // Eviter débordement
+            // Eviter dÃ©bordement
             if (currentLineIndex >= dialogueLines.Length)
             {
                 dialoguePanel.SetActive(false);
@@ -51,13 +51,13 @@ public class NPCInteract : MonoBehaviour
                 currentLineIndex = 0;
                 return;
             }
-            // Mettre à jour le texte
-            OpenDialogue();
+            // Mettre Ã  jour le texte
+            openDialogue();
         }
     }
 
     // Ouvrir le dialogue
-    void OpenDialogue()
+    void openDialogue()
     {
         if (dialoguePanel == null || dialogueText == null) return;
 
@@ -85,3 +85,4 @@ public class NPCInteract : MonoBehaviour
         }
     }
 }
+

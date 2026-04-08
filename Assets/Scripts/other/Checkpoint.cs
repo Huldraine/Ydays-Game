@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class CheckpointAuto : MonoBehaviour
@@ -13,8 +13,9 @@ public class CheckpointAuto : MonoBehaviour
         PlayerRespawn respawn = other.GetComponent<PlayerRespawn>();
         if (respawn != null)
         {
-            respawn.SetCheckpoint(transform);
+            respawn.setCheckpoint(transform);
             // ici plus tard tu pourras ajouter un son / anim
         }
     }
 }
+

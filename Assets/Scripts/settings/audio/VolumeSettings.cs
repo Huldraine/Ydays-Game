@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 
 public class VolumeSettings : MonoBehaviour
@@ -6,12 +6,12 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private AudioMixer myMixer;
     private float currentVolume = 1f;
 
-    public float GetVolume()
+    public float getVolume()
     {
         return currentVolume;
     }
 
-    public void SetVolume(float volume)
+    public void setVolume(float volume)
     {
         currentVolume = volume;
         myMixer.SetFloat("Music", Mathf.Log10(volume) * 20);

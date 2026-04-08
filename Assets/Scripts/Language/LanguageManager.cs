@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public enum Language
@@ -33,10 +33,10 @@ public class LanguageTranslate : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        InitDictionaries();
-        LoadSavedLanguage();
+        initDictionaries();
+        loadSavedLanguage();
     }
-    private void InitDictionaries()
+    private void initDictionaries()
     {
         english = new Dictionary<string, string>()
         {
@@ -51,12 +51,12 @@ public class LanguageTranslate : MonoBehaviour
         {
             { "pause", "MENU PAUSE" },
             { "resume", "Reprendre" },
-            { "settings", "Paramètre" },
+            { "settings", "Parametre" },
             { "save", "Sauvegarder" },
             { "quit", "Quitter" }
         };
     }
-    private void LoadSavedLanguage()
+    private void loadSavedLanguage()
     {
         string savedLang = PlayerPrefs.GetString("language", "en");
         if (savedLang == "fr")
@@ -65,7 +65,7 @@ public class LanguageTranslate : MonoBehaviour
             currentLanguage = Language.English;
     }
 
-    public void SetLanguage(Language language)
+    public void setLanguage(Language language)
     {
         currentLanguage = language;
 
@@ -74,28 +74,29 @@ public class LanguageTranslate : MonoBehaviour
         PlayerPrefs.SetString("language", code);
         PlayerPrefs.Save();
 
-        // Prévenir tous les textes
+        // PrÃ©venir tous les textes
         OnLanguageChanged?.Invoke();
     }
 
-    public string GetText(string key)
+    public string getText(string key)
     {
         Dictionary<string, string> dict = (currentLanguage == Language.French) ? french : english;
 
         if (dict.TryGetValue(key, out string value))
             return value;
 
-        // Si clé non trouvée --> renvoyer la clé pour debug
+        // Si clÃ© non trouvÃ©e --> renvoyer la clÃ© pour debug
         return key;
     }
 
-    public void SetLanguage(string lang)
+    public void setLanguage(string lang)
     {
         language = lang;
     }
 
-    public string GetLanguage()
+    public string getLanguage()
     {
         return language;
     }
 }
+

@@ -1,20 +1,20 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI; // Ajout pour la référence au Slider
+using UnityEngine.UI; // Ajout pour la rÃ©fÃ©rence au Slider
 
 public class SoundVolume : MonoBehaviour
 {
-    public AudioMixer masterMixer; // Votre référence à l'AudioMixer
-    public Slider volumeSlider;   // Référence au composant Slider
+    public AudioMixer masterMixer; // Votre rÃ©fÃ©rence Ã  l'AudioMixer
+    public Slider volumeSlider;   // RÃ©fÃ©rence au composant Slider
 
     void Start()
     {
-        // Récupère la valeur actuelle du volume au démarrage
+        // RÃ©cupÃ¨re la valeur actuelle du volume au dÃ©marrage
         loadVolumeFromMixer();
     }
     
     // Changer volume de l'AudioMixer
-    public void SetVolume(float volume)
+    public void setVolume(float volume)
     {
         masterMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
     }
@@ -23,13 +23,13 @@ public class SoundVolume : MonoBehaviour
     private void loadVolumeFromMixer()
     {
         float mixerValue;
-        // Tente d'obtenir la valeur exposée "MasterVolume"
+        // Tente d'obtenir la valeur exposÃ©e "MasterVolume"
         if (masterMixer.GetFloat("MasterVolume", out mixerValue))
         {
-            // Conversion de la valeur logarithmique (dB) en une valeur linéaire (0 à 1)
+            // Conversion de la valeur logarithmique (dB) en une valeur linÃ©aire (0 Ã  1)
             float linearValue = Mathf.Pow(10, mixerValue / 20f); 
             
-            // Vérif si le Slider est assigné
+            // VÃ©rif si le Slider est assignÃ©
             if (volumeSlider != null)
             {
                 // Applique la valeur lue au Slider

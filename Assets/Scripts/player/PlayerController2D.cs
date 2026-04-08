@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -15,7 +15,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float jumpForce = 8.5f;
     [SerializeField] private int maxJumps = 2;
 
-    [Header("Détection du sol")]
+    [Header("DÃ©tection du sol")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundProbeSkin = 0.02f;
     [SerializeField] private float groundProbeHeight = 0.12f;
@@ -25,7 +25,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.12f;
     [SerializeField] private float jumpBuffer = 0.12f;
 
-    [Header("Gravité avancée")]
+    [Header("GravitÃ© avancÃ©e")]
     [SerializeField] private float fallMultiplier = 3.4f;
     [SerializeField] private float lowJumpMultiplier = 2.6f;
     [SerializeField] private float maxFallSpeed = -28f;
@@ -49,11 +49,11 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float knockbackDuration = 0.15f;
     [SerializeField] private float invincibilityTime = 1.0f;
 
-    [Header("Invincibilité & collisions")]
-    [Tooltip("Nom du layer utilisé par les ennemis (doit exister dans Unity).")]
+    [Header("InvincibilitÃ© & collisions")]
+    [Tooltip("Nom du layer utilisÃ© par les ennemis (doit exister dans Unity).")]
     [SerializeField] private string enemyLayerName = "Enemy";
 
-    [Tooltip("Tag utilisé par les ennemis (pour ignorer les collisions individuellement).")]
+    [Tooltip("Tag utilisÃ© par les ennemis (pour ignorer les collisions individuellement).")]
     [SerializeField] private string enemyTagName = "Enemy";
 
     private Rigidbody2D rb;
@@ -68,13 +68,13 @@ public class PlayerController2D : MonoBehaviour
     private float coyoteTimer;
     private float bufferTimer;
 
-    private int jumpCount; // nombre de sauts restants (réinitialisé au sol)
+    private int jumpCount; // nombre de sauts restants (rÃ©initialisÃ© au sol)
 
     public float LastInputX => inputX;
 
     private bool isGrounded;
 
-    // Knockback & invincibilité
+    // Knockback & invincibilitÃ©
     private bool isKnockedBack;
     private float knockbackTimer;
 
@@ -103,7 +103,7 @@ public class PlayerController2D : MonoBehaviour
         rb.linearDamping = 0f;
         rb.freezeRotation = true;
 
-        // prépare le compteur de sauts (initialement au sol)
+        // prÃ©pare le compteur de sauts (initialement au sol)
         jumpCount = maxJumps;
 
         // Layers
@@ -111,31 +111,31 @@ public class PlayerController2D : MonoBehaviour
         enemyLayerIndex = LayerMask.NameToLayer(enemyLayerName);
         if (enemyLayerIndex < 0)
         {
-            Debug.LogWarning($"[PlayerController2D] Layer '{enemyLayerName}' introuvable. Vérifie son nom dans les Layer Settings.");
+            Debug.LogWarning($"[PlayerController2D] Layer '{enemyLayerName}' introuvable. VÃ©rifie son nom dans les Layer Settings.");
         }
     }
 
     private void Update()
     {
-        HandleInvincibilityTimers();
+        handleInvincibilityTimers();
 
         if (isKnockedBack)
             return;
 
-        HandleInput();
-        FlipSprite();
+        handleInput();
+        flipSprite();
     }
 
-    private void HandleInput()
+    private void handleInput()
     {
-        inputX = GetHorizontalInput();
-        ApplyDash();
+        inputX = getHorizontalInput();
+        applyDash();
 
         if (Input.GetKeyDown(KeyCode.Space))
             bufferTimer = jumpBuffer;
     }
 
-    private float GetHorizontalInput()
+    private float getHorizontalInput()
     {
         int x = 0;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -151,7 +151,7 @@ public class PlayerController2D : MonoBehaviour
         return Mathf.Clamp(x, -1, 1);
     }
 
-    private void ApplyDash()
+    private void applyDash()
     {
         if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -160,7 +160,7 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    private void FlipSprite()
+    private void flipSprite()
     {
         if (flipSpriteOnDirection && inputX != 0f)
         {
@@ -172,46 +172,46 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateGroundedState();
-        UpdateSafePosition();
-        UpdateTimers();
+        updateGroundedState();
+        updateSafePosition();
+        updateTimers();
 
         Vector2 vel = rb.linearVelocity;
 
         if (!isKnockedBack)
         {
-            ApplyHorizontalMovement(ref vel);
-            TryJump(ref vel);
+            applyHorizontalMovement(ref vel);
+            tryJump(ref vel);
         }
         else
         {
-            HandleKnockbackTimer();
+            handleKnockbackTimer();
         }
 
-        ApplyGravity(ref vel);
+        applyGravity(ref vel);
 
         rb.linearVelocity = vel;
     }
 
     // helper methods for FixedUpdate logic ------------------------------------------------
-    private void UpdateGroundedState()
+    private void updateGroundedState()
     {
         if (col != null)
         {
             Vector2 boxCenter, boxSize;
-            GetGroundProbeBox(out boxCenter, out boxSize);
+            getGroundProbeBox(out boxCenter, out boxSize);
             isGrounded = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null;
         }
     }
 
-    private void GetGroundProbeBox(out Vector2 center, out Vector2 size)
+    private void getGroundProbeBox(out Vector2 center, out Vector2 size)
     {
         Bounds b = col.bounds;
         center = new Vector2(b.center.x, b.min.y - groundProbeSkin);
         size = new Vector2(b.size.x * groundProbeWidthScale, groundProbeHeight);
     }
 
-    private void UpdateSafePosition()
+    private void updateSafePosition()
     {
         if (isGrounded && respawn != null)
         {
@@ -222,11 +222,11 @@ public class PlayerController2D : MonoBehaviour
             if (Mathf.Abs(dir) > 0.01f)
                 safePos.x -= Mathf.Sign(dir) * safeOffsetX;
             safePos.y += safeOffsetY;
-            respawn.UpdateLastSafePosition(safePos);
+            respawn.updateLastSafePosition(safePos);
         }
     }
 
-    private void UpdateTimers()
+    private void updateTimers()
     {
         if (isGrounded)
         {
@@ -240,14 +240,14 @@ public class PlayerController2D : MonoBehaviour
         bufferTimer -= Time.fixedDeltaTime;
     }
 
-    private void ApplyHorizontalMovement(ref Vector2 vel)
+    private void applyHorizontalMovement(ref Vector2 vel)
     {
         float targetVX = inputX * maxSpeed;
         float rate = (Mathf.Abs(inputX) > 0.01f) ? acceleration : deceleration;
         vel.x = Mathf.MoveTowards(vel.x, targetVX, rate * Time.fixedDeltaTime);
     }
 
-    private void TryJump(ref Vector2 vel)
+    private void tryJump(ref Vector2 vel)
     {
         if (bufferTimer > 0f && jumpCount > 0)
         {
@@ -259,14 +259,14 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    private void HandleKnockbackTimer()
+    private void handleKnockbackTimer()
     {
         knockbackTimer -= Time.fixedDeltaTime;
         if (knockbackTimer <= 0f)
             isKnockedBack = false;
     }
 
-    private void ApplyGravity(ref Vector2 vel)
+    private void applyGravity(ref Vector2 vel)
     {
         if (vel.y < 0f)
         {
@@ -283,25 +283,25 @@ public class PlayerController2D : MonoBehaviour
     }
 
     /// <summary>
-    /// Appelé quand un ennemi touche le joueur : dégâts + knockback + invincibilité.
+    /// AppelÃ© quand un ennemi touche le joueur : dÃ©gÃ¢ts + knockback + invincibilitÃ©.
     /// </summary>
-    public void OnHitByEnemy(Vector2 enemyPosition, int damage)
+    public void onHitByEnemy(Vector2 enemyPosition, int damage)
     {
         if (isInvincible || health == null)
             return;
 
-        // Dégâts
-        health.TakeDamage(damage);
+        // DÃ©gÃ¢ts
+        health.takeDamage(damage);
 
         if (health.currentHealth <= 0f)
         {
             if (respawn != null)
-                respawn.RespawnFromDeath();
+                respawn.respawnFromDeath();
             return;
         }
 
-        // Invincibilité (et ignore collisions avec ennemis)
-        SetInvincibleState(true);
+        // InvincibilitÃ© (et ignore collisions avec ennemis)
+        setInvincibleState(true);
         invincibilityTimer = invincibilityTime;
         flashTimer = 0f;
 
@@ -323,7 +323,7 @@ public class PlayerController2D : MonoBehaviour
     }
 
     /// <summary>Applique un pogo (rebond vers le haut).</summary>
-    public void ApplyPogo(float pogoForce)
+    public void applyPogo(float pogoForce)
     {
         Vector2 vel = rb.linearVelocity;
 
@@ -333,12 +333,12 @@ public class PlayerController2D : MonoBehaviour
         vel.y = pogoForce;
         rb.linearVelocity = vel;
 
-        // considérer le pogo comme un saut consommé (perte d'un jump)
+        // considÃ©rer le pogo comme un saut consommÃ© (perte d'un jump)
         if (jumpCount > 0)
             jumpCount--;
     }
 
-    private void HandleInvincibilityTimers()
+    private void handleInvincibilityTimers()
     {
         if (!isInvincible)
             return;
@@ -346,7 +346,7 @@ public class PlayerController2D : MonoBehaviour
         invincibilityTimer -= Time.deltaTime;
         if (invincibilityTimer <= 0f)
         {
-            SetInvincibleState(false);
+            setInvincibleState(false);
             return;
         }
 
@@ -363,9 +363,9 @@ public class PlayerController2D : MonoBehaviour
     }
 
     /// <summary>
-    /// Active/désactive l'invincibilité + ignore collisions avec les ennemis.
+    /// Active/dÃ©sactive l'invincibilitÃ© + ignore collisions avec les ennemis.
     /// </summary>
-    private void SetInvincibleState(bool value)
+    private void setInvincibleState(bool value)
     {
         isInvincible = value;
 
@@ -375,7 +375,7 @@ public class PlayerController2D : MonoBehaviour
             Physics2D.IgnoreLayerCollision(playerLayerIndex, enemyLayerIndex, value);
         }
 
-        // 2) Ignore collisions directes avec chaque collider taggé Enemy
+        // 2) Ignore collisions directes avec chaque collider taggÃ© Enemy
         if (!string.IsNullOrEmpty(enemyTagName))
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTagName);
@@ -389,7 +389,7 @@ public class PlayerController2D : MonoBehaviour
             }
         }
 
-        // Quand on sort de l'invincibilité, on remet le sprite visible
+        // Quand on sort de l'invincibilitÃ©, on remet le sprite visible
         if (!value && spriteRenderer != null)
         {
             spriteRenderer.enabled = true;
@@ -401,7 +401,7 @@ public class PlayerController2D : MonoBehaviour
         if (col == null && !TryGetComponent(out col)) return;
 
         Vector2 boxCenter, boxSize;
-        GetGroundProbeBox(out boxCenter, out boxSize);
+        getGroundProbeBox(out boxCenter, out boxSize);
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(boxCenter, boxSize);

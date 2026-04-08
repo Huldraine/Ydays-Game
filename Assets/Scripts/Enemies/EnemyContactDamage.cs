@@ -1,43 +1,43 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// Inflige des d�g�ts au joueur au contact, avec un cooldown.
-/// � mettre sur le m�me GameObject que l'ennemi (collider non-trigger).
+/// Inflige des dï¿½gï¿½ts au joueur au contact, avec un cooldown.
+/// ï¿½ mettre sur le mï¿½me GameObject que l'ennemi (collider non-trigger).
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
 public class EnemyContactDamage : MonoBehaviour
 {
-    [Header("D�g�ts au joueur")]
-    [Tooltip("D�g�ts inflig�s au joueur au contact.")]
+    [Header("Dï¿½gï¿½ts au joueur")]
+    [Tooltip("Dï¿½gï¿½ts infligï¿½s au joueur au contact.")]
     public int contactDamage = 1;
 
-    [Tooltip("Temps minimal entre deux applications de d�g�ts (en secondes).")]
+    [Tooltip("Temps minimal entre deux applications de dï¿½gï¿½ts (en secondes).")]
     public float damageInterval = 0.5f;
 
     private float lastDamageTime = -999f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        TryDamage(collision.collider);
+        tryDamage(collision.collider);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        TryDamage(collision.collider);
+        tryDamage(collision.collider);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Si jamais tu veux utiliser un collider en trigger pour les d�g�ts
-        TryDamage(other);
+        // Si jamais tu veux utiliser un collider en trigger pour les dï¿½gï¿½ts
+        tryDamage(other);
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        TryDamage(other);
+        tryDamage(other);
     }
 
-    private void TryDamage(Collider2D other)
+    private void tryDamage(Collider2D other)
     {
         if (Time.time < lastDamageTime + damageInterval)
             return;
@@ -45,7 +45,7 @@ public class EnemyContactDamage : MonoBehaviour
         PlayerController2D playerController = other.GetComponentInParent<PlayerController2D>();
         if (playerController != null)
         {
-            playerController.OnHitByEnemy(transform.position, contactDamage);
+            playerController.onHitByEnemy(transform.position, contactDamage);
             lastDamageTime = Time.time;
             return;
         }
@@ -53,8 +53,9 @@ public class EnemyContactDamage : MonoBehaviour
         Health playerHealth = other.GetComponentInParent<Health>();
         if (playerHealth != null)
         {
-            playerHealth.TakeDamage(contactDamage);
+            playerHealth.takeDamage(contactDamage);
             lastDamageTime = Time.time;
         }
     }
 }
+

@@ -1,4 +1,4 @@
-%YAML 1.1
+﻿%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -2699,7 +2699,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 492405335}
         m_TargetAssemblyTypeName: InputMapper, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: onButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3109,7 +3109,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 492405335}
         m_TargetAssemblyTypeName: InputMapper, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: onButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4373,7 +4373,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 492405335}
         m_TargetAssemblyTypeName: InputMapper, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: onButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5986,7 +5986,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 492405335}
         m_TargetAssemblyTypeName: InputMapper, Assembly-CSharp
-        m_MethodName: OnButtonClick
+        m_MethodName: onButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8292,7 +8292,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 976742878}
         m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
-        m_MethodName: SetVolume
+        m_MethodName: setVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8310,3 +8310,4 @@ SceneRoots:
   - {fileID: 1188648392}
   - {fileID: 1866627442}
   - {fileID: 1579214635}
+

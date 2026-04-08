@@ -1,4 +1,4 @@
-    using UnityEngine;
+﻿    using UnityEngine;
 
     public class PauseMenu : MonoBehaviour
     {
@@ -6,7 +6,7 @@
         private bool IsPaused = false;
 
     void Start() {
-        Resume();
+        resume();
             }
         void Update()
         {
@@ -14,28 +14,28 @@
             {
                 if (!IsPaused)
                 {
-                Pause();
+                pause();
                 }
                 else
                 {
-                Resume();
+                resume();
                 }
             }
         }
-    public void Resume()
+    public void resume()
     {
         PausePanel.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
     }
-    void Pause()
+    void pause()
     {
         PausePanel.SetActive(true);
         Time.timeScale = 0f;
         IsPaused = true;
     }
 
-    public void QuitGame()
+    public void quitGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
