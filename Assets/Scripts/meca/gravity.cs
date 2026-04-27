@@ -25,6 +25,7 @@ public class Gravity : MonoBehaviour
     public bool inIntermittentGravityZone = false;
     public bool inIntermittentSuperGravityZone = false;
     public bool inInterupteurGravityZone = false;
+    public bool inSuperGravityInterupteurZone = false;
     public bool inFantomeZone;
     public bool isInRange = false;
     public bool interupteuractif = false;
@@ -115,7 +116,7 @@ public class Gravity : MonoBehaviour
             float zeroGravityForce = logGravity(currentY, zoneBottomY, zoneTopY);
             rb.gravityScale = (indextimer == 1) ? zeroGravityForce : normalGravityForce;
         }
-        else if (inSuperGravityZone)
+        else if (inSuperGravityZone || inSuperGravityInterupteurZone)
         {
             rb.gravityScale = superGravityForce;
 
@@ -152,6 +153,7 @@ public class Gravity : MonoBehaviour
         inIntermittentGravityZone = false;
         inSuperGravityZone = false;
         inIntermittentSuperGravityZone = false;
+        inSuperGravityInterupteurZone = false;
 
 
         // Activation selon tag
@@ -187,6 +189,12 @@ public class Gravity : MonoBehaviour
             indexsol = 0;
 
         }
+        else if (col.CompareTag("super_gravity_interupteur") && interupteuractif)
+        {
+
+            inSuperGravityInterupteurZone = true;
+
+        }
 
         if (col.CompareTag("interupteur"))
         {
@@ -197,7 +205,7 @@ public class Gravity : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.CompareTag("no_Gravity") || col.CompareTag("no_Gravity_intermitant") || col.CompareTag("super_Gravity") || col.CompareTag("super_Gravity_intermitant") || col.CompareTag("gravity_interupteur"))
+        if (col.CompareTag("no_Gravity") || col.CompareTag("no_Gravity_intermitant") || col.CompareTag("super_Gravity") || col.CompareTag("super_Gravity_intermitant") || col.CompareTag("gravity_interupteur") || col.CompareTag("super_gravity_interupteur"))
         {
             // Dès qu'on quitte le collider, reset complet
             rb.gravityScale = normalGravityForce;
@@ -207,6 +215,7 @@ public class Gravity : MonoBehaviour
             inSuperGravityZone = false;
             inIntermittentSuperGravityZone = false;
             inInterupteurGravityZone = false;
+            inSuperGravityInterupteurZone = false;
 
         }
 
