@@ -38,7 +38,7 @@ public class Gravity : MonoBehaviour
     public float HightY;
     
 
-    float logGravity(float currentY, float bottomY, float topY, float targetGravity = -2f, float startGravity = -7f, float k = 9f)
+    float logGravity(float currentY, float bottomY, float topY, float targetGravity = -0.5f, float startGravity = -5f, float k = 9f)
     {
         float height = Mathf.Max(0.0001f, topY - bottomY);
         float t = Mathf.Clamp01((currentY - bottomY) / height);
