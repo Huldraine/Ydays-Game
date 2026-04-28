@@ -37,7 +37,6 @@
 
     public void quitGame()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
 }
