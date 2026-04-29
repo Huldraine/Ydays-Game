@@ -8,13 +8,17 @@ public class LocalizedText : MonoBehaviour
 
     private TMP_Text textComponent;
 
-    public void Awake()
+    private void Awake()
     {
         textComponent = GetComponent<TMP_Text>();
     }
 
     private void OnEnable()
     {
+        if (textComponent == null) {
+            textComponent = GetComponent<TMP_Text>();
+        }
+
         if (LanguageTranslate.Instance != null)
         { 
             LanguageTranslate.Instance.OnLanguageChanged += updateText;

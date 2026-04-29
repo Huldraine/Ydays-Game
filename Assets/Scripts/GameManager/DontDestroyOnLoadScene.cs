@@ -13,17 +13,22 @@ public class DontDestroyOnLoadScene : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            transform.SetParent(null);
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(Instance.gameObject);
             Instance = this;
+            transform.SetParent(null);
             DontDestroyOnLoad(gameObject);
         }
 
         foreach (var element in objects)
         {
+            if (element == null) continue;
+
+            element.transform.SetParent(null);
             DontDestroyOnLoad(element);
         }
     }

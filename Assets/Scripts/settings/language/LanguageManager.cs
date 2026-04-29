@@ -40,21 +40,35 @@ public class LanguageTranslate : MonoBehaviour
     {
         english = new Dictionary<string, string>()
         {
+            // Ajouter ici toutes les clés utilisées dans le jeu, avec leur traduction anglaise //
+            // Exemple :
+            // Clé = "pause" --> Valeur = "GAME PAUSED" //
+            // Dictionnaire menu pause :
             { "pause", "GAME PAUSED" },
             { "resume", "Resume" },
             { "settings", "Settings" },
             { "save", "Save" },
             { "load", "Load" },
-            { "quit", "Quit" }
+            { "exit", "Exit" },
+
+            // Dictionnaire menu principal :
+            { "play", "Play" },
+            { "quit", "quit" }
         };
 
         french = new Dictionary<string, string>()
         {
+            // Ajouter ici toutes les clés utilisées dans le jeu, avec leur traduction française //
+            // Dictionnaire menu pause :
             { "pause", "MENU PAUSE" },
             { "resume", "Reprendre" },
-            { "settings", "Parametre" },
+            { "settings", "Paramètres" },
             { "save", "Sauvegarder" },
             { "load", "Charger" },
+            { "exit", "Partir" },
+
+            // Dictionnaire menu principal :
+            { "play", "Jouer" },
             { "quit", "Quitter" }
         };
     }
