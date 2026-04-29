@@ -3,8 +3,7 @@
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(PlayerRespawn))]
-[RequireComponent(typeof(Health))]
-public class PlayerController2D : MonoBehaviour
+[RequireComponent(typeof(Health))]public class PlayerController2D : MonoBehaviour
 {
     [Header("Vitesse")]
     [SerializeField] private float maxSpeed = 7f;
@@ -87,6 +86,9 @@ public class PlayerController2D : MonoBehaviour
     private int playerLayerIndex;
     private int enemyLayerIndex;
 
+    // Animation
+    private Animator animator;
+
     /// <summary>Vitesse verticale actuelle du joueur.</summary>
     public float VerticalVelocity => rb != null ? rb.linearVelocity.y : 0f;
     public bool IsInvincible => isInvincible;
@@ -98,6 +100,7 @@ public class PlayerController2D : MonoBehaviour
         respawn = GetComponent<PlayerRespawn>();
         health = GetComponent<Health>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         rb.gravityScale = 1.4f;
         rb.linearDamping = 0f;
@@ -157,6 +160,10 @@ public class PlayerController2D : MonoBehaviour
         {
             float dashVel = dash * (direction > 0f ? 1f : -1f);
             rb.linearVelocity = new Vector2(dashVel, rb.linearVelocity.y);
+            
+            // Jouer l'animation de dash
+            if (animator != null)
+                animator.SetTrigger("Dash");
         }
     }
 
@@ -245,6 +252,19 @@ public class PlayerController2D : MonoBehaviour
         float targetVX = inputX * maxSpeed;
         float rate = (Mathf.Abs(inputX) > 0.01f) ? acceleration : deceleration;
         vel.x = Mathf.MoveTowards(vel.x, targetVX, rate * Time.fixedDeltaTime);
+        
+        // Mettre à jour l'animation de course
+        if (animator != null)
+        {
+            float speed = Mathf.Abs(vel.x);
+            animator.SetFloat("Speed", speed);
+            
+            // Jouer l'animation de run si le joueur se déplace
+            if (speed > 0.1f && isGrounded)
+                animator.SetBool("Run", true);
+            else
+                animator.SetBool("Run", false);
+        }
     }
 
     private void tryJump(ref Vector2 vel)
@@ -256,6 +276,10 @@ public class PlayerController2D : MonoBehaviour
             jumpCount--;
             bufferTimer = 0f;
             coyoteTimer = 0f;
+            
+            // Jouer l'animation de saut
+            if (animator != null)
+                animator.SetTrigger("Jump");
         }
     }
 
@@ -299,6 +323,10 @@ public class PlayerController2D : MonoBehaviour
                 respawn.respawnFromDeath();
             return;
         }
+
+        // Jouer l'animation de hit
+        if (animator != null)
+            animator.SetTrigger("Hit");
 
         // InvincibilitÃ© (et ignore collisions avec ennemis)
         setInvincibleState(true);
