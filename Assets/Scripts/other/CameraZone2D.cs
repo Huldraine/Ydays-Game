@@ -46,7 +46,7 @@ public class CameraZone2D : MonoBehaviour
 
         if (cameraController != null)
         {
-            cameraController.SetActiveZone(this);
+            cameraController.setActiveZone(this);
         }
     }
 
@@ -57,7 +57,7 @@ public class CameraZone2D : MonoBehaviour
 
         if (cameraController != null)
         {
-            cameraController.ClearActiveZone(this);
+            cameraController.clearActiveZone(this);
         }
     }
 }

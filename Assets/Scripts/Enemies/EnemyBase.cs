@@ -91,7 +91,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         Health playerHealth = other.GetComponentInParent<Health>();
         if (playerHealth != null)
         {
-            playerHealth.takeDamage(contactDamage);
+            playerHealth.TakeDamage(contactDamage);
             lastContactDamageTime = Time.time;
         }
     }
@@ -99,7 +99,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     /// <summary>
     /// Implï¿½mentation d'IDamageable. Appelï¿½e par HitBoxDamage, HazardZone, etc.
     /// </summary>
-    public virtual void takeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (isDead) return;
 

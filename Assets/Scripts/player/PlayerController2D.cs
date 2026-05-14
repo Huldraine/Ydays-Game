@@ -291,7 +291,7 @@ public class PlayerController2D : MonoBehaviour
             return;
 
         // DÃ©gÃ¢ts
-        health.takeDamage(damage);
+        health.TakeDamage(damage);
 
         if (health.currentHealth <= 0f)
         {

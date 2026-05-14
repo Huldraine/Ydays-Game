@@ -26,12 +26,12 @@ public abstract class DamageableEntity : MonoBehaviour, IDamageable
     }
 
     /// <summary>Interface implementation; forwards to the Health script.</summary>
-    public virtual void takeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         if (health != null)
         {
             float before = health.currentHealth;
-            health.takeDamage(amount);
+            health.TakeDamage(amount);
             float after = health.currentHealth;
 
             if (after < before)

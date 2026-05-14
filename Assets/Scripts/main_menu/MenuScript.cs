@@ -5,7 +5,7 @@ public class MenuScript : MonoBehaviour
 {
     public void Jouer()
     {
-        SceneManager.LoadScene("pnj_dialogues");
+        SceneManager.LoadScene("poumonS1");
     }
 
     public void Parametres()

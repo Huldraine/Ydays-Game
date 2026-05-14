@@ -53,7 +53,7 @@ public class EnemyContactDamage : MonoBehaviour
         Health playerHealth = other.GetComponentInParent<Health>();
         if (playerHealth != null)
         {
-            playerHealth.takeDamage(contactDamage);
+            playerHealth.TakeDamage(contactDamage);
             lastDamageTime = Time.time;
         }
     }

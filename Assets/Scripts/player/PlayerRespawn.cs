@@ -47,7 +47,7 @@ public class PlayerRespawn : MonoBehaviour
         if (health != null)
         {
             // on applique les dégâts
-            health.takeDamage(hazardDamage);
+            health.TakeDamage(hazardDamage);
 
             if (health.currentHealth >= 0)
             {

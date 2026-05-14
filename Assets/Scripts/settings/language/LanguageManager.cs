@@ -53,7 +53,21 @@ public class LanguageTranslate : MonoBehaviour
 
             // Dictionnaire menu principal :
             { "play", "Play" },
-            { "quit", "quit" }
+            { "quit", "Quit" },
+            
+            // Dictionnaire menu paramètres :
+            { "settings_title", "SETTINGS" },
+            { "screen", "Screen" },
+            { "resolution", "Resolution" },
+            { "fullscreen", "Fullscreen" },
+            { "audio", "Sound" },
+            { "volume", "Volume" },
+            { "controls", "Controls" },
+            { "move_up", "Move up" },
+            { "move_down", "Move down" },
+            { "move_left", "Move left" },
+            { "move_right", "Move right" },
+            { "credits", "Credits" }
         };
 
         french = new Dictionary<string, string>()
@@ -69,7 +83,21 @@ public class LanguageTranslate : MonoBehaviour
 
             // Dictionnaire menu principal :
             { "play", "Jouer" },
-            { "quit", "Quitter" }
+            { "quit", "Quitter" },
+
+            // Dictionnaire menu paramètres :
+            { "settings_title", "PARAMÈTRES" },
+            { "screen", "Écran" },
+            { "resolution", "Résolution" },
+            { "fullscreen", "Plein écran" },
+            { "audio", "Son" },
+            { "volume", "Volume" },
+            { "controls", "Contrôles" },
+            { "move_up", "Haut" },
+            { "move_down", "Bas" },
+            { "move_left", "Gauche" },
+            { "move_right", "Droite" },
+            { "credits", "Crédits" }
         };
     }
     private void loadSavedLanguage()
@@ -90,7 +118,7 @@ public class LanguageTranslate : MonoBehaviour
         PlayerPrefs.SetString("language", code);
         PlayerPrefs.Save();
 
-        // PrÃ©venir tous les textes
+        // Prévenir tous les textes
         OnLanguageChanged?.Invoke();
     }
 
@@ -101,17 +129,17 @@ public class LanguageTranslate : MonoBehaviour
         if (dict.TryGetValue(key, out string value))
             return value;
 
-        // Si clÃ© non trouvÃ©e --> renvoyer la clÃ© pour debug
+        // Si clé non trouvée --> renvoyer la clé pour debug
         return key;
     }
 
     public void SetFrench()
     {
-        LanguageTranslate.Instance.SetLanguage(Language.French);
+        LanguageTranslate.Instance.setLanguage(Language.French);
     }
 
     public void SetEnglish()
     {
-        LanguageTranslate.Instance.SetLanguage(Language.English);
+        LanguageTranslate.Instance.setLanguage(Language.English);
     }
 }

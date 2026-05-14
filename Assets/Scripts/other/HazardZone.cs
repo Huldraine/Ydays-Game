@@ -40,7 +40,7 @@ public class HazardZone : MonoBehaviour
             IDamageable damageable = other.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                damageable.takeDamage(damageToOthers);
+                damageable.TakeDamage(damageToOthers);
             }
         }
     }

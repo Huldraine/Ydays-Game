@@ -33,7 +33,7 @@ public class HitBoxDamage : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.takeDamage(damage);
+            damageable.TakeDamage(damage);
             hitSomething = true;
         }
 
