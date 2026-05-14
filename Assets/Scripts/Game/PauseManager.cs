@@ -3,13 +3,27 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public static PauseMenu Instance { get; private set; }
+
     public GameObject PausePanel;
     private bool IsPaused = false;
 
+    private static readonly string[] scenesWithoutPause = { "menu_principal", "parametres", "credits" };
+
     void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
         Time.timeScale = 1f;
         if (PausePanel) PausePanel.SetActive(false);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Update()
@@ -17,9 +31,7 @@ public class PauseMenu : MonoBehaviour
         if (!PausePanel) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
             TogglePause();
-        }
     }
 
     public void ForceResume()
@@ -43,6 +55,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Parameter()
     {
+        ForceResume();
         SceneManager.LoadScene("parametres");
     }
 
@@ -52,28 +65,16 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("menu_principal");
     }
 
-    private void RebindPausePanel(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        PausePanel = null;
+        ForceResume();
 
-        GameObject pauseui = GameObject.FindWithTag("PauseUI");
-        if (pauseui != null)
-        {
-            PausePanel = pauseui;
-            PausePanel.SetActive(false);
-        }
-
-        Time.timeScale = 1f;
-        IsPaused = false;
+        bool hide = System.Array.IndexOf(scenesWithoutPause, scene.name) >= 0;
+        gameObject.SetActive(!hide);
     }
 
-    private void OnEnable()
+    private void OnDestroy()
     {
-        SceneManager.sceneLoaded += RebindPausePanel;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= RebindPausePanel;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

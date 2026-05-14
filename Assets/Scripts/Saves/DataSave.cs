@@ -4,11 +4,29 @@ using UnityEngine.SceneManagement;
 
 public class DataSave : MonoBehaviour
 {
-    [Header("Données du joueur")]
-    [SerializeField] private Transform player; 
-    [SerializeField] private Health life;
+    public static DataSave Instance { get; private set; }
+
+    private Transform player;
+    private Health life;
     
     private string filePath;
+
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     private string GetFilePath()
     {
@@ -39,33 +57,29 @@ public class DataSave : MonoBehaviour
         
         waitLoadData =  JsonUtility.FromJson<Data>(File.ReadAllText(GetFilePath()));
         
-        // Evènement qui s'éxécute à la fin du chargement de la scène
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        
         // On charge la scène
         SceneManager.LoadScene(waitLoadData.levelName);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Stoper l'évènement du chargement de la scène 
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        
         // Re-Bind des refs dans la nouvelle scène
         GameObject playerGo = GameObject.FindWithTag("Player");
-        player = playerGo.transform;
         if (playerGo == null) return;
+        player = playerGo.transform;
         if (player.GetComponent<Health>() == null) return;
         life = player.GetComponent<Health>();
-        
+
         PauseMenu pauseMenu = FindFirstObjectByType<PauseMenu>();
         //if (pauseMenu != null)
         //    pauseMenu.ForceResume();
 
+        if (waitLoadData == null) return;
+
         // Appliquer les données
         player.position = waitLoadData.playerPosition;
         life.currentHealth = waitLoadData.playerHealth;
-        
+
         waitLoadData = null;
     }
 }
