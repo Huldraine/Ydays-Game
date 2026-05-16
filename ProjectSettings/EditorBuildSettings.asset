@@ -6,23 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level02.unity
-    guid: e72a221286c823d4aacb7830a8433c55
+    path: Assets/Scenes/menu_principal.unity
+    guid: c33dd6be5d1aa3d4c8dda471fd2b1315
+  - enabled: 1
+    path: Assets/Scenes/parametres.unity
+    guid: 207f423b009216142813a094b717fb97
   - enabled: 1
     path: Assets/Scenes/niveau1/poumonS1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/niveau1/poumonE1.unity
-    guid: 926d93d1ec334814dbb5fdd469013475
   - enabled: 1
     path: Assets/Scenes/niveau1/poumonS2.unity
     guid: aa4a594db7ab2cc4cbfdf4458fe289ef
   - enabled: 1
     path: Assets/Scenes/niveau1/poumonS3.unity
     guid: 9a908132aeda03445bb806a8b6e6f1ff
-  - enabled: 1
-    path: Assets/Scenes/niveau1/poumonS4.unity
-    guid: 9ae9f9d4ce6ecda4fae571392f8b40bf
   - enabled: 1
     path: Assets/Scenes/niveau1/poumonS5.unity
     guid: 53468a7c39fdc0346bcd0cec759a1180
@@ -35,9 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/niveau1/poumonS8.unity
     guid: 6a854b677be7c1a428dfddccfd6897dd
-  - enabled: 1
-    path: Assets/Scenes/niveau1/poumonE2.unity
-    guid: 4e4d9a42fe6aeb64bba884de16134c43
   - enabled: 1
     path: Assets/Scenes/niveau1/poumonS9.unity
     guid: b061f0c6bac7ccc468c5d1443a470ce4
@@ -53,9 +47,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/niveau1/poumonB.unity
     guid: 7e6c5e25be46e6e45af6ecce0d35c367
-  - enabled: 1
-    path: Assets/Scenes/niveau1/poumonE3.unity
-    guid: 7eb4610136aa715459a08b54f2f5cadb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0

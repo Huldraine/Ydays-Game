@@ -1253,6 +1253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1175102157}
   - component: {fileID: 1175102156}
+  - component: {fileID: 1175102158}
   m_Layer: 0
   m_Name: YDAYS_LUMINARIS_25-02-2026_ENVIRO_LimiteZone (2)
   m_TagString: Untagged
@@ -1333,6 +1334,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180.373}
+--- !u!61 &1175102158
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175102155}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 27.1, y: 8.111475}
+    newSize: {x: 27.1, y: 8.111475}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 27.1, y: 8.111475}
+  m_EdgeRadius: 0
 --- !u!1001 &1189528590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1576,7 +1623,7 @@ GameObject:
   - component: {fileID: 1306572282}
   - component: {fileID: 1306572281}
   - component: {fileID: 1306572283}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: YDAYS_LUMINARIS_25-02-2026_ENVIRO_LimiteZone (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1856,7 +1903,7 @@ GameObject:
   - component: {fileID: 1702952594}
   - component: {fileID: 1702952593}
   - component: {fileID: 1702952595}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: YDAYS_LUMINARIS_25-02-2026_ENVIRO_LimiteZone (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2467,7 +2514,7 @@ GameObject:
   - component: {fileID: 1980699667}
   - component: {fileID: 1980699666}
   - component: {fileID: 1980699668}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: YDAYS_LUMINARIS_25-02-2026_ENVIRO_LimiteZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2756,7 +2803,7 @@ GameObject:
   - component: {fileID: 2140858960}
   - component: {fileID: 2140858959}
   - component: {fileID: 2140858961}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: YDAYS_LUMINARIS_25-02-2026_ENVIRO_LimiteZone (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

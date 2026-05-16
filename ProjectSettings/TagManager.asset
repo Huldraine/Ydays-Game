@@ -56,5 +56,26 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: window
+    uniqueID: 2291480705
+    locked: 0
+  - name: machine
+    uniqueID: 2368645953
+    locked: 0
+  - name: cable
+    uniqueID: 730687963
+    locked: 0
+  - name: helice
+    uniqueID: 2500212823
+    locked: 0
+  - name: plateforme
+    uniqueID: 2019242645
+    locked: 0
+  - name: pic
+    uniqueID: 2442435551
+    locked: 0
+  - name: Player
+    uniqueID: 4126909767
+    locked: 0
   m_RenderingLayers:
   - Default
