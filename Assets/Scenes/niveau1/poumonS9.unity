@@ -577,6 +577,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52d0bc934944c094a9f502afbbb5ce3b, type: 3}
+--- !u!1001 &141469589
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1649476856426287817, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_Name
+      value: YDAYS_LUMINARIS_06-05-2026_TEXTURE_FOND_SEAMLESS (1)_0 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 104.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 73.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
 --- !u!1001 &156031138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -758,6 +815,177 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8982cdcab26f64742a5b1ecf34a20730, type: 3}
+--- !u!1001 &212414382
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1649476856426287817, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_Name
+      value: YDAYS_LUMINARIS_06-05-2026_TEXTURE_FOND_SEAMLESS (1)_0 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 55.206
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 23.884598
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+--- !u!1001 &215306999
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1649476856426287817, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_Name
+      value: YDAYS_LUMINARIS_06-05-2026_TEXTURE_FOND_SEAMLESS (1)_0 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 105.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+--- !u!1001 &230668496
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1649476856426287817, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_Name
+      value: YDAYS_LUMINARIS_06-05-2026_TEXTURE_FOND_SEAMLESS (1)_0 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 104.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 122.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
 --- !u!1001 &257063816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2629,6 +2857,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &752826626
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1649476856426287817, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_Name
+      value: YDAYS_LUMINARIS_06-05-2026_TEXTURE_FOND_SEAMLESS (1)_0 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 54.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 121.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
 --- !u!1 &757301213
 GameObject:
   m_ObjectHideFlags: 0
@@ -3361,6 +3646,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9888cf43c2833d8419c228ccfd9fba2b, type: 3}
+--- !u!1001 &1175648464
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1649476856426287817, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_Name
+      value: YDAYS_LUMINARIS_06-05-2026_TEXTURE_FOND_SEAMLESS (1)_0 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 122.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
 --- !u!1001 &1197869550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3686,6 +4028,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6033057657144308136, guid: d66d8c747264c0045831239bc39b4976, type: 3}
   m_PrefabInstance: {fileID: 1202106965}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1219373620
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1649476856426287817, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_Name
+      value: YDAYS_LUMINARIS_06-05-2026_TEXTURE_FOND_SEAMLESS (1)_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 54.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 72.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
 --- !u!1001 &1220548483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4223,6 +4622,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb2f2f6cc818af7449152b7ef21877e2, type: 3}
+--- !u!1001 &1500184592
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1649476856426287817, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_Name
+      value: YDAYS_LUMINARIS_06-05-2026_TEXTURE_FOND_SEAMLESS (1)_0 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.3390274
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 23.593723
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
 --- !u!1001 &1535267073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5036,6 +5492,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ed8a6ac6bee4054f8148bd0dc35fc85, type: 3}
+--- !u!1001 &1818598576
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1649476856426287817, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_Name
+      value: YDAYS_LUMINARIS_06-05-2026_TEXTURE_FOND_SEAMLESS (1)_0 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.0330276
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 72.40912
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638556278008584991, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a81136ad8d27ae54cafd854d4ed63dbe, type: 3}
 --- !u!1001 &1876153808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6051,6 +6564,15 @@ SceneRoots:
   - {fileID: 1662314703}
   - {fileID: 1201703358}
   - {fileID: 695613754}
+  - {fileID: 215306999}
+  - {fileID: 230668496}
+  - {fileID: 1219373620}
+  - {fileID: 141469589}
+  - {fileID: 1500184592}
+  - {fileID: 212414382}
+  - {fileID: 1818598576}
+  - {fileID: 1175648464}
+  - {fileID: 752826626}
   - {fileID: 522435126}
   - {fileID: 563593201}
   - {fileID: 609377285}
