@@ -2279,8 +2279,29 @@ PrefabInstance:
     - {fileID: 9180475302779459074, guid: 939992665e935fd43a85143cf41d13c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2965151983746960570, guid: 939992665e935fd43a85143cf41d13c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1743847453}
   m_SourcePrefab: {fileID: 100100000, guid: 939992665e935fd43a85143cf41d13c1, type: 3}
+--- !u!1 &1743847452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2965151983746960570, guid: 939992665e935fd43a85143cf41d13c1, type: 3}
+  m_PrefabInstance: {fileID: 1743847451}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1743847453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743847452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e38a67f55244b4380b48ed302b6b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::rotateHelice
+  direction: 1
 --- !u!1001 &1772043899
 PrefabInstance:
   m_ObjectHideFlags: 0

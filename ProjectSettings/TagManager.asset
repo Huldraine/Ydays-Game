@@ -19,6 +19,10 @@ TagManager:
   - right_gravity_interupteur
   - left_gravity_interupteur
   - super_gravity_interupteur
+  - topBossgravity
+  - bottomBossgravity
+  - leftBossgravity
+  - rightBossgravity
   layers:
   - Default
   - TransparentFX
@@ -53,6 +57,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: balise
+    uniqueID: 3834033339
+    locked: 0
+  - name: background
+    uniqueID: 698844999
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -73,6 +83,9 @@ TagManager:
     locked: 0
   - name: pic
     uniqueID: 2442435551
+    locked: 0
+  - name: Boss
+    uniqueID: 3362541639
     locked: 0
   - name: Player
     uniqueID: 4126909767
